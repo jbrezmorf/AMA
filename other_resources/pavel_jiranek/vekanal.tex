@@ -1,0 +1,456 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Vektorová analýza}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Vektorové pole. Základní pojmy.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Vektorová funkce (vektorové pole) reálné promìnné $t$ v $E_3$: 
+$\vec{f}=f_1\vec{e}_1+f_2\vec{e}_1+f_3\vec{e}_3$,
+kde $f_1$, $f_2$, $f_3$ jsou (reálné) funkce,
+$\vec{e}_1=(1,0,0)$, $\vec{e}_2=(0,1,0)$, $\vec{e}_3=(0,0,1)$.
+
+Operátor ``nabla'': $\nabla\equiv\partial_x\vec{e}_1+\partial_y\vec{e}_2+\partial_z\vec{e}_3$.
+
+Divergence: $\Div\vec{f} \equiv \nabla\cdot\vec{f} = \partial_x f_1 + \partial_y f_2 + \partial_z f_3$.
+
+Rotace: $\Rot\vec{f} \equiv \nabla\times\vec{f} = (\partial_y f_3 - \partial_z f_2)\vec{e}_1
+                               +(\partial_z f_1 - \partial_x f_3)\vec{e}_2
+                               +(\partial_x f_2 - \partial_y f_1)\vec{e}_3$.
+        Symbolicky
+        \[
+           \nabla\times\vec{f} = \det\begin{pmatrix}
+                                    \vec{e}_1 & \vec{e}_2 & \vec{e}_3 \\
+                                    \partial_x & \partial_y & \partial_z \\
+                                    f_1 & f_2 & f_3  
+                                 \end{pmatrix}.
+        \]
+
+Gradient skalární funkce $g$: $\Grad g \equiv \nabla g = \partial_x g\vec{e}_1+\partial_y g\vec{e}_2+\partial_z g\vec{e}_3$.
+
+Potenciálové pole: $\vec{f}$ je potenciálové na $M\subset E_3$
+                   $\Leftrightarrow$ $\exists$ funkce $g$ se spojitými 
+                   parciálními derivacemi na $M$ tak,
+                   ¾e $\vec{f} = \Grad g$ na $M$ ($g$ je potenciálová funkce)
+                   $\Leftrightarrow$ $\Rot\vec{f}=0$.
+
+V $E_2$ se podmínka $\Rot\vec{f}=0$ redukuje na podmínku $\partial_x f_2 = \partial_y f_1$.
+
+\begin{ex}
+   Zjistìte, zda jsou vektorová pole 
+   \begin{enumerate}
+      \item $\vec{f}(x,y) = y^2\vec{e}_1+(2xy+1)\vec{e}_2+3z^2\vec{e}_3$,
+      \item $\vec{f}(x,y) = x^2y\vec{e}_1+xy\vec{e}_2$,
+      \item $\vec{f}(x,y)=2xy\vec{e}_1+(x^2-y)\vec{e}_2$.
+      \item $\vec{f}(x,y)=x^2y\vec{e}_1+xy\vec{e}_2$,
+      \item $\vec{f}(x,y)=2xy\vec{e}_1+x^2\vec{e}_2$.
+   \end{enumerate}
+   potenciálové na $E_3$, popø. na $E_2$ a v kladném pøípadì 
+   naleznìte potenciálové funkce $g$.
+\end{ex}
+\begin{sol}
+   \begin{enumerate}
+      \item Ano, $g(x,y,z)=xy^2+y+z^3+k$, $k\in E_1$.
+      \item Ne.
+      \item Ano, $g(x,y)=x^2y-\frac{1}{2}y^2+k$, $k\in E_1$.
+      \item Ne.
+      \item Ano, $g(x,y)=x^2y+k$, $k\in E_1$.
+   \end{enumerate}
+\end{sol}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Køivkové integrály}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Køivky}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Zadání køivky:
+\begin{itemize}
+   \item parametricky, $\gamma$: $x=x(t)$, $y=y(t)$, $z=z(t)$, $t\in[a,b]$,
+   \item ve vektorovém tvaru, $\gamma$: $\vec{r}(t)=x(t)\vec{e}_1+y(t)\vec{e}_2+z(t)\vec{e}_3$, $t\in[a,b]$.
+\end{itemize}
+
+teèný vektor: 
+   $\vec{t}(t) \equiv \dot{x}(t)\vec{e}_1+\dot{y}(t)\vec{e}_2+\dot{z}(t)\vec{e}_3$.
+
+$\gamma$ je hladká $\Leftrightarrow$ $(\forall t\in[a,b])(\exists$ $\dot{\vec{r}}(t)\neq 0)$
+(existují teèné vektory).
+
+$\gamma$ je po èástech hladká $\Leftrightarrow$ $[a,b]$ sjednocením disjunktních intervalù
+a na ka¾dém z tìchto intervalù je $\gamma$ hladká (teèný vektor existuje skoro v¹ude).
+
+$\gamma$ je jednoduchá $\Leftrightarrow$ $(\forall t_1,t_2\in[a,b])(t_1\neq t_2\Rightarrow\vec{r}(t_1)\neq\vec{r}(t_2))$.
+
+$\gamma$ je uzavøená $\Leftrightarrow$ $\vec{r}(a)=\vec{r}(b)$.
+
+Orientace køivky je dána uspoøádáním intervalu $[a,b]$, resp. tím, jakým ``smìrem'' prochází
+parametr $t$ tento interval.
+
+Jednoduchá uzavøená køivka je orientovaná kladnì, resp. zápornì, pokud je 
+pøi obíhání køivky ve smìru její orientace ``vnitøek'' køivky po levé, resp. po pravé stranì.
+
+\subsection{Køivkový integrál prvního druhu}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Zobecnìní pojmu urèitého integrálu (jako integrálu po úseèce) na libovolnou køivku.
+
+Je-li $\gamma$ hladká, pak
+\[
+   \int\limits_{\gamma} f(x,y,z)\,ds = \int\limits_a^b f(x(t),y(t),z(t))\sqrt{\dot{x}^2(t)+\dot{y}^2(t)+\dot{z}^2(t)}\,dt.
+\]
+
+\begin{ex}
+   Spoètìte integrály
+   \begin{enumerate}
+      \item
+      \[
+         I = \int\limits_{\gamma}(x^2-y+3z)\,ds,
+      \]
+      kde $\gamma$ je úseèka z bodu $[0,0,0]$ do bodu $[1,2,1]$.
+      \item
+      \[
+         I = \int\limits_{\gamma}(x^2+y^2)\,ds,
+      \]
+      kde $\gamma$ je kladnì orientovaná hranice trojúhelníka s vrcholy $[0,0]$, $[1,0]$, $[0,1]$.
+      \item
+      \[
+         I = \left|\int\limits_{\gamma}\,ds\right|,
+      \]
+      kde $\gamma$ je kru¾nice $x^2+y^2=r^2$.
+      \item
+      \[
+         I = \int\limits_{\gamma}(x+2)\,ds,
+      \]
+      kde $\gamma=\{[x,y,z]\in E_3\,|\,x=t,\;y=\frac{4}{3}t^{\frac{3}{2}},\;z=\frac{1}{2}t^2,\;t\in[0,2]\}$.
+   \end{enumerate}
+\end{ex}
+\begin{sol}
+   \begin{enumerate}
+      \item $I=\frac{5\sqrt{6}}{6}$.
+      \item $I=\frac{2}{3}(1+\sqrt{2})$.
+      \item $I=2\pi r$.
+      \item $I=\frac{1}{3}(13\sqrt{13}-1)$.
+   \end{enumerate}
+\end{sol}
+
+\subsection{Køivkový integrál druhého druhu}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Význam práce vektorového pole $\vec{f}(x,y,z)$ po køivce $\gamma$.
+
+Je-li $\gamma$ hladká, pak
+\[
+   \int\limits_{\gamma}\vec{f}\,d\vec{r} = \int\limits_a^b \vec{f}(x(t),y(t),z(t))\dot{\vec{r}}(t)\,dt 
+    = \int\limits_{\gamma} f_1\,dx+f_2\,dy+f_3\,dz.
+\]
+
+\begin{ex}
+   Spoètìte integrály
+   \begin{enumerate}
+      \item
+      \[
+         I = \int\limits_{\gamma}\,dx+x\,dy,
+      \]
+      kde $\gamma$ je èást paraboly $y=x^2$ s poèáteèním bodem $[1,1]$ a koncovým bodem $[2,4]$.
+      \item
+      \[
+         I = \int\limits_{\gamma}\,y\,dx+x^2\,dy,
+      \]
+      kde $\gamma$ je èást paraboly $y=4-x^2$ z $[4,0]$ do $[1,3]$.
+      \item
+      \[
+         I = \int\limits_{\gamma}\,(2x-y)\,dx+(x+3y)\,dy,
+      \]
+      kde $\gamma$ je lomená èára spojující body $[0,0]$, $[3,0]$, $[3,3]$.
+   \end{enumerate}
+\end{ex}
+\begin{sol}
+   \begin{enumerate}
+      \item $I=\frac{17}{3}$.
+      \item $I=\frac{69}{2}$.
+      \item $I=\frac{63}{2}$.
+   \end{enumerate}
+\end{sol}
+
+\begin{ex}
+   Spoètìte práci vektorového pole $\vec{f}$ po køivce $\gamma$, kde
+   \begin{enumerate}
+      \item $\vec{f}(x,y)=xy\vec{e}_1+y\vec{e}_2$, $\gamma=\{[x,y]\in E_2\,|\,x=4t,\;y=t,\;t\in[0,1]\}$,
+      \item $\vec{f}(x,y)=3x\vec{e}_1+4y\vec{e}_2$, $\gamma=\{[x,y]\in E_2\,|\,x=2\cos t,\;y=2\sin t,\;t\in[0,\frac{\pi}{2}]\}$,
+      \item $\vec{f}(x,y)=x^2y\vec{e}_1+(x-z)\vec{e}_2+xyz\vec{e}_3$, $\gamma=\{[x,y,z]\in E_3\,|\,x=t,\;y=t^2,\;z=2,\;t\in[0,1]\}$,
+      \item $\vec{f}(x,y)=x\vec{e}_1+y\vec{e}_2-5z\vec{e}_3$, $\gamma=\{[x,y,z]\in E_3\,|\,x=2\cos t,\;y=2\sin t,\;z=t,\;t\in[0,2\pi]\}$.
+   \end{enumerate}
+\end{ex}
+\begin{sol}
+   \begin{enumerate}
+      \item $\frac{35}{6}$.
+      \item $2$.
+      \item $-\frac{17}{15}$.
+      \item $-10\pi^2$.
+   \end{enumerate}
+\end{sol}
+
+\subsection{Nezávislost na integraèní cestì}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Má-li $\vec{f}$ spojité slo¾ky na $M\subset E_3$, $\vec{f}$ je potenciálové pole
+na $M$ s potenciálovou funkcí $g$, $\gamma$ hladká køivka v $M$, pak
+\[
+   \int\limits_{\gamma}\vec{f}\,d\vec{r} = [g(x,y,z)]_{[x(a),y(a),z(a)]}^{[x(b),y(b),z(b)]}.
+\]
+Integrál tedy nezávisí na integraèní cestì, tj. na tvaru køivky $\gamma$, 
+ale jen na hodnotách potenciálové funkce $g$ v poèáteèním a koncovém bodu.
+Je-li navíc $\gamma$ uzavøená, je
+\[
+   \oint\limits_{\gamma}\vec{f}\,d\vec{r} = 0.
+\]
+
+\begin{ex}
+   Spoètìte integrály
+   \begin{enumerate}
+      \item
+      \[
+         I = \int\limits_{\gamma}y\,dx+x\,dy,
+      \]
+      kde $\gamma$ je lomená èára spojující postupnì body $[0,0]$, $[1,1]$, $[2,4]$, $[4,-1]$.
+      \item
+      \[
+         I = \int\limits_{\gamma}2xy\,dx+(x^2-y)\,dy,
+      \]
+      kde $\gamma$ je hladká køivka spojující body $[-1,4]$ a $[1,2]$.
+      \item
+      \[
+         I = \int\limits_{\gamma}(y\vec{e}_1+x\vec{e}_2)\,d\vec{r},
+      \]
+      kde $\gamma$ je lomená èára spojující body $[0,0]$, $[1,2]$, $[4,5]$, $[5,8]$.
+      \item
+      \[
+         I = \int\limits_{\gamma}e^x\sin y\,dx+e^x\cos y\,dy,
+      \]
+      kde $\gamma$ je èást cykloidy $x=t-\sin t$, $y=1-\cos t$ z $[0,0]$ do $[2\pi,0]$.
+      \item
+      \[
+         I = \int\limits_{\gamma}(y^3+1)\,dx+(3xy^2+1)\,dy,
+      \]
+      kde $\gamma=\{[x,y]\in E_2\,|\,x^2+y^2=r^2, \; r>0\}$.
+   \end{enumerate}
+\end{ex}
+\begin{sol}
+   \begin{enumerate}
+      \item $I=-4$.
+      \item $I=4$.
+      \item $I=24$.
+      \item $I=0$.
+      \item $I=0$.
+   \end{enumerate}
+\end{sol}
+
+\subsection{Greenova vìta}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Nech» $\Omega\subset E_2$ je oblast, její¾ hranice $\gamma$
+je jednoduchá uzavøená po èástech hladká køivka (orientovaná kladnì)
+a $f$, $g$, $\partial_y f$, $\partial_x g$ jsou spojité na $\Omega$ a $\gamma$.
+Pak
+\[
+   \int\limits_{\gamma} f(x,y)\,dx+g(x,y)\,dy = \iint\limits_{\Omega}(\partial_x g(x,y)-\partial_y f(x,y))\,dx\,dy.
+\]
+
+\begin{ex}
+   Spoètìte integrály
+   \begin{enumerate}
+      \item
+      \[
+         I = \int\limits_{\gamma}y^3\,dx+(x^3+3xy^2)\,dy,
+      \]
+      kde $\gamma$ je kladnì orientovaná uzavøená køivka sestávající se z èásti kubické paraboly $y=x^3$
+      mezi body $[0,0]$ do $[1,1]$ a úseèky $y=x$ spojující tyto body.
+      \item
+      \[
+         I = \int\limits_{\gamma}y^3\,dx+(x^3+3xy^2)\,dy,
+      \]
+      kde $\gamma$ je kladnì orientovaná kru¾nice $x^2+y^2=9$.
+      \item
+      \[
+         I = \int\limits_{\gamma}(y-x)\,dx+(2x-y)\,dy,
+      \]
+      kde $\gamma$ je kladnì orientovaná hranice mezi grafy funkcí $y=x$, $y=x^2-x$.
+      \item
+      \[
+         I = \int\limits_{\gamma}\sin x\cos x\,dx+(xy+\cos x\sin y)\,dy,
+      \]
+      kde $\gamma$ je kladnì orientovaná hranice mezi grafy funkcí $y=x$, $y=\sqrt{x}$.
+   \end{enumerate}
+\end{ex}
+\begin{sol}
+   \begin{enumerate}
+      \item $I=-4$.
+      \item $I=\frac{243}{4}\pi$.
+      \item $I=\frac{4}{3}$.
+      \item $I=\frac{1}{12}$.
+   \end{enumerate}
+\end{sol}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Plo¹né integrály}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Plo¹ný integrál prvního druhu}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Je-li plocha $\Gamma$ zadána funkcí $z=g(x,y)$ se spojitými derivacemi $\partial_x g$ a $\partial_y g$, je
+\[
+   \iint\limits_{\Gamma}f(x,y,z)\,dS = \iint\limits_{G}f(x,y,g(x,y))\,\sqrt{1+(\partial_x g(x,y))^2+(\partial_y g(x,y))^2}\,dx\,dy,
+\]
+kde $G$ je prùmìt plochy $\Gamma$ do roviny $z=0$.
+
+\begin{ex}
+   Spoètìte
+   \[
+      I=\int\limits f_(x,y,z)\,dS,
+   \]
+   kde
+   \begin{enumerate}
+      \item $f(x,y,z)=y^2+2yz$ a $\Gamma$ je èást roviny $2x+y+2z-6=0$ v prvním oktantu,
+      \item $f(x,y,z)=x+z$ a $\Gamma$ je èást válcové plochy $x^2+y^2=9$ v prvním oktantu oøíznutá rovinou $z=4$,
+      \item $f(x,y,z)=xy$ a $\Gamma$ je èást roviny $z=6-x-2y$ v prvním oktantu,
+      \item $f(x,y,z)=\sqrt{a^2+x^2+y^2}$ a $\Gamma$ je èást paraboloidu $x^2+y^2=2az$ oøíznutá ku¾elem $x^2+y^2=z^2$,
+      \item $f(x,y,z)=x^2+y^2+z^2$ a $\Gamma=\{[x,y,z]\in E_3\,|\,z=x+2\;\&\;x^2+y^2\leq 1\}$.
+   \end{enumerate}
+\end{ex}
+\begin{sol}
+   \begin{enumerate}
+      \item $I=\frac{243}{2}$,
+      \item $I=12\pi+36$,
+      \item $I=\frac{27\sqrt{6}}{2}$,
+      \item $I=12\pi a^3$,
+      \item $I=\frac{19\sqrt{2}\pi}{4}$,
+   \end{enumerate}
+\end{sol}
+
+\subsection{Plo¹ný integrál druhého druhu}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Orientace plochy:
+Nech» $\Gamma$ je omezená plocha, oboustranná.
+Orientaci lze zadat slovnì, pøíp. smìrem vnìj¹í normály.
+
+Je-li plocha zadaná funkcí $z=g(x,y)$ ($g$ má spojité první derivace), jsou
+\[
+ \begin{split}
+   \vec{n}_1 &= \frac{-\partial_x g\,\vec{e}_1-\partial_y g\,\vec{e}_2+\vec{e}_3}{\sqrt{1+(\partial_x g(x,y))^2+(\partial_y g(x,y))^2}},\\
+   \vec{n}_2 &= -\vec{n}_1=\frac{\partial_x g\,\vec{e}_1+\partial_y g\,\vec{e}_2-\vec{e}_3}{\sqrt{1+(\partial_x g(x,y))^2+(\partial_y g(x,y))^2}}
+ \end{split}
+\]
+dvì mo¾né volby vnìj¹í normály.
+
+Jestli¾e je $\vec{f}=f_1\,\vec{e}_1+f_2\,\vec{e}_2+f_3\,\vec{e}_3$
+a $\Gamma$ je omezená orientovaná plocha s jednotkovou vnìj¹í normálou $\vec{n}$, oznaèujeme výrazem
+\[
+   \iint\limits_{\Gamma} \vec{f}\vec{n}\,dS, \text{ resp. } \iint\limits_{\Gamma} f_1\,dy\,dz+f_2\,dx\,dz+f_3\,dx\,dy
+\]
+plo¹ný integrál druhého druhu vektorové funkce $\vec{f}$ na plo¹e $\Gamma$.
+
+Integrál druhého druhu má fyzikální význam toku vektorového pole.
+
+Po dosazení:
+\[
+  \begin{split}
+     \iint\limits_{\Gamma}\vec{f}\vec{n}_1\,dS
+       &= \iint\limits_{\Gamma}(f_1\,\vec{e}_1+f_2\,\vec{e}_2+f_3\,\vec{e}_3))\frac{-\partial_x g\,\vec{e}_1-\partial_y g\,\vec{e}_2+\vec{e}_3}{\sqrt{1+(\partial_x g(x,y))^2+(\partial_y g(x,y))^2}}\,dS\\
+       &= \iint\limits_{G}(-f_1\partial_x g-f_2\partial_y g+f_3)\,dx\,dy,
+  \end{split}
+\]
+kde $G$ je prùmìt plochy $\Gamma$ do roviny $z=0$.
+
+\begin{ex}
+   Spoètìte
+   \[
+      I=\iint\limits \vec{f}\vec{n}\,dS,
+   \]
+   kde
+   \begin{enumerate}
+      \item $\vec{f}(x,y,z)=x\,\vec{e}_1+y\,\vec{e}_2+z\,\vec{e}_3$ a $\Gamma$ je èást paraboloidu $z=4-x^2-y^2$ nad rovinou $z=0$
+            s normálou $\vec{n}=\vec{e}_3$ v bodì $(0,0,4)$,
+      \item $\vec{f}(x,y,z)=3z\,\vec{e}_1-4\,\vec{e}_2+y\,\vec{e}_3$ a $\Gamma$ je èást roviny $x+y+z=1$ orientovaná vektorem normály
+            smìøujícím do poloprostoru obsahujícího poèátek,
+      \item $\vec{f}(x,y,z)=xy\,\vec{e}_1-x^2\,\vec{e}_2+(x+z)\,\vec{e}_3$ a $\Gamma$ je èást roviny $2x+2y+z=6$ orientovaná vektorem normály
+            smìøujícím do poloprostoru neobsahujícího poèátek.
+   \end{enumerate}
+\end{ex}
+\begin{sol}
+   \begin{enumerate}
+      \item $I=24\pi$,
+      \item $I=413$,
+      \item $I=\frac{27}{4}$.
+   \end{enumerate}
+\end{sol}
+
+\subsection{Stokesova a Gaussova-Ostrogradského vìta}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Orientace okraje plochy: Nech» $\Gamma$ je plocha s okrajem (okrajovou køivkou) $\gamma$.
+$\gamma$ je orientovaná ve kladném smyslu orientace $\Gamma$,
+jestli¾e pøi sledování køivky $\gamma$ v kladném smyslu orientace zùstává
+èást plochy $\Gamma$ uzavøená køivkou $\Gamma$ po levé stranì (pozorováno
+ze strany vnìj¹í normály k plo¹e).
+
+Stokesova vìta: $\Gamma$ plocha s okrajem $\gamma$ a vnìj¹í normálou $\vec{n}$,
+$\gamma$ tvoøí uzavøená jednoduchá po èástech hladká køivka,
+$\gamma$ je orientovaná ve kladném smyslu orientace $\Gamma$,
+$\vec{f}=f_1\,\vec{e}_1+f_2\,\vec{e}_2+f_3\,\vec{e}_3$ je vektorové pole,
+$f_i$ má spojité parciální derivace na otevøené mno¾inì obsahující $\Gamma$ a $\gamma$ ($i=1,2,3$), pak
+\[
+   \iint\limits_{\Gamma}\Rot\vec{f}\,\vec{n}\,dS = \int\limits_{\gamma}\vec{f}\,d\vec{r}.
+\]
+
+Gaussova-Ostrogradského vìta:
+$\Omega\in E_3$ je oblast, její¾ hranici tvoøí uzavøená plocha $\Gamma$ orientovaná vnìj¹í normálou $\vec{n}$,
+$\vec{f}=f_1\,\vec{e}_1+f_2\,\vec{e}_2+f_3\,\vec{e}_3$ je vektorové pole,
+$\Div f$ je spojitá funkce na otevøené mno¾inì obsahující $\Omega$ a $\Gamma$, pak
+\[
+   \iint\limits_{\Gamma} \vec{f}\,\vec{n}\,dS = \iiint\limits_{\Omega}\Div f\,dx\,dy\,dz.
+\]
+
+\begin{ex}
+   \begin{enumerate}
+      \item
+      Vypoètìte (pomocí Stokesovy vìty)
+      \[
+         I = \int\limits_{\gamma}(-y^2\,\vec{e}_1+z\,\vec{e}_2+x\,\vec{e}_3)\,d\vec{r},
+      \]
+      kde $\gamma$ je hranice trojúhelníka tvoøeného body $[3,0,0]$, $[0,3,0]$ a $[0,0,6]$
+      orientované ve smyslu uvedeného poøadí bodù.
+   \end{enumerate}
+\end{ex}
+\begin{sol}
+   \begin{enumerate}
+      \item $I=-9$,
+   \end{enumerate}
+\end{sol}
+
+\begin{ex}
+   Vypoètìte (pomocí Gaussovy-Ostrogradského vìty)
+   \[
+      I = \iint\limits_{\Gamma}\vec{f}\,\vec{n}\,dS,
+   \]
+   kde
+   \begin{enumerate}
+      \item $\vec{f}(x,y,z)=(z^2-x)\,\vec{e}_1-xy\,\vec{e}_2+3z\,\vec{e}_3$ a $\Gamma$ je uzavøená plocha ohranièená
+            plochami $z=4-y^2$, $x=0$, $x=3$ a $z=0$ orientovaná vnìj¹í normálou,
+      \item $\vec{f}(x,y,z)=x\,\vec{e}_1+y^2\,\vec{e}_2+z\,\vec{e}_3$ a $\Gamma$ je uzavøená plocha ohranièená
+            rovinami $2x+2y+z+6=0$, $x=0$, $y=0$ a $z=0$ orientovaná vnìj¹í normálou,
+      \item $\vec{f}(x,y,z)=(x^2+\sin\,z)\,\vec{e}_1+(xy+\cos\,z)\,\vec{e}_2+e^y\,\vec{e}_3$ a $\Gamma$ je uzavøená plocha ohranièená
+            plochami $x^2+y^2=4$, $x+z=6$ a $z=0$ orientovaná vnìj¹í normálou.
+   \end{enumerate}
+\end{ex}
+\begin{sol}
+   \begin{enumerate}
+      \item $I=17$,
+      \item $I=\frac{63}{2}$,
+      \item $I=-12\pi$.
+   \end{enumerate}
+\end{sol}
+

@@ -1,0 +1,94 @@
+\documentclass[fleqn,12pt]{report}
+\usepackage{a4}
+\usepackage{czech}
+%\documentstyle[fleqn,czech,a4,12pt]{report}
+\newcommand{\e}{{\rm e}}
+%\newcommand{\klasif}{\vfill {\bf Klasifikace:}\begin{enumerate}\item 20--17 bodù\item 16--13 bodù\item 12--10 bodù\item 9--0 bodù\end{enumerate}}
+\newcommand{\nadpis}[1]{\newpage\noindent{\Huge Aplikovaná matematika}
+
+\begin{flushright}
+\_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_\\
+jméno a pøíjmení~~~~~~~~
+\end{flushright}
+
+\noindent{\Large #1}
+
+~
+
+}
+\pagestyle{empty}
+\headheight 0pt
+\headsep 0pt
+\begin{document}
+\nadpis{Pøíklad è. 1}
+Naleznìte øešení soustavy lineárních obyèejnıch diferenciálních rovnic s pravou stranou
+\begin{displaymath}
+\begin{array}{rcrcrcr}
+\dot x_1&=&3 x_1&-&4 x_2&+& \e^{2t}\\
+\dot x_2&=&2 x_1&-&3 x_2&-&2\e^{2t}
+\end{array}
+\end{displaymath}
+s poèáteèní podmínkou $x_1(0)=2, x_2(0)=3$.
+
+\nadpis{Pøíklad è. 2}
+Sestavte rovnice metody sítí pro øešení eliptické parciální diferenciální rovnice
+\begin{displaymath}
+3\frac{\partial^2}{\partial x^2} u(x,y) + \frac{\partial^2}{\partial y^2} u(x,y)-2 u(x,y)=2xy+1
+\end{displaymath}
+v obdélníkové oblasti $\Omega=\langle 0;\frac 23\rangle\times\langle 0;0{,}8\rangle$ 
+s Dirichletovımi okrajovımi podmínkami $u(0,y)= -y$, $u(\frac 23,y)= 2y$, $u(x,0)= 0$, $u(x, 0{,}8)= -0{,}8+3{,}6 x$,
+s krokem sítì $h=\frac15$ a poèáteèním uzlem sítì $[0;0]$.
+
+~
+
+Nakreslete sí, oznaète její uzly, klasifikujte je na vnitøní a hranièní a 
+sestavte soustavu rovnic pro aproximace hodnot funkce $u$ ve všech uzlech. Vypište 
+hodnoty funkce $u$ v uzlech leících na hranici oblasti. Rovnice pro hranièní uzly neleící 
+pøímo na hranici sestavte metodou lineární interpolace.
+
+\nadpis{Teoretická èást}
+
+{\Large Úloha 1:}
+Ovìøte, zda mnoina $M = \{ p(x) = a x^3 + a x^2 + b x + c ;  \frac{d^2 p}{d x ^2} (1) = b \}$
+je vektorovım podprostorem prostoru polynomù maximálnì tøetího stupnì. Proveïte diskusi.
+
+\vspace{6cm}
+{\Large Úloha 2:}
+Vysvìtlete, co znamená, e mnoina $M$ je hustá v metrickém prostoru $X$. Je prostor
+spojitıch funkcí $C((-1; 1))$ hustı v prostoru $L^2((-1; 1))$? Vysvìtlete, co tato otázka vlastnì
+znamená pro funkce z $L^2$.
+
+\vspace{5cm}
+{\Large Úloha 3:}
+Napište vlastnosti fundamentální matice a standardní fundamentální matice øešení 
+soustavy lineárních obyèejnıch diferenciálních rovnic. Jak se liší standardní 
+fundamentální matice od obecné fundamentální matice?
+
+\vfill
+~\hfill{\tiny otoète}\newpage
+
+{\Large Úloha 4:}
+Co je obecná jednokroková metoda? Napište, pro øešení jakého typu úloh ji lze 
+pouít a jakı má obecnı pøedpis. Napište pøíklad konkrétní jednokrokové metody.
+
+\vspace{6cm}
+{\Large Úloha 5:}
+Pomocí integrace per partes, resp. Greenovy vìty ovìøte, zda diferenciální operátor
+$A(u)=(-x\frac{\partial ^2 u}{\partial x^2} - y\frac{\partial ^2 u}{\partial y^2}  +  u  )$
+je symetrickı a pozitivnì definitní, tj.
+$(A u , v) = (u, A v)$ pro všechna $u,v \in L^2(\Omega)$  a  
+$(A u, u) \geq c (u,u)$, kde $c>0$,
+na prostoru dvakrát spojitì diferencovatelnıch funkcí s nulovou stopou na 
+hranici $\partial \Omega$, kde za $\Omega$ zvolte kartézskı souèin intervalù $(-1;0)\times (0;1)$.
+
+\vspace{6cm}
+{\Large Úloha 6:}
+Nech je dána obecná úloha:
+$A u = f$    v   $\Omega$
+s okrajovou podmínkou  $u = 0$  na $\partial \Omega$.
+Zformulujte vìtu o minimu kvadratického funkcionálu.
+Odvoïte metodu nejmenších ètvercù (Courantovu metodu) pro nalezení pøibliného øešení této úlohy pro bázové 
+vektory $\varphi_1,\dots,\varphi_n$. Uveïte podmínky, za kterıch posloupnost 
+pøiblinıch øešení konverguje k øešení $u_0$  rovnice $A u = f$.
+
+\end{document}

@@ -1,0 +1,790 @@
+\chapter{Soustavy obyčejných diferenciálních rovnic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Soustavou obyčejných diferenciálních rovnic prvního řádu rozumíme (vektorovou) rovnici ve tvaru
+\[
+   \vec{y}' = \vec{f}(x,\vec{y}),
+\]
+kde $\vec{f}:\mathbb{R}\times\mathbb{R}^n\rightarrow\mathbb{R}^n$, $\vec{y}=(y_1,\ldots,y_n)^T$, $n\in\mathbb{N}$.
+
+Definujeme derivaci vektorové funkce vztahem $\vec{y}'=(y'_1,\ldots,y'_n)^T$.
+
+\paragraph{Soustavy lineárních diferenciálních rovnic prvního řádu s konstantní maticí}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+V této kapitole se budeme zabývat řešením soustavy lineárních diferenciálních rovnic prvního řádu
+s konstantní maticí, která má tvar
+\begin{equation}\label{eq:slodr}
+   \vec{y}' = \vec{A}\vec{y} + \vec{b}(x), \; \vec{A}\in\mathbb{R}^{n,n}, \; \vec{b}:\,\mathbb{R}\rightarrow\mathbb{R}^n,
+\end{equation}
+kde $\vec{b}$ je spojitá vektorová fukce na $(a,b)$.
+Tato soustava má na $(a,b)$ řešení,
+které je jednoznačně určeno počáteční podmínkou $\vec{y}(x_0)=\vec{y}_0$, kde $x_0\in(a,b)$.
+
+\paragraph{Homogenní soustavy s konstantními koeficienty}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Homogenní soustava příslušná soustavě~(\ref{eq:slodr}) má tvar
+\begin{equation}\label{eq:hslodr}
+   \vec{y}'=\vec{A}\vec{y}.
+\end{equation}
+Řešení~(\ref{eq:hslodr}) tvoří vektorový prostor.
+
+Předpokládejme, že matice $\vec{A}$ je diagonalizovatelná, tj. má úplný systém vlastních vektorů.
+Je-li $\lambda\in\mathbb{R}$ reálné vlastní číslo matice $\vec{A}$ a $\vec{u}\in\mathbb{R}^n$ 
+je jemu odpovídající vlastní vektor, pak funkce
+\[
+   \vec{v}(x) = \vec{u}e^{\lambda x}
+\]
+je řešením rovnice~(\ref{eq:hslodr}).
+Je-li $\lambda\in\mathbb{C}\setminus\mathbb{R}$ komplexní vlastní číslo matice $\vec{A}$
+(a tedy rovněž $\bar{\lambda}$ je vlastní číslo $\vec{A}$)
+a $\vec{u}\in\mathbb{C}^n$ je jemu odpovídající vlastní vektor (vlastnímu číslu $\bar{\lambda}$ odpovídá
+vlastní vektor $\bar{\vec{u}}$), pak funkce
+\[
+   \vec{v}_1(x) = \vec{u}_1 e^{\sigma x}\cos\omega x - \vec{u}_2 e^{\sigma x}\sin\omega x,\;\;
+   \vec{v}_2(x) = \vec{u}_1 e^{\sigma x}\sin\omega x + \vec{u}_2 e^{\sigma x}\cos\omega x
+\]
+jsou reálná řešení rovnice~(\ref{eq:hslodr}),
+kde $\sigma=\Re\lambda$, $\omega=\Im\lambda$, $\vec{u}_1 = \Re\vec{u}$, $\vec{u}_2=\Im\vec{u}$.
+
+Nechť $\vec{V}(x)$, $x\in\mathbb{R}$ je matice obsahující ve sloupcích funkce definované v předchozím odstavci
+pro každé vlastní číslo matice $\vec{A}$ (příp. dvojici komplexně sdružených vlastních čísel)
+-- tyto funkce tvoří fundamentální systém řešení soustavy~(\ref{eq:hslodr}).
+Platí tedy
+\[
+   \vec{V}'(x) = \vec{A}\vec{V}(x), \; x\in\mathbb{R}.
+\]
+Je-li $\vec{T}\in\mathbb{R}^{n,n}$ libovolná regulární matice stupně $n$, pak 
+(definujeme-li $\tilde{\vec{V}}(x)\equiv\vec{V}(x)\vec{T}$, $x\in\mathbb{R}$) rovněž platí
+\[
+   \tilde{\vec{V}}'(x) = \vec{A}\tilde{\vec{V}}(x), \; x\in\mathbb{R}.
+\]
+Matice $\vec{V}(x)$ je regulární matice (má lineárně nezávislé sloupce), a tedy
+rovněž matice $\tilde{\vec{V}}(x)$.
+Všechny takové matice nazýváme fundamentálními maticemi soustavy~(\ref{eq:hslodr})
+a každé řešení soustavy~(\ref{eq:hslodr}) můžeme napsat jako lineární kombinaci sloupců
+$\vec{V}(x)$, tj. 
+\[
+   \vec{y}(x) = \vec{V}(x)\vec{c}, \; x\in\mathbb{R},
+\]
+pro nějaké $\vec{c}\in\mathbb{R}^{n}$.
+
+\begin{ex}\label{priklad:1}
+   Najděte fundamentální matici soustavy
+   \[
+      \vec{y}'\equiv
+      \begin{pmatrix}
+         y_1\\y_2
+      \end{pmatrix}'
+      =
+      \begin{pmatrix}
+         0 & 1 \\ -2 & -3
+      \end{pmatrix}
+      \begin{pmatrix}
+         y_1\\y_2
+      \end{pmatrix}
+      \equiv \vec{A}\vec{y}
+   \]
+\end{ex}
+\begin{sol}
+   Vlastní čísla matice $\vec{A}$ jsou $\lambda_1=-1$ a $\lambda_2=-2$
+   s odpovídajícími vlastními vektory $\vec{u}_1=(-1,1)^T$ a $\vec{u}_2=(-1,2)^T$.
+   Fundamentální systém soustavy tedy tvoří funkce
+   \[
+      \vec{v}_1(x) = \begin{pmatrix}
+         -1 \\ 1
+      \end{pmatrix}e^{-x}, \;\;
+      \vec{v}_1(x) = \begin{pmatrix}
+         -1 \\ 2
+      \end{pmatrix}e^{-2x}.
+   \]
+   Fundamentální matice soustavy (resp. jedna z fundamentálních matic) je
+   \[
+      \vec{V}(x) = \begin{pmatrix}
+         -e^{-x} &  -e^{-2x}\\
+          e^{-x} &  2e^{-2x}
+      \end{pmatrix}.
+   \]
+\end{sol}
+
+\paragraph{Homogenní soustavy s konstantními koeficienty -- Cauchyho úloha}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Řešme Cauchyho úlohu pro soustavu~(\ref{eq:hslodr}), tj. soustavu s podmínkou $\vec{y}(x_0)=\vec{y}_0$.
+Každé řešení soustavy~(\ref{eq:hslodr}) lze psát ve tvaru $\vec{y}(x)=\vec{V}(x)\vec{c}$,
+kde $\vec{c}\in\mathbb{R}^n$.
+Užitím počáteční podmínky máme $\vec{y}_0=\vec{V}(x_0)\vec{c}$, odkud $\vec{c} = \vec{V}^{-1}(x_0)\vec{y}_0$,
+takže
+\[
+   \vec{y}(x) = \vec{U}(x)\vec{y}_0
+\]
+je řešením počáteční úlohy.
+Matice $\vec{U}(x) = \vec{V}(x)\vec{V}^{-1}(x_0)$ se nazývá standardní fundamentální matice
+příslušná Cauchyho úloze~(\ref{eq:hslodr}) s počáteční podmínkou $\vec{y}(x_0)=\vec{y}_0$.
+
+\begin{ex}\label{priklad:2}
+   Najděte standardní fundamentální matici soustavy
+   \[
+      \vec{y}'\equiv
+      \begin{pmatrix}
+         y_1\\y_2
+      \end{pmatrix}'
+      =
+      \begin{pmatrix}
+         0 & 1 \\ -2 & -3
+      \end{pmatrix}
+      \begin{pmatrix}
+         y_1\\y_2
+      \end{pmatrix}
+      \equiv \vec{A}\vec{y}
+   \]
+   a najděte řešení soustavy s počáteční podmínkou $\vec{y}_0 = (1,1)^T$.
+\end{ex}
+\begin{sol}
+   Jedna z fundamentálních matic soustavy je podle příkladu~(\ref{priklad:1})
+   \[
+      \vec{V}(x) = \begin{pmatrix}
+         -e^{-x} &  -e^{-2x}\\
+          e^{-x} &  2e^{-2x}
+      \end{pmatrix}.
+   \]
+   Dále je
+   \[
+      \vec{V}(0) = \begin{pmatrix}
+         -1 & -1\\
+          1 &  2
+      \end{pmatrix},
+   \]
+   odkud
+   \[
+      \vec{V}^{-1}(0) = \begin{pmatrix}
+         -2 & -1\\
+          1 &  1
+      \end{pmatrix},
+   \]
+   takže
+   \[
+      \begin{split}
+      \vec{U}(x) = \vec{V}(x)\vec{V}^{-1}(0) &= 
+      \begin{pmatrix}
+         -e^{-x} &  -e^{-2x}\\
+          e^{-x} &  2e^{-2x}
+      \end{pmatrix}
+      \begin{pmatrix}
+         -2 & -1\\
+          1 &  1
+      \end{pmatrix}\\
+      &=
+      \begin{pmatrix}
+         2e^{-x}-e^{-2x} & e^{-x}-e^{-2x}\\
+         -2e^{-x}+2e^{-2x} & -e^{-x}+2e^{-2x}
+      \end{pmatrix}.
+      \end{split}
+   \]
+   Řešením Cauchyho úlohy je tedy funkce
+   \[
+      \vec{y}(x) = \vec{U}(x)\vec{y}_0
+      =
+      \begin{pmatrix}
+         3e^{-x}-2e^{-2x}\\
+         -3e^{-x}+4e^{-2x}
+      \end{pmatrix}.
+   \]
+\end{sol}
+
+\begin{ex}
+   Řešte soustavu
+   \[
+      \vec{y}'\equiv
+      \begin{pmatrix}
+         y_1\\y_2\\y_3
+      \end{pmatrix}'
+      =
+      \begin{pmatrix}
+         0 & 1 & 0\\ 0 & 0 & 1\\ 0 & -1 & 0
+      \end{pmatrix}
+      \begin{pmatrix}
+         y_1\\y_2\\y_3
+      \end{pmatrix}
+      \equiv \vec{A}\vec{y}
+   \]
+   s počáteční podmínkou $\vec{y}_0=(1,1,1)^T$.
+\end{ex}
+\begin{sol}
+   Vlastní čísla matice $\vec{A}$ jsou $\lambda_1=0$, $\lambda_2=\mathrm{i}$ a $\lambda_3=-\mathrm{i}$.
+   Odpovídající vlastní vektory jsou
+   \[
+      \vec{u}_1 = \begin{pmatrix}1\\0\\0\end{pmatrix}, \;\;
+      \vec{u}_2 = \begin{pmatrix}-1\\-i\\1\end{pmatrix}, \;\;
+      \vec{u}_3 = \begin{pmatrix}-1\\i\\1\end{pmatrix}.
+   \]
+   Funkce fundamentálního systému jsou
+   \[
+      \vec{v}_1(x) = \begin{pmatrix}
+         1 \\ 0 \\ 0
+      \end{pmatrix},\;
+      \vec{v}_2(x) = \begin{pmatrix}
+         -\cos x \\ \sin x \\ \cos x
+      \end{pmatrix},\;
+      \vec{v}_3(x) = \begin{pmatrix}
+         -\sin x \\ -\cos x \\ \sin x
+      \end{pmatrix}.
+   \]
+   Fundamentální matice je
+   \[
+      \vec{V}(x) = \begin{pmatrix}
+         1 & -\cos x & -\sin x\\
+         0 & \sin x  & -\cos x\\
+         0 & \cos x  & \sin x
+      \end{pmatrix}.
+   \]
+   Odtud
+   \[
+      \vec{V}(0) = \begin{pmatrix}
+         1 & -1 & 0\\
+         0 & 0  &-1\\
+         0 & 1  & 0
+      \end{pmatrix},
+   \]
+   takže
+   \[
+      \vec{V}^{-1}(0) = \begin{pmatrix}
+         1 & 0 & 1\\
+         0 & 0  &1\\
+         0 & -1  & 0
+      \end{pmatrix},
+   \]
+   odkud dostaneme standardní fundamentální matici ve tvaru
+   \[
+      \begin{split}
+      \vec{U}(x) = \vec{V}(x)\vec{V}^{-1}(0) &=
+      \begin{pmatrix}
+         1 & -\cos x & -\sin x\\
+         0 & \sin x  & -\cos x\\
+         0 & \cos x  & \sin x
+      \end{pmatrix}
+      \begin{pmatrix}
+         1 & 0 & 1\\
+         0 & 0  &1\\
+         0 & -1  & 0
+      \end{pmatrix}\\
+      &=
+      \begin{pmatrix}
+         1 & \sin x  & 1-\cos x\\
+         0 & \cos x  & \sin x\\
+         0 & -\sin x & \cos x
+      \end{pmatrix}.
+      \end{split}
+   \]
+   Řešení Cauchyho úlohy je tedy
+   \[
+      \vec{y}(x) = \vec{U}(x)\vec{y}_0
+      =
+      \begin{pmatrix}
+         2 + \sin x  -\cos x\\
+         \cos x  + \sin x\\
+         \cos x - \sin x
+      \end{pmatrix}.
+   \]
+\end{sol}
+
+\paragraph{Nehomogenní soustavy s konstantní maticí}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Mějme (nehomogenní) soustavu lineárních diferenciálních rovnic prvního řádu s konstantní maticí ve tvaru
+\begin{equation}\label{eq:nhslodr}
+   \vec{y}' = \vec{A}\vec{y} + \vec{b}(x), \; \vec{A}\in\mathbb{R}^{n,n}, \; \vec{b}:\,\mathbb{R}\rightarrow\mathbb{R}^n,
+\end{equation}
+kde $\vec{b}$ je spojitá vektorová fukce na $(a,b)$.
+Řešení nehomogenní rovnice pak můžeme vyjádřit jako součet partikulárního řešení 
+(tj. libovolného řešení rovnice~(\ref{eq:nhslodr})) a řešení homogenní rovnice, tedy platí
+\[
+   \vec{y}(x) = \vec{y}_p(x) + \vec{U}(x)\vec{c}, \; x\in(a,b),
+\]
+kde $\vec{U}(x)$ je standardní fundamentální matice příslušné homogenní soustavy, $\vec{c}\in\mathbb{R}^n$ a
+\[
+   \vec{y}_p(x) = \int\limits_{x_0}^x\vec{U}(x-\xi)\vec{b}(\xi)\,d\xi.
+\]
+
+\begin{ex}
+   Najděte řešení soustavy
+   \[
+      \vec{y}'\equiv
+      \begin{pmatrix}
+         y_1\\y_2
+      \end{pmatrix}'
+      =
+      \begin{pmatrix}
+         0 & 1 \\ -2 & -3
+      \end{pmatrix}
+      \begin{pmatrix}
+         y_1\\y_2
+      \end{pmatrix}
+      +
+      \begin{pmatrix}
+         1 \\ 2
+      \end{pmatrix}
+      e^{x}
+      \equiv \vec{A}\vec{y}
+   \]
+   a najděte řešení soustavy s počáteční podmínkou $\vec{y}_0 = (1,1)^T$.
+\end{ex}
+\begin{sol}
+   Z příkladu~(\ref{priklad:2}) máme standardní fundamentální matici homogenní soustavy ve tvaru
+   \[
+      \vec{U}(x) = 
+      \begin{pmatrix}
+         -1 &  -1\\
+         1 &  2
+      \end{pmatrix}
+      \begin{pmatrix}
+         e^{-x} &  0\\
+         0 &  e^{-2x}
+      \end{pmatrix}
+      \begin{pmatrix}
+         -2 & -1\\
+          1 &  1
+      \end{pmatrix}.
+   \]
+   Odtud
+   \[
+      \begin{split}
+      \vec{U}^{-1}(x) &= 
+      \begin{pmatrix}
+         -2 & -1\\
+          1 &  1
+      \end{pmatrix}^{-1}
+      \begin{pmatrix}
+         e^{-x} &  0\\
+         0 &  e^{-2x}
+      \end{pmatrix}^{-1}
+      \begin{pmatrix}
+         -1 &  -1\\
+         1 &  2
+      \end{pmatrix}^{-1}\\
+      &=
+      \begin{pmatrix}
+         -1 &  -1\\
+         1 &  2
+      \end{pmatrix}
+      \begin{pmatrix}
+         e^{x} &  0\\
+         0 &  e^{2x}
+      \end{pmatrix}
+      \begin{pmatrix}
+         -2 & -1\\
+          1 &  1
+      \end{pmatrix}
+      \end{split}
+   \]
+   takže
+   \[
+      \begin{split}
+      \int\limits_{0}^x\vec{U}^{-1}(\xi)\vec{b}(\xi)\,d\xi
+                   &=\int\limits_{0}^x
+                      \begin{pmatrix}
+                        2e^{\xi}-e^{2\xi} & e^{\xi}-e^{2\xi} \\ -2e^{\xi}+2e^{2\xi} & -e^{\xi}+2e^{2\xi}
+                      \end{pmatrix}
+                      \begin{pmatrix}
+                         1 \\ 2
+                      \end{pmatrix}
+                      e^{\xi}
+                      \,d\xi\\
+                   &=\int\limits_{0}^x
+                      \begin{pmatrix}
+                         4e^{2\xi}-3e^{3\xi}\\
+                         -4e^{2\xi}+6e^{3\xi}
+                      \end{pmatrix}
+                      \,d\xi
+                   =\begin{pmatrix}
+                      2e^{2x}-e^{3x}-1\\
+                      -2e^{2x}+2e^{3x}
+                   \end{pmatrix},
+      \end{split}
+   \]
+   odkud
+   \[
+      \begin{split}
+      \vec{y}_p(x) &= 
+      \begin{pmatrix}
+         -1 &  -1\\
+         1 &  2
+      \end{pmatrix}
+      \begin{pmatrix}
+         e^{-x} &  0\\
+         0 &  e^{-2x}
+      \end{pmatrix}
+      \begin{pmatrix}
+         -2 & -1\\
+          1 &  1
+      \end{pmatrix}
+      \begin{pmatrix}
+            2e^{2x}-e^{3x}-1\\
+            -2e^{2x}+2e^{3x}
+      \end{pmatrix}\\
+      &=
+      \begin{pmatrix}
+         e^{x}-2e^{-x}+e^{-2x}\\
+         2e^{-x}-2e^{-2x}
+      \end{pmatrix}
+      \end{split}
+   \]
+   Řešení Cauchyho úlohy je tedy
+   \[
+      \vec{y}(x) = \vec{y}_p(x) + \vec{U}(x)\vec{y}_0
+       =\begin{pmatrix}
+         e^{x}+e^{-x}-e^{-2x}\\
+         -e^{-x}+2e^{-2x}
+       \end{pmatrix}
+   \]
+\end{sol}
+
+
+
+\paragraph{Putzerova metoda výpočtu fundamentální matice}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+Tato metoda je použitelná i v případě nediagonalizovatelné matice $\vec{A}$.
+Nechť $\lambda_1,\ldots,\lambda_n\in\mathbb{C}$ jsou vlastní čísla matice $\vec{A}$ včetně násobnosti.
+Definujeme matice
+\[
+   \begin{split}
+   \vec{P}_0 = \vec{I},\;
+   \vec{P}_1 = (\vec{A}-\lambda_1\vec{I})\vec{P}_0,\;
+   \vec{P}_2 = (\vec{A}-\lambda_2\vec{I})\vec{P}_1,\;
+   \ldots,\;
+   \vec{P}_{n-1} = (A-\lambda_{n-1}I)\vec{P}_{n-2}.
+   \end{split}
+\]
+Nalezněme funkce $q_i$, $i=1,\ldots,n$ jako řešení Cauchyho úloh
+\begin{align*}
+      q_1' &= \lambda_1q_1,  & q_1(0) &= 1,\\
+      q_2' &= \lambda_2q_2+q_1,  & q_2(0) &= 0,\\
+      &\cdots\\
+      q_n' &= \lambda_nq_n+q_{n-1},  & q_n(0) &= 0.
+\end{align*}
+Matice
+\[
+  \vec{U}(x) = q_1(x)\vec{P}_0 + q_2(x)\vec{P}_1 + \cdots + q_n(x)\vec{P}_{n-1}
+\]
+je standardní fundamentální maticí soustavy~(\ref{eq:hslodr}).
+
+\begin{ex}
+   Najděte řešení soustavy
+   \[
+      \vec{y}'\equiv
+      \begin{pmatrix}
+         y_1\\y_2
+      \end{pmatrix}'
+      =
+      \begin{pmatrix}
+         7 & -18 \\ 3 & -8
+      \end{pmatrix}
+      \begin{pmatrix}
+         y_1\\y_2
+      \end{pmatrix}
+      +
+      \begin{pmatrix}
+         12 \\ 5
+      \end{pmatrix}
+      e^{-x}
+      \equiv \vec{A}\vec{y}+\vec{b}(x)
+   \]
+   s podmínkou $\vec{y}_0=(2,1)^T$.
+\end{ex}
+\begin{sol}
+   Vlastní čísla matice $\vec{A}$ jsou $\lambda_1 = 1$ a $\lambda_2 = -2$.
+   Položme
+   \[
+      \vec{P}_0 = \begin{pmatrix}
+         1 & 0 \\ 0 & 1
+      \end{pmatrix}, \;\;
+      \vec{P}_1 = \begin{pmatrix}
+         6 & -18 \\ 3 & -9
+      \end{pmatrix}.
+   \]
+   Dále řešme rovnice $q'_1=q'_1$ s podmínkou $q_1(0)=1$; odtud $q_1(x)=e^{x}$;
+   $q'_2=-2q_2+e^x$ s podmínkou $q_2(0)=0$; odtud $q_2(x)=\frac{1}{3}(e^x-e^{-2x})$.
+   Odtud
+   \[
+      \vec{U}(x)=q_1(x)\vec{P}_0+q_2(x)\vec{P}_1 = 
+      \begin{pmatrix}
+         3 & -6 \\ 1 & -2
+      \end{pmatrix}
+      e^x
+      +
+      \begin{pmatrix}
+         -2 & 6 \\ -1 & 3
+      \end{pmatrix}
+      e^{-2x},
+   \]
+   takže
+   \[
+     \begin{split}
+        \vec{y}(x) &= \vec{y}_p + \vec{U}(x)\vec{y}_0\\
+                   &= \int\limits_0^x\vec{U}(x-\xi)\vec{b}(\xi)+\vec{U}(x)\vec{y}_0\\
+                   &= \int\limits_0^x\left(
+                         \begin{pmatrix}3 & -6 \\ 1 & -2\end{pmatrix}e^{x-\xi}+\begin{pmatrix}-2 & 6 \\ -1 & 3\end{pmatrix}e^{-2x+2\xi}\right)
+                         \begin{pmatrix}12 \\ 5\end{pmatrix}e^{-\xi}\,d\xi\\
+                    &+\left(
+                           \begin{pmatrix}
+                              3 & -6 \\ 1 & -2
+                           \end{pmatrix}
+                           e^x
+                           +
+                           \begin{pmatrix}
+                              -2 & 6 \\ -1 & 3
+                           \end{pmatrix}
+                           e^{-2x}
+                        \right)
+                        \begin{pmatrix}
+                        2 \\ 1
+                        \end{pmatrix}\\
+                   &= \int\limits_0^x\left(
+                         \begin{pmatrix}6\\2\end{pmatrix}e^{x-2\xi}+\begin{pmatrix}6\\3\end{pmatrix}e^{-2x+\xi}\right)
+                         \,d\xi
+                    +
+                        \begin{pmatrix}
+                        2 \\ 1
+                        \end{pmatrix}
+                        e^{-2x}\\
+                   &= 
+                         \begin{pmatrix}-3\\-1\end{pmatrix}e^{x}(e^{-2x}-1)+\begin{pmatrix}6\\3\end{pmatrix}e^{-2x}(e^x-1)
+                    +
+                        \begin{pmatrix}
+                        2 \\ 1
+                        \end{pmatrix}
+                        e^{-2x}\\
+                   &= 
+                         \begin{pmatrix}-3\\-1\end{pmatrix}(e^{-x}-e^x)+\begin{pmatrix}6\\3\end{pmatrix}(e^{-x}-e^{-2x})
+                    +
+                        \begin{pmatrix}
+                        2 \\ 1
+                        \end{pmatrix}
+                        e^{-2x}\\
+                   &= 
+                        \begin{pmatrix}
+                        -4 \\ -2
+                        \end{pmatrix}
+                        e^{-2x}
+                        +
+                        \begin{pmatrix}
+                        3 \\ 2
+                        \end{pmatrix}
+                        e^{-x}
+                        +
+                        \begin{pmatrix}
+                        3 \\ 1
+                        \end{pmatrix}
+                        e^{x}.
+     \end{split}
+   \]
+\end{sol}
+      
+      
+
+
+\paragraph{Mocninná metoda výčtu fundamentální matice}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Definujeme-li exponent matice $\vec{A}$ jako
+\[
+   e^{\vec{A}x} \equiv \sum\limits_{k=1}^{\infty}\frac{1}{k!}(\vec{A}x)^k,
+\]
+lze ukázat, že $e^{\vec{A}x}$ je standardní fundamentální matice~(\ref{eq:hslodr}).
+Protože $p({A})=0$, kde $p$ je charakteristický polynom matice $\vec{A}$,
+lze každou mocninu matice $\vec{A}^i$, $i\geq n$ vyjádřit jako lineární kombinaci
+matic $\vec{I}, \; \vec{A},\;\ldots,\;\vec{A}^{n-1}$.
+Matici $e^{\vec{A}x}$ lze tedy hledat ve tvaru
+\[
+   e^{\vec{A}x} = b_0(x)\vec{I}+b_1(x)\vec{A}+\cdots+b_{n-1}(x)\vec{A}^{n-1},
+\]
+kde $b_i$ ($i=0,\ldots,n-1$) jsou funkce $x$.
+Je-li $\lambda_j$ $r$-násobné vlastní číslo matice $\vec{A}$,
+nalezneme tyto funkce jako řešení soustav (přes všechna vlastní čísla matice $\vec{A}$)
+\[
+   \begin{split}
+   b_0(x)+b_1(x)\lambda_j+\cdots+b_{n-1}(x)\lambda_j^{n-1}&=e^{\lambda_j x},\\
+   b_1(x)+\cdots+(n-1)b_{n-1}(x)\lambda_j^{n-2}&=xe^{\lambda_j x},\\
+     &\cdots\\   
+   (r-1)!b_{r-1}+\cdots+\frac{(n-1)!}{(n-r-1)!}b_{n-1}(x)\lambda_j^{n-r-1}&=x^{r-1}e^{\lambda_jx}
+   \end{split}
+\]
+
+\begin{ex}
+   Najděte řešení soustavy
+   \[
+      \vec{y}'\equiv
+      \begin{pmatrix}
+         y_1\\y_2
+      \end{pmatrix}'
+      =
+      \begin{pmatrix}
+         1 & 1 \\ 0 & 1
+      \end{pmatrix}
+      \begin{pmatrix}
+         y_1\\y_2
+      \end{pmatrix}
+      +
+      \begin{pmatrix}
+         1 \\ 2
+      \end{pmatrix}
+      e^{x}
+      \equiv \vec{A}\vec{y}+\vec{b}(x)
+   \]
+   s podmínkou $\vec{y}_0=(1,1)^T$.
+\end{ex}
+\begin{sol}
+   Matice $\vec{A}$ má dvojnásobné vlastní číslo $\lambda=1$.
+   Standardní fundamentální matici hledáme ve tvaru
+   \[
+      \vec{U}(x) = b_0(x)\vec{I} + b_1(x)\vec{A},
+   \]
+   kde $b_0$ a $b_1$ jsou řešením soustavy
+   \[
+      \begin{split}
+         b_0(x) + b_1(x) &= e^{x},\\
+                  b_1(x) &= xe^{x}.
+      \end{split}
+   \]
+   Odtud
+   \[
+      b_0(x) = (1-x)e^x, \; b_1(x) = xe^x
+   \]
+   a tedy
+   \[
+      \vec{U}(x) = \begin{pmatrix}1&x\\0&1\end{pmatrix}e^x.
+   \]
+   Nakonec
+   \[
+     \begin{split}
+        \vec{y}(x) &= \vec{y}_p + \vec{U}(x)\vec{y}_0\\
+                   &= \int\limits_0^x\vec{U}(x-\xi)\vec{b}(\xi)+\vec{U}(x)\vec{y}_0\\
+                   &= \int\limits_0^x
+                         \begin{pmatrix}1&x-\xi\\0&1\end{pmatrix}e^{x-\xi}
+                         \begin{pmatrix}1 \\ 2\end{pmatrix}e^{\xi}\,d\xi
+                    +\begin{pmatrix}1&x\\0&1\end{pmatrix}e^x
+                        \begin{pmatrix}
+                        1\\1
+                        \end{pmatrix}\\
+                   &= \int\limits_0^x
+                         \begin{pmatrix}1+2x-2\xi\\2\end{pmatrix}e^{x}
+                         \,d\xi
+                    +\begin{pmatrix}1+x\\1\end{pmatrix}e^x\\
+                   &= 
+                     \begin{pmatrix}x^2+x\\2x\end{pmatrix}e^{x}
+                    +\begin{pmatrix}1+x\\1\end{pmatrix}e^x
+                   = 
+                     \begin{pmatrix}x^2+2x+1\\2x+1\end{pmatrix}e^{x}.
+     \end{split}
+   \]
+\end{sol}
+
+
+
+\section{Příklady}
+
+\begin{ex}
+   Hledejte standardní fundamentální matice soustav $\vec{y}'=\vec{A}\vec{y}$, kde
+   \begin{enumerate}
+      \item
+      \[
+         \vec{A} = \begin{pmatrix}
+            0 & 1\\ -1 & 0
+         \end{pmatrix},
+      \]
+      \item
+      \[
+         \vec{A} = \begin{pmatrix}
+            1 & 1 \\ 0 & 1
+         \end{pmatrix},
+      \]
+      \item
+      \[
+         \vec{A} = \begin{pmatrix}0 & 1 \\ -2 & -3\end{pmatrix},
+      \]
+      \item
+      \[
+         \vec{A} = \begin{pmatrix}2 & 1 \\ 0 & 2\end{pmatrix},
+      \]
+      \item
+      \[
+         \vec{A} = \begin{pmatrix}1 & 2 \\ 2 & 1\end{pmatrix}.
+      \]
+   \end{enumerate}
+\end{ex}
+\begin{sol}
+   \begin{enumerate}
+      \item
+      \item
+      \item
+      \[
+         \vec{Y}_S(x) = \begin{pmatrix}2e^{-x}-e^{-2x}&e^{-x}-e^{-2x}\\-2e^{-x}+2e^{-2x}&-e^{-x}+2e^{-2x}\end{pmatrix}.
+      \]
+      \item
+      \[
+         \vec{Y}_S(x) = \begin{pmatrix}e^{2x}&xe^{2x}\\0&e^{2x}\end{pmatrix},
+      \]
+      \item
+      \[
+         \vec{Y}_S(x) = \frac{1}{2}\begin{pmatrix}e^{-x}+e^{3x}&-e^{-x}+e^{3x}\\-e^{-x}+e^{3x}&e^{-x}+e^{3x}\end{pmatrix}.
+      \]
+   \end{enumerate}
+\end{sol}
+
+\paragraph{Převod lineární diferenciální rovnice $n$-tého řádu s konstantními koeficienty
+           na soustavu diferenciálních rovnic prvního řádu}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Uvažujme rovnici
+\[
+   y^{(n)} + a_{n-1}y^{(n-1)} + \cdots + a_1 y' + a_0 y = g(x), \; x \in (a,b).
+\]
+Položme 
+\[
+   y_1=y, \; y_2=y', \; y_3=y'', \ldots, y_{n-1} = y^{(n-2)}, \; y_{n} = y^{(n-1)}.
+\]
+Pak
+\[
+   \begin{split}
+      y'_1 &= y_2,\\
+      y'_2 &= y_3,\\
+           &\cdots\\
+      y'_{n-1} &= y'_n,\\
+      y'_n &= g(x) - a_{n-1}y_n - \cdots - a_1 y_2 - a_0 y_1.
+   \end{split}
+\]
+Původní rovnici jsme převedli na ekvivalentní soustavu
+\[
+   \begin{pmatrix}
+      y_1 \\ y_2 \\\vdots \\ y_{n-1} \\ y_n
+   \end{pmatrix}'
+   =
+   \begin{pmatrix}
+         0 & 1 & & \\
+         0 & & \ddots & & \\
+         \vdots & & & \ddots & \\
+         0 & \cdots & \cdots & \cdots &        1\\
+      -a_0 & -a_1   & \cdots & \cdots & -a_{n-1}
+   \end{pmatrix}
+   \begin{pmatrix}
+      y_1 \\ y_2 \\ \vdots \\ y_{n-1} \\ y_n
+   \end{pmatrix}
+   +
+   \begin{pmatrix}
+      0 \\ 0 \\ \vdots \\ 0 \\ g(x)
+   \end{pmatrix}.
+\]
+
+\begin{ex}
+   Rovnici $y''-y=x^2e^x$ převeďte na soustavu rovnic prvního řádu.
+\end{ex}
+\begin{sol}
+   Položíme
+   \[
+      y_1 = y, \; y_2 = y'.
+   \]
+   Potom je
+   \[
+      \begin{split}
+         y_1' &= y_2\\
+         y_2' &= x^2e^x+y_1.
+      \end{split}
+   \]
+\end{sol}

@@ -1,0 +1,144 @@
+\documentclass[a4,11pt]{article}
+%\usepackage[active]{srcltx}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%
+\newtheorem{theorem}{Věta}[section]
+\newtheorem{proposition}[theorem]{Tvrzení}
+\newtheorem{definition}[theorem]{Definice}
+\newtheorem{remark}[theorem]{Poznámka}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Důsledek}
+\newtheorem{exercise}[theorem]{Cvičení}
+
+%\numberwithin{equation}{document}
+%
+\def\div{{\rm div}}
+\def\Lapl{\Delta}
+\def\grad{\nabla}
+\def\supp{{\rm supp}}
+\def\dist{{\rm dist}}
+%\def\chset{\mathbbm{1}}
+\def\chset{1}
+%
+\def\Tr{{\rm Tr}}
+\def\to{\rightarrow}
+\def\weakto{\rightharpoonup}
+\def\imbed{\hookrightarrow}
+\def\cimbed{\subset\subset}
+\def\range{{\mathcal R}}
+\def\leprox{\lesssim}
+\def\argdot{{\hspace{0.18em}\cdot\hspace{0.18em}}}
+\def\Distr{{\mathcal D}}
+\def\calK{{\mathcal K}}
+\def\FromTo{|\rightarrow}
+\def\convol{\star}
+\def\impl{\Rightarrow}
+\DeclareMathOperator*{\esslim}{esslim}
+\DeclareMathOperator*{\esssup}{ess\,supp}
+\DeclareMathOperator{\ess}{ess}
+\DeclareMathOperator{\osc}{osc}
+\DeclareMathOperator{\curl}{curl}
+%
+%\def\Ess{{\rm ess}}
+%\def\Exp{{\rm exp}}
+%\def\Implies{\Longrightarrow}
+%\def\Equiv{\Longleftrightarrow}
+% ****************************************** GENERAL MATH NOTATION
+\def\Real{{\rm\bf R}}
+\def\Rd{{{\rm\bf R}^{\rm 3}}}
+\def\RN{{{\rm\bf R}^N}}
+\def\D{{\mathbb D}}
+\def\Nnum{{\mathbb N}}
+\def\Measures{{\mathcal M}}
+\def\d{\,{\rm d}}               % differential
+\def\sdodt{\genfrac{}{}{}{1}{\rm d}{{\rm d}t}}
+\def\dodt{\genfrac{}{}{}{}{\rm d}{{\rm d}t}}
+%
+\def\vc#1{\mathbf{\boldsymbol{#1}}}     % vector
+\def\tn#1{{\mathbb{#1}}}    % tensor
+\def\abs#1{\lvert#1\rvert}
+\def\Abs#1{\bigl\lvert#1\bigr\rvert}
+\def\bigabs#1{\bigl\lvert#1\bigr\rvert}
+\def\Bigabs#1{\Big\lvert#1\Big\rvert}
+\def\ABS#1{\left\lvert#1\right\rvert}
+\def\norm#1{\bigl\Vert#1\bigr\Vert} %norm
+\def\close#1{\overline{#1}}
+\def\inter#1{#1^\circ}
+\def\eqdef{\mathrel{\mathop:}=}     % defining equivalence
+\def\where{\,|\,}                    % "where" separator in set's defs
+\def\timeD#1{\dot{\overline{{#1}}}}
+%
+% ******************************************* USEFULL MACROS
+\def\RomanEnum{\renewcommand{\labelenumi}{\rm (\roman{enumi})}}   % enumerate by roman numbers
+\def\rf#1{(\ref{#1})}                                             % ref. shortcut
+\def\prtl{\partial}                                        % partial deriv.
+\def\Names#1{{\scshape #1}}
+\def\rem#1{{\parskip=0cm\par!! {\sl\small #1} !!}}
+\def\reseni#1{\par{\bf Řešení:}#1}
+%
+%
+% ******************************************* DOCUMENT NOTATIONS
+% document specific
+%***************************************************************************
+%
+\addtolength{\textwidth}{3cm}
+\addtolength{\textheight}{3cm}
+\addtolength{\topmargin}{-1.5cm}
+\addtolength{\hoffset}{-1.5cm}
+\begin{document}
+\parskip=2ex
+\parindent=0pt
+\pagestyle{empty}
+\begin{enumerate}
+ \item Metrický prostor, příklady. Množiny v metrických prostorech:\\ 
+       uzavřená, otevřená, hranice
+ \item Úplnost, Banachova věta, aplikace.
+
+\hrule
+ \item Vektorové prostory polynomů a funkcí.
+ \item Normované prostory, příklady, vlastnosti normy, ověřování? 
+ \item Výpočty norem v různých normovaných prostorech.
+ \item Konvergence v normovaných prostorech. Výpočetně nenáročné, ale zajímavé příklady.
+ 
+\hrule
+
+ \item prostory se skal. součinem, příklady skla. souč. a prostorů, ověřování
+ \item Schwartzova nerovnost. Indukovaná norma.
+ \item orto. báze, Fourierovy řady, orto. proces, orto polynomy, kráté rekurence
+ \item Slabá derivace, Greenova věta, Galerkinova metoda
+ \item Lax-Milgramova věta, aplikace Rieszovy věty, příklady pro konkrétní rovnice.
+
+\hrule
+ %základní teorie, částečně skripta od H. Šembery, řešený příklady a neřešený př. zadání + výsledky (ne u příkladu ale na konci kapitoly)
+ %Putzerova metoda, navíc
+ %Předělat vronského determinanty
+ \item opakování ODR 
+ \item Soustavy ODR, prostor řešení, wronskián, převod rovnic vyššího řádu
+ \item Výpočet SFM pomocí vlastních vektorů.
+ \item Výpočet SFM metodou rozvoje v řadu, reálný a komplexní případ
+ \item Řešení nehomogenních rovnic.
+
+{\bf skupiny PI a NANO}
+
+ \item typy PDR
+ \item Aproximace derivací. Metoda sítí  pro okrajové úlohy.
+ \item Metoda sítí pro eliptické rovnice.
+ \item Metoda sítí pro parabolické rovnice.
+ \item písemka
+
+\hrule
+{\bf skupiny AŘ a ME}
+ \item ODR, okrajové úlohy
+ \item Numerické metody pro ODR (RK, explicitní/implicitní), stabilita
+ \item Minimalizační úlohy, vícekrokové metody
+ \item Singulární rozklad. Číslo podmíněnosti.
+ \item písemka
+\end{enumerate}
+
+\end{document}

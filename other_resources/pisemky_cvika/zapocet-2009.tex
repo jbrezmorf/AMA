@@ -1,0 +1,325 @@
+\documentclass[a4paper,10pt]{article}
+%\usepackage[active]{srcltx}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%
+\newtheorem{theorem}{Věta}[section]
+\newtheorem{proposition}[theorem]{Tvrzení}
+\newtheorem{definition}[theorem]{Definice}
+\newtheorem{remark}[theorem]{Poznámka}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Důsledek}
+\newtheorem{exercise}[theorem]{Cvičení}
+
+%\numberwithin{equation}{document}
+%
+\def\div{{\rm div}}
+\def\Lapl{\Delta}
+\def\grad{\nabla}
+\def\supp{{\rm supp}}
+\def\dist{{\rm dist}}
+%\def\chset{\mathbbm{1}}
+\def\chset{1}
+%
+\def\Tr{{\rm Tr}}
+\def\to{\rightarrow}
+\def\weakto{\rightharpoonup}
+\def\imbed{\hookrightarrow}
+\def\cimbed{\subset\subset}
+\def\range{{\mathcal R}}
+\def\leprox{\lesssim}
+\def\argdot{{\hspace{0.18em}\cdot\hspace{0.18em}}}
+\def\Distr{{\mathcal D}}
+\def\calK{{\mathcal K}}
+\def\FromTo{|\rightarrow}
+\def\convol{\star}
+\def\impl{\Rightarrow}
+\DeclareMathOperator*{\esslim}{esslim}
+\DeclareMathOperator*{\esssup}{ess\,supp}
+\DeclareMathOperator{\ess}{ess}
+\DeclareMathOperator{\osc}{osc}
+\DeclareMathOperator{\curl}{curl}
+%
+%\def\Ess{{\rm ess}}
+%\def\Exp{{\rm exp}}
+%\def\Implies{\Longrightarrow}
+%\def\Equiv{\Longleftrightarrow}
+% ****************************************** GENERAL MATH NOTATION
+\def\Real{{\rm\bf R}}
+\def\Rd{{{\rm\bf R}^{\rm 3}}}
+\def\RN{{{\rm\bf R}^N}}
+\def\D{{\mathbb D}}
+\def\Nnum{{\mathbb N}}
+\def\Measures{{\mathcal M}}
+\def\d{\,{\rm d}}               % differential
+\def\sdodt{\genfrac{}{}{}{1}{\rm d}{{\rm d}t}}
+\def\dodt{\genfrac{}{}{}{}{\rm d}{{\rm d}t}}
+%
+\def\vc#1{\mathbf{\boldsymbol{#1}}}     % vector
+\def\tn#1{{\mathbb{#1}}}    % tensor
+\def\abs#1{\lvert#1\rvert}
+\def\Abs#1{\bigl\lvert#1\bigr\rvert}
+\def\bigabs#1{\bigl\lvert#1\bigr\rvert}
+\def\Bigabs#1{\Big\lvert#1\Big\rvert}
+\def\ABS#1{\left\lvert#1\right\rvert}
+\def\norm#1{\bigl\Vert#1\bigr\Vert} %norm
+\def\close#1{\overline{#1}}
+\def\inter#1{#1^\circ}
+\def\eqdef{\mathrel{\mathop:}=}     % defining equivalence
+\def\where{\,|\,}                    % "where" separator in set's defs
+\def\timeD#1{\dot{\overline{{#1}}}}
+%
+% ******************************************* USEFULL MACROS
+\def\RomanEnum{\renewcommand{\labelenumi}{\rm (\roman{enumi})}}   % enumerate by roman numbers
+\def\rf#1{(\ref{#1})}                                             % ref. shortcut
+\def\prtl{\partial}                                        % partial deriv.
+\def\Names#1{{\scshape #1}}
+\def\rem#1{{\parskip=0cm\par!! {\sl\small #1} !!}}
+\def\reseni#1{\par{\bf Řešení:}#1}
+%
+%
+% ******************************************* DOCUMENT NOTATIONS
+% document specific
+%***************************************************************************
+%
+\addtolength{\textwidth}{2cm}
+\addtolength{\vsize}{2cm}
+\addtolength{\topmargin}{-1cm}
+\addtolength{\hoffset}{-1cm}
+\begin{document}
+\parskip=2ex
+\parindent=0pt
+\pagestyle{empty}
+\section*{Zápočtová písemka - verze A}
+\begin{enumerate}
+ \item 
+   Nalezněte řešení počáteční úlohy:
+   \[
+    \vc y'=\begin{pmatrix}
+          1 & 1 \\ -1 & 1
+       \end{pmatrix} \vc y
+       +
+       \begin{pmatrix}
+         \cos t \\ -\sin t
+       \end{pmatrix}
+    \qquad
+    \vc y(0)=\begin{pmatrix}
+           -1 \\ 1
+         \end{pmatrix}
+   \]
+ \item 
+    Nalezněte libovolnou iterační metodou (doporučuji Newtonovu) všechna řešení rovnice
+    \[
+       \cos x=-\frac14 x
+    \]
+    Načrtněte grafy funkcí na obou stranách rovnice. Určete kolik má rovnice celkem řešení.
+    Napište vzorce pro výpočet iterací, odůvodněte volbu zvoleného počátečního přiblížení
+    a nalezněte řešení s přesností na dvě platné cifry.
+ \item
+    Nalezněte libovolný fundamentální systém pro počáteční úlohu
+    \[
+    \vc y'=\begin{pmatrix}
+          0 & -1 & 3 \\ 
+          -4 & 0 & 10 \\
+          -2 & -1 & 6
+       \end{pmatrix} \vc y   
+    \]
+\end{enumerate}
+
+\pagebreak
+
+\section*{Zápočtová písemka - verze B}
+\begin{enumerate}
+ \item 
+   Nalezněte řešení počáteční úlohy:
+   \[
+    \vc y'=\begin{pmatrix}
+          0 & 1 \\ 1 & 0
+       \end{pmatrix} \vc y
+       +
+       \begin{pmatrix}
+         -2 e^t \\  t^2
+       \end{pmatrix}
+    \qquad
+    \vc y(0)=\begin{pmatrix}
+           -2 \\ 1
+         \end{pmatrix}
+   \]
+ \item 
+    Nalezněte libovolnou iterační metodou kladné řešení rovnice
+    \[
+       e^x=(x+1)^2.
+    \]
+    Načrtněte grafy funkcí na obou stranách rovnice. Určete kolik má rovnice celkem řešení.    Odůvodněte volbu zvoleného počátečního přiblížení. Napište vzorce pro výpočet iterací
+    a nalezněte řešení s přesností na dvě platné cifry.
+ \item
+    Nalezněte libovolný fundamentální systém pro počáteční úlohu
+    \[
+    \vc y'=\begin{pmatrix}
+          1 & -1 & 2 \\ 
+          1 & 1 & -1 \\
+          2 & 1 & 1
+       \end{pmatrix} \vc y   
+    \]
+\end{enumerate}
+\pagebreak
+\section*{Zápočtová písemka - verze C}
+\begin{enumerate}
+ \item 
+ \item 
+   Nalezněte řešení počáteční úlohy:
+   \[
+    \vc y'=\begin{pmatrix}
+          1 & 1 \\ -1 & 1
+       \end{pmatrix} \vc y
+       +
+       \begin{pmatrix}
+         \cos t \\ -\sin t
+       \end{pmatrix}
+    \qquad
+    \vc y(0)=\begin{pmatrix}
+           -1 \\ 1
+         \end{pmatrix}
+   \]
+\item 
+    Nalezněte libovolnou iterační metodou záporné řešení rovnice
+    \[
+       x=2\ln\abs{x+1}.
+    \]
+    Načrtněte grafy funkcí na obou stranách rovnice. Určete kolik má rovnice celkem řešení.
+    Odůvodněte volbu zvoleného počátečního přiblížení. Napište vzorce pro výpočet iterací
+    a nalezněte řešení s přesností na dvě platné cifry.
+ \item
+    Nalezněte libovolný fundamentální systém pro počáteční úlohu
+    \[
+    \vc y'=\begin{pmatrix}
+          2 & 1 & 0 \\ 
+          1 & 3 & -1 \\
+          -1 & 2 & 3
+       \end{pmatrix} \vc y   
+    \]
+   (jedno vlastní číslo je 2)
+\end{enumerate}
+
+\pagebreak
+\section*{Zápočtová písemka - verze D}
+\begin{enumerate}
+ \item 
+   Nalezněte řešení počáteční úlohy:
+   \[
+    \vc y'=\begin{pmatrix}
+          0 & 1 \\ 1 & 0
+       \end{pmatrix} \vc y
+       +
+       \begin{pmatrix}
+         -2 e^t \\  t^2
+       \end{pmatrix}
+    \qquad
+    \vc y(0)=\begin{pmatrix}
+           -2 \\ 1
+         \end{pmatrix}
+   \]
+ \item 
+   Oblast $\Omega$ tvoří trojúhelník s vrcholy v bodech $[0,0]$, $[1.5, 0]$, $[0,3]$. Proveďte diskretizaci 
+   oblasti metodou sítí s krokem $1/2$ (nakreslete obrázek). Na této oblasti řešte metodou sítí rovnici:
+   \[
+      -\frac{\prtl}{\prtl x}\big( (1+y^2)\frac{\prtl u}{\prtl x}\big) - 2 \frac{\prtl^2 u}{\prtl y^2} + yu= x/y
+   \]
+   s konstantní Dirichletovou okrajovou podmínkou $u = 1$.
+   Označte regulární a neregulární uzly. V regulárních uzlech sestavte diskrétní formu rovnice. V neregulárních 
+   uzlech napište rovnici lineární interpolace okrajové podmínky.
+      
+ \item
+    Nalezněte libovolný fundamentální systém pro počáteční úlohu
+    \[
+    \vc y'=\begin{pmatrix}
+          0 & -1 & 3 \\ 
+          -4 & 0 & 10 \\
+          -2 & -1 & 6
+       \end{pmatrix} \vc y   
+    \]
+\end{enumerate}
+
+\pagebreak
+\section*{Zápočtová písemka - verze E}
+\begin{enumerate}
+ \item 
+   Nalezněte řešení počáteční úlohy:
+   \[
+    \vc y'=\begin{pmatrix}
+          1 & 1 \\ -1 & 1
+       \end{pmatrix} \vc y
+       +
+       \begin{pmatrix}
+         \cos t \\ -\sin t
+       \end{pmatrix}
+    \qquad
+    \vc y(0)=\begin{pmatrix}
+           -1 \\ 1
+         \end{pmatrix}
+   \]
+ \item 
+   Oblast $\Omega$ tvoří trojúhelník s vrcholy v bodech $[1,1]$, $[2.5, 1]$, $[1,4]$. Proveďte diskretizaci 
+   oblasti metodou sítí s krokem $1/2$ (nakreslete obrázek). Na této oblasti řešte metodou sítí rovnici:
+   \[
+      -\frac{\prtl}{\prtl x}\big( (x^2+y)\frac{\prtl u}{\prtl x}\big) - 3 \frac{\prtl^2 u}{\prtl y^2} + yu= xy
+   \]
+   s konstantní Dirichletovou okrajovou podmínkou $u = 1$.
+   Označte regulární a neregulární uzly. V regulárních uzlech sestavte diskrétní formu rovnice. V neregulárních 
+   uzlech napište rovnici lineární interpolace okrajové podmínky.
+      
+ \item
+    Nalezněte libovolný fundamentální systém pro počáteční úlohu
+    \[
+    \vc y'=\begin{pmatrix}
+          1 & -1 & 2 \\ 
+          1 & 1 & -1 \\
+          2 & 1 & 1
+       \end{pmatrix} \vc y   
+    \]
+\end{enumerate}
+\pagebreak
+\section*{Zápočtová písemka - verze F}
+\begin{enumerate}
+ \item 
+   Nalezněte řešení počáteční úlohy:
+   \[
+    \vc y'=\begin{pmatrix}
+          2 & 1 \\ -1 & 4
+       \end{pmatrix} \vc y
+       +
+       \begin{pmatrix}
+         2 e^t \\  1
+       \end{pmatrix}
+    \qquad
+    \vc y(0)=\begin{pmatrix}
+           -1 \\ -1
+         \end{pmatrix}
+   \]
+ \item 
+    Nalezněte libovolnou iterační metodou (doporučuji Newtonovu) všechna řešení rovnice
+    \[
+       \cos x=-\frac14 x
+    \]
+    Načrtněte grafy funkcí na obou stranách rovnice. Určete kolik má rovnice celkem řešení.
+    Napište vzorce pro výpočet iterací, odůvodněte volbu zvoleného počátečního přiblížení
+    a nalezněte řešení s přesností na dvě platné cifry.
+ \item
+    Nalezněte libovolný fundamentální systém pro počáteční úlohu
+    \[
+    \vc y'=\begin{pmatrix}
+          2 & 1 & 0 \\ 
+          1 & 3 & -1 \\
+          -1 & 2 & 3
+       \end{pmatrix} \vc y   
+    \]
+   (jedno vlastní číslo je 2)
+\end{enumerate}
+
+\end{document}
+

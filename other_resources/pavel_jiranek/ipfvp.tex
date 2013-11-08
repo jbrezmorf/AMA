@@ -1,0 +1,128 @@
+\chapter{Opakování}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Dvojné a trojné integrály}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+V následujícím textu si zopakujeme výpoèet dvojných a trojných integrálù
+na speciálních typech oblastí v $E_2$ a $E_3$.
+Tyto oblasti budeme jednotnì znaèit symbolem $\Omega$,
+integrovanou funkci budeme znaèit symbolem $f$.
+
+Integraèní obory v $E_2$:
+\begin{itemize}
+   \item Kartézské souøadnice:
+   \begin{itemize}
+      \item Obrazec mezi grafy spojitých funkcí $y=l(x)$ a $y=u(x)$
+            a pøímkami $x=a$, $x=b$ ($a<b$, $l(x)\leq u(x)$ pro $x\in [a,b]$),
+            \[
+               \iint\limits_{\Omega} f(x,y)\,dx\,dy = \int\limits_a^b\left(\int\limits_{l(x)}^{u(x)}f(x,y)\,dy\right)\,dx.
+            \]
+      \item Obrazec mezi grafy spojitých funkcí $x=l(y)$ a $x=u(y)$
+            a pøímkami $y=a$, $y=b$ ($a<b$, $l(y)\leq u(y)$ pro $y\in [a,b]$).
+            \[
+               \iint\limits_{\Omega} f(x,y)\,dx\,dy = \int\limits_a^b\left(\int\limits_{l(y)}^{u(y)}f(x,y)\,dx\right)\,dy.
+            \]
+   \end{itemize}
+   \item Polární souøadnice:
+         (transformaèní rovnice $x=\varrho\cos\varphi$, $y=\varrho\sin\varphi$):
+         Obrazec mezi hranièními polopøímkami $\varphi=\alpha$, $\varphi=\beta$,
+            ($\alpha\leq\beta$, $\beta-\alpha\leq 2\pi$) a grafy spojitých
+            funkcí $\varrho=l(\varphi)$, $\varrho=u(\varphi)$,
+            \[
+               \iint\limits_{\Omega} f(x,y)\,dx\,dy = \iint\limits_{\Omega} g(\varrho,\varphi)\varrho\,d\varrho\,d\varphi,
+            \]
+            tj.
+            \[
+               \iint\limits_{\Omega} f(x,y)\,dx\,dy = \int\limits_{\alpha}^{\beta}\left(\int\limits_{l(\varphi)}^{u(\varphi)}g(\varrho,\varphi)\varrho\,d\varrho\right)\,d\varphi,
+            \]
+            kde $g(\varrho,\varphi)=f(\varrho\cos\varphi,\varrho\sin\varphi)$.
+\end{itemize}
+
+Integraèní obory v $E_3$:
+\begin{itemize}
+   \item Kartézské souøadnice:
+         Oblast urèená nerovnostmi $x\in[a,b]$, $y\in [l(x),u(x)]$, 
+            $z\in[L(x,y),U(x,y)]$, kde $l,u,L,U$ jsou spojité funkce,
+            \[
+               \iiint\limits_{\Omega} f(x,y,z)\,dx\,dy\,dz = \int\limits_a^b\left(\int\limits_{l(x)}^{u(x)}\left(\int\limits_{L(x,y)}^{H(x,y)}f(x,y,z)\,dz\right)\,dy\right)\,dx.
+            \]
+   \item Cylindrické souøadnice 
+         (transformaèní rovnice $x=\varrho\cos\varphi$, $y=\varrho\sin\varphi$, $z=z$):
+         Oblast urèená nerovnostmi $\varphi\in[\alpha,\beta]$, $\varrho\in [l(\varphi),u(\varphi)]$, 
+            $z\in[L(\varrho,\varphi),U(\varrho,\varphi)]$, kde $l,u,L,U$ jsou spojité funkce,
+            \[
+               \iiint\limits_{\Omega} f(x,y,z)\,dx\,dy\,dz = \iiint\limits_{\Omega} g(\varrho,\varphi,z)\varrho\,d\varrho\,d\varphi\,d\varphi,
+            \]
+            tj.
+            \[
+               \iiint\limits_{\Omega} f(x,y,z)\,dx\,dy\,dz = \int\limits_{\alpha}^{\beta}\left(\int\limits_{l(\varphi)}^{u(\varphi)}\left(\int\limits_{L(\varrho,\varphi)}^{H(\varrho,\varphi)}g(\varrho,\varphi,z)\,dz\right)\,d\varrho\right)\,d\varphi,
+            \]
+            kde $g(\varrho,\varphi,z)=f(\varrho\cos\varphi,\varrho\sin\varphi,z)$.
+   \item Sférické souøadnice
+         (transformaèní souøadnice $x=\varrho\cos\vartheta\cos\varphi$,
+         $y=\varrho\cos\vartheta\sin\varphi$, $z=\varrho\sin\vartheta$):
+         Oblast urèená nerovnostmi $\varphi\in[\alpha,\beta]$, $\vartheta\in[\gamma,\delta]$,
+            $\varrho\in [L(\varphi,\vartheta),U(\varphi,\vartheta)]$, 
+            kde $L,U$ jsou spojité funkce,
+            \[
+               \iiint\limits_{\Omega} f(x,y,z)\,dx\,dy\,dz = \iiint\limits_{\Omega} g(\varrho,\varphi,\vartheta)\varrho^2\sin\vartheta\,d\varrho\,d\varphi\,d\varphi,
+            \]
+            tj.
+            \[
+               \iiint\limits_{\Omega} f(x,y,z)\,dx\,dy\,dz = \int\limits_{\alpha}^{\beta}\left(\int\limits_{\gamma}^{\delta}\left(\int\limits_{L(\varphi,\vartheta)}^{H(\varphi,\vartheta)}g(\varrho,\varphi,\vartheta)\rho^2\sin\theta\,d\varrho\right)\,d\vartheta\right)\,d\varphi,
+            \]
+            kde $g(\varrho,\varphi,\vartheta)=f(\varrho\cos\vartheta\cos\varphi,\varrho\cos\vartheta\sin\varphi,\varrho\sin\vartheta)$.
+\end{itemize}
+
+\begin{ex}
+   Spoètìte integrály
+   \begin{enumerate}
+      \item
+      \[
+         I = \iint\limits_{\Omega}(x+y)\,dx\,dy,
+      \]
+      kde $\Omega=\{[x,y]\in E_2\,|\,y\in[x+1,x^2],\;x\in[0,1]\}$.
+      \item
+      \[
+         I = \iint\limits_{\Omega}e^{(y^2)}\,dx\,dy,
+      \]
+      kde $\Omega=\{[x,y]\in E_2\,|\,y\in[x,1],\;x\in[0,1]\}$.
+      \item
+      \[
+         I = \iint\limits_{\Omega}x\,dx\,dy,
+      \]
+      kde $\Omega=\{[x,y]\in E_2\,|\,\;y=[-x,x], \;x\in[0,1]\;\&\;x^2+(y-r)^2\leq r^2\}$.
+      \item
+      \[
+         I = \iint\limits_{\Omega}\,dx\,dy,
+      \]
+      kde $\Omega=\{[x,y]\in E_2\,|\,\;r_1\leq x^2+y^2\leq r_2, \; r_1<r_2\}$.
+      \item
+      \[
+         I = \iiint\limits_{\Omega}\,dx\,dy\,dz,
+      \]
+      kde $\Omega=\{[x,y,z]\in E_3\,|\,x\in[0,1],\;y\in[0,\frac{1}{2}(1-x)],\;z\in[0,1-x-2y]\}$.
+      \item
+      \[
+         I = \iiint\limits_{\Omega}z\sqrt{x^2+y^2}\,dx\,dy\,dz,
+      \]
+      kde $\Omega=\{[x,y,z]\in E_3\,|\,x^2+y^2-2x\leq 0\;\&\;y\geq 0\;\&\;z\in[0,k],\;k>0\}$.
+      \item
+      \[
+         I = \iiint\limits_{\Omega}x^2\,dx\,dy\,dz,
+      \]
+      kde $\Omega = \{[x,y,z]\in E_3\,|\,x^2+y^2+z^2\leq r^2\}$.
+   \end{enumerate}
+\end{ex}
+\begin{sol}
+   \begin{enumerate}
+      \item $I=\frac{33}{20}$.
+      \item $I = \frac{1}{2}(e-1)$.
+      \item $I = 0$.
+      \item $I=\pi(r_2^2-r_1^2)$.
+      \item $I = \frac{1}{12}$.
+      \item $I=\frac{8}{9}k^2$.
+      \item $I=\frac{4}{15}\pi r^5$.
+   \end{enumerate}
+\end{sol}

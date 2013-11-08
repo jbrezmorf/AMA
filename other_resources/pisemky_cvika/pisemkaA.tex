@@ -1,0 +1,147 @@
+\documentclass[a4paper,10pt]{article}
+%\usepackage[active]{srcltx}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%
+\def\div{{\rm div}}
+\def\Lapl{\Delta}
+\def\grad{\nabla}
+\def\supp{{\rm supp}}
+\def\dist{{\rm dist}}
+%\def\chset{\mathbbm{1}}
+\def\chset{1}
+%
+\def\Tr{{\rm Tr}}
+\def\to{\rightarrow}
+\def\weakto{\rightharpoonup}
+\def\imbed{\hookrightarrow}
+\def\cimbed{\subset\subset}
+\def\range{{\mathcal R}}
+\def\leprox{\lesssim}
+\def\argdot{{\hspace{0.18em}\cdot\hspace{0.18em}}}
+\def\Distr{{\mathcal D}}
+\def\calK{{\mathcal K}}
+\def\FromTo{|\rightarrow}
+\def\convol{\star}
+\def\impl{\Rightarrow}
+\DeclareMathOperator*{\esslim}{esslim}
+\DeclareMathOperator*{\esssup}{ess\,supp}
+\DeclareMathOperator{\ess}{ess}
+\DeclareMathOperator{\osc}{osc}
+\DeclareMathOperator{\curl}{curl}
+%
+%\def\Ess{{\rm ess}}
+%\def\Exp{{\rm exp}}
+%\def\Implies{\Longrightarrow}
+%\def\Equiv{\Longleftrightarrow}
+% ****************************************** GENERAL MATH NOTATION
+\def\Real{{\rm\bf R}}
+\def\Rd{{{\rm\bf R}^{\rm 3}}}
+\def\RN{{{\rm\bf R}^N}}
+\def\D{{\mathbb D}}
+\def\Nnum{{\mathbb N}}
+\def\Measures{{\mathcal M}}
+\def\d{\,{\rm d}}               % differential
+\def\sdodt{\genfrac{}{}{}{1}{\rm d}{{\rm d}t}}
+\def\dodt{\genfrac{}{}{}{}{\rm d}{{\rm d}t}}
+%
+\def\vc#1{\mathbf{\boldsymbol{#1}}}     % vector
+\def\tn#1{{\mathbb{#1}}}    % tensor
+\def\abs#1{\lvert#1\rvert}
+\def\Abs#1{\bigl\lvert#1\bigr\rvert}
+\def\bigabs#1{\bigl\lvert#1\bigr\rvert}
+\def\Bigabs#1{\Big\lvert#1\Big\rvert}
+\def\ABS#1{\left\lvert#1\right\rvert}
+\def\norm#1{\bigl\Vert#1\bigr\Vert} %norm
+\def\close#1{\overline{#1}}
+\def\inter#1{#1^\circ}
+\def\eqdef{\mathrel{\mathop:}=}     % defining equivalence
+\def\where{\,|\,}                    % "where" separator in set's defs
+\def\timeD#1{\dot{\overline{{#1}}}}
+%
+% ******************************************* USEFULL MACROS
+\def\RomanEnum{\renewcommand{\labelenumi}{\rm (\roman{enumi})}}   % enumerate by roman numbers
+\def\rf#1{(\ref{#1})}                                             % ref. shortcut
+\def\prtl{\partial}                                        % partial deriv.
+\def\Names#1{{\scshape #1}}
+\def\rem#1{{\parskip=0cm\par!! {\sl\small #1} !!}}
+%
+%
+% ******************************************* DOCUMENT NOTATIONS
+% document specific
+%***************************************************************************
+%
+\addtolength{\textwidth}{2cm}
+\addtolength{\vsize}{2cm}
+\addtolength{\topmargin}{-1cm}
+\addtolength{\hoffset}{-1cm}
+\begin{document}
+\parskip=2ex
+\parindent=0pt
+\pagestyle{empty}
+%
+\def\zA{
+Zadani A. Najdete SFM pro nasledujici soustavy:
+\begin{align*}
+   1.&\quad
+   \left\{
+   \begin{aligned}
+     &y_1'=y_2-7y_1\\
+     &y_2'+2y_1=-5y_2
+   \end{aligned}
+   \right.
+   &
+   2.&\quad
+   \left\{
+   \begin{aligned}
+     &y_1'=-y_1-y_2+5y_3\\
+     &y_2'=-2y_1+6y_3\\
+     &y_3'=-2y_1-y_2+6y_3
+   \end{aligned}\right.
+\end{align*}
+\vskip 1cm
+\hrule
+}
+\zA
+\zA
+\zA
+\zA
+\zA
+\zA
+
+
+\pagebreak
+\def\zB{
+Zadani B. Najdete SFM pro nasledujici soustavy:
+\begin{align*}
+   1.&\quad
+   \left\{
+   \begin{aligned}
+    y_1'-y_1&=4y_2\\
+    y_2'+7y_2&=5y_1
+  \end{aligned}\right.
+   &
+   2.&\quad
+   \left\{
+   \begin{aligned}
+     &y_1'=-y_2+3y_3\\
+     &y_2'=-4y_1+10y_3\\
+     &y_3'=-2y_1-y_2+6y_3
+   \end{aligned}\right.
+\end{align*}
+\vskip 1cm
+\hrule
+}
+\zB
+\zB
+\zB
+\zB
+\zB
+\zB
+
+
+
+\end{document}

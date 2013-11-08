@@ -1,0 +1,381 @@
+\chapter{Metrické prostory}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Metrické prostory jsou speciální typy mno¾in, na nich¾ lze definovat tzv.
+metriku, resp. vzdálenost, pro ka¾dou dvojici prvkù z této mno¾iny.
+Formálnì: nech» $X\neq\emptyset$, $\varrho:\,X\times X\rightarrow\mathbb{R}$,
+zobrazení­ $\varrho$ nech» má následující­ vlastnosti:
+\begin{enumerate}
+\renewcommand{\theenumi}{M\arabic{enumi}}
+   \item $(\forall x,y\in X)(\varrho(x,y)\geq 0\;\&\;\varrho(x,y)=0\; 
+                 \Leftrightarrow\;x=y)$,\label{item:m1}
+   \item $(\forall x,y\in X)(\varrho(x,y)=\varrho(y,x))$ (symetrie),
+   \item $(\forall x,y,z\in X))(\varrho(x,z)\leq\varrho(x,y)+\varrho(y,z))$  
+          (trojúhelní­ková nerovnost).\label{item:m3}
+\end{enumerate}
+Zobrazení $\varrho$ potom øíkáme metrika (na $X$), dvojici $(X,\varrho)$ 
+nazýváme metrickým prostorem.
+Èasto se metrický prostor zastupuje pouze symbol $X$, je-li zøejmé, jakou
+metriku na nìm máme definovanou.
+Je-li $Y\subset X$, mù¾eme na $Y$ pou¾ít metriku definovanou na $X$.
+Dvojici $(Y,\varrho)$ øíkáme metrický podprostor prostoru $(X,\varrho)$.
+
+Pojem metrického prostoru umo¾òuje zobecnit pojmy známé z analýzy
+jako spojitost, konvergence, jako zobecnìní otevøených a uzavøených intervalù
+mù¾eme definovat otevøené a uzavøené mno¾iny.
+
+Symbolem $B_r(x)$ budeme oznaèovat otevøenou kouli se støedem v bodì $x$
+a polomìrem $r$, tj. $B_r(x)\equiv\{y\in X\,|\,\varrho(x,y)<r\}$
+($r$-okolí bodu $x$).
+Zále¾í-li na pou¾ité metrice, oznaèujeme ji $B_r^{\varrho}(x)$.
+
+\begin{ex}
+   Pøíklady metrických prostorù:
+   \begin{enumerate}
+      \item Èíselné mno¾iny ($\mathbb{R}$ reálných, $\mathbb{C}$ racionálních,
+            $\mathbb{Q}$ racionálních èísel) je metrický prostor s metrikou 
+            definovanou pomocí absolutní hodnoty $|\cdot|$.
+            V dal¹ím textu budeme uva¾ovat zpravidla metrický prostor reálných èísel.
+      \item Na mno¾inì reálných $n$-tic, $n\in\mathbb{N}$
+            (aritmetických vektorù) lze definovat
+            napø. metriky:
+            \[
+               \begin{split}
+                  \varrho_1(x,y)&\equiv
+                           \sum\limits_{i=1}^n|\beta_i-\alpha_i|,\\
+                  \varrho_2(x,y)&\equiv
+                           \sqrt{\sum\limits_{i=1}^n(\beta_i-\alpha_i)^2},\\
+                  \varrho_{\infty}(x,y)&\equiv
+                           \max\limits_{i=1,\ldots,n}|\beta_i-\alpha_i|,
+               \end{split}
+            \]
+            kde $x=(\alpha_1,\ldots,\alpha_n),
+            y=(\beta_1,\ldots,\beta_n)\in\mathbb{R}^n$.
+       \item Analogicky jako na mno¾inì aritmetických vektorù
+             lze definovat metriky na mno¾inì $C(I)$ spojitých funkcí 
+             na uzavøeném intervalu $I\subset\mathbb{R}$
+            \[
+               \begin{split}
+                  \varrho_1(f,g)&\equiv
+                           \int\limits_I|g(x)-f(x)|\,dx,\\
+                  \varrho_2(f,g)&\equiv
+                           \sqrt{\int\limits_I(g(x)-f(x))^2\,dx},\\
+                  \varrho_{\infty}(f,g)&\equiv
+                           \max\limits_{x\in I}|g(x)-f(x)|
+               \end{split}
+            \]
+            pro $f,g\in C(I)$.
+        \item Nech» $X$ je neprázdná mno¾ina, definujme
+              $\varrho(x,y)=0$ pro $x=y$ a $\varrho(x,y)=1$ pro $x\neq y$.
+              Prostor $(X,\varrho)$ je (diskrétní) metrický prostor.
+   \end{enumerate}
+\end{ex}
+
+\section{Mno¾iny v metrických prostorech}
+
+Nech» $M,N\subset X$ jsou podmno¾iny metrického prostoru $X$.
+Definujeme
+\begin{itemize}
+   \item sjednocení: $M\cup N\equiv\{x\in X\,|\,x\in M\;\vee\;x\in N\}$;
+   \item prùnik: $M\cap N\equiv\{x\in X\,|\,x\in M\;\&\;x\in N\}$;
+   \item rozdíl: $M\setminus N\equiv\{x\in X\,|\,x\in M\;\&\;x\not\in N\}$;
+   \item doplnìk: $M^c\equiv\{x\in X\,|\,x\not\in M\}$;
+\end{itemize}
+zøejmì platí $M\setminus N=M\cap N^c$, $M^c = X\setminus M$.
+
+Nech» $M\subset X$ je podmno¾ina metrického prostoru $X$ a $x\in X$.
+Øíkáme, ¾e $x$ je
+\begin{itemize}
+   \item vnitøním bodem mno¾iny $M$ 
+         $\Leftrightarrow\;(\exists r>0)(B_r(x)\subset M)$;
+   \item hranièním bodem mno¾iny $M$
+         $\Leftrightarrow\;(\forall r>0)(B_r(x)\cap M\neq\emptyset
+           \;\&\;B_r(x)\cap M^c\neq\emptyset)$;
+   \item hromadným bodem mno¾iny $M$
+         $\Leftrightarrow\;(\forall r>0)((B_r(x)\setminus\{x\})\cap M\neq\emptyset)$;
+   \item izolovaným bodem mno¾iny $M$
+         $\Leftrightarrow\;(\exists r>0)(B_r(x)\cap M=\{x\})$;
+\end{itemize}
+Definujme: vnitøek mno¾iny $M$, $M^0$, jako mno¾inu v¹ech vnitøních bodù;
+           hranici mno¾iny $M$, $M'$, jako mno¾inu v¹ech hranièních bodù;
+           uzávìr mno¾iny $M$, $\overline{M}\equiv M\cup\partial M$.
+
+Zøejmì: ka¾dý vnitøní bod mno¾iny le¾í v této mno¾inì  
+        a ka¾dý bod mno¾iny le¾í v jejím uzávìru ($M^0\subset M\subset\overline{M}$);
+        hranièní body a hromadné body nemusí nutnì le¾et v dané mno¾inì;
+        ka¾dý hranièní bod je hromadným bodem mno¾iny;
+        izolovaný bod je hranièní bod mno¾iny a zároveò v ní le¾í;
+        v ka¾dém okolí hromadného bodu mno¾iny le¾í nekoneènì mnoho bodù této mno¾iny,
+        v pøípadì izolovaného bodu platí opak;
+
+Mno¾ina $M\subset X$ je
+\begin{itemize}
+   \item otevøená $\Leftrightarrow \; M=M^0$,
+   \item uzavøená $\Leftrightarrow \; M=\overline{M}$.
+\end{itemize}
+Platí: $M$ je otevøená $\Leftrightarrow$ $M^c$ je uzavøená
+       a naopak
+       (dùsledky de Morganových zákonù:
+        $M\cup N=(M^c\cap N^c)^c$, $M\cap N=(M^c\cup N^c)^c$).
+
+\section{Konvergence v metrickém prostoru}
+
+O prvku $x\in X$ øekneme, ¾e je limitou posloupnosti $\{x_n\}\subset X$,
+pokud $\varrho(x_n,x)\rightarrow 0$ pro $n\rightarrow\infty$,
+tj. kovergenci prvkù metrického prostoru pøevedeme na konvergenci reálné posloupnosti.
+Definici mù¾eme formalizovat následovnì:
+výrok $\varrho(x_n,x)\rightarrow 0$ pro $n\rightarrow\infty$
+je ekvivalentní výroku
+$(\forall \varepsilon>0)(\exists N\in\mathbb{N})(\forall n\in\mathbb{N})
+(n>N\;\Rightarrow\;\varrho(x_n,x)<\varepsilon)$.
+
+Z jednoznaènosti limity reálné posloupnosti a vlastnosti~\ref{item:m1}
+metriky plyne jednoznaènost limity posloupnosti v metrickém prostoru.
+
+Mù¾eme-li na mno¾inì $X$ definovat více metrik, napø. $\varrho_1$ a $\varrho_2$,
+nemusí konvergence v jedné metrice být v¾dy ekvivalentní konvergenci v druhé metrice.
+Toto platí jen pro tzv. ekvivalentní metriky, tj. metriky, pro nì¾ existují
+kladné konstanty $\alpha$ a $\beta$ tak, ¾e 
+$\alpha\varrho_1(x,y)\leq\varrho_2(x,y)\leq\beta\varrho_1(x,y)$.
+Metriky $\varrho_1$ a $\varrho_2$ na $X$ jsou ekvivalentní, právì kdy¾
+$(\forall x\in X)(\forall r>0)(\exists r_1<r)(\exists r_2>r)
+ (B_{r_1}^{\varrho_1}\subset B_r^{\varrho_2}\subset B_{r_2}^{\varrho_1})$.
+
+Mno¾ina $M$ je uzavøená, pokud ka¾dá konvergentní posloupnost z $M$
+má limitu v $M$.
+
+\section{Úplné metrické prostory}
+
+$\{x_n\}\subset X$ je cauchyovská $\Leftrightarrow$
+$(\forall\varepsilon>0)(\exists N\in\mathbb{N})(\forall m,n\in\mathbb{N})
+(m,n>N\;\Rightarrow\;\varrho(x_m,x_n)<\varepsilon)$.
+Metrický prostor $(X,\varrho)$ nazveme úplný, pokud ka¾dá cauchyovská posloupnost
+$\{x_n\}\in X$ konverguje k prvku $x\in X$ v metrice $\varrho$.
+
+Ka¾dá konvergentní posloupnost je nutnì cauchyovská.
+
+Uzavøený metrický podprostor (uzavøená podmno¾ina metrického prostoru
+s metrikou daného prostoru) úplného metrického prostoru je úplný.
+
+\begin{ex} Pøíklady úplných a neúplných metrických prostorù:
+   \begin{enumerate}
+   \item Pøíkladem neúplného metrického prostoru je $(\mathbb{Q},|\cdot|)$.
+         Víme, ¾e posloupnost $x_n=(1+1/n)^n$, $n\in\mathbb{N}$,
+         konverguje k èíslu $e=\exp(1)\not\in\mathbb{Q}$.
+   \item Metrický prostor $(\mathbb{R},|\cdot|)$ je úplný.
+   \item Metrické prostory 
+         $(\mathbb{R}^n,\varrho_1)$, $(\mathbb{R}^n,\varrho_2)$, 
+         $(\mathbb{R}^n,\varrho_{\infty})$ jsou úplné.
+   \item Metrický prostor $(C(I),\varrho_{\infty})$ je úplný,
+         prostory $(C(I),\varrho_{1})$ a $(C(I),\varrho_{2})$ nikoliv.
+         Obecnì úplnost metrického prostoru závisí na pou¾ité metrice
+         (viz diskuze o ekvivalentních metrikách vý¹e).
+   \item Diskrétní metrický prostor $X$ je úplný
+         (cauchyovské posloupnosti mají tvar $(x,x,\ldots,x,\ldots)$
+         a konvergují k $x$, kde $x\in X$).
+   \end{enumerate}
+\end{ex}
+
+\section{Operátory na metrických prostorech}
+
+Nech» $X$, $Y$ jsou neprázdné mno¾iny.
+Je-li pro ka¾dé $x\in X$ pøiøazeno $y\in Y$, zapisujeme $y=Ax$ ($x\in X$, $y\in Y$),
+øíkáme, ¾e je definován operátor z $X$ do $Y$ (znaèíme $A:\,X\rightarrow Y$).
+Nìkdy se uva¾uje operátor definovaný jen pro jistou podmno¾inu mno¾iny $X$
+(které øíkáme definièní obor operátoru $A$). Tomu se zde vyhneme.
+Je-li $y=Ax$ ($x\in X$, $y\in Y$), øíkáme prvku $x$ vzor prvku $y$,
+prvku $y$ øíkáme obraz prvku $x$.
+Mno¾ina $R(A)\equiv\{y\in Y\,|\,(\exists x\in X)(y=Ax)\}\subset Y$
+se nazývá obor hodnot operátoru $A$;
+operátor $A:\,X\rightarrow Y$ je spojitý, pokud pro ka¾dou posloupnost
+$\{x_n\}\subset X$ platí implikace $x_n\rightarrow x\;\Rightarrow\;Ax_n\rightarrow Ax$
+(tj. pokud pøevádí konvergentní posloupnosti v konvergentní).
+
+Ka¾dý spojitý operátor je omezený, tj. pøevádí omezené mno¾iny na omezené.
+Mno¾inu $M$ nazveme omezenou, je-li 
+$\mathrm{diam}(M)=\sup_{x,y\in M}\varrho(x,y)<\infty$.
+Ekvivalentnì: je-li operátor neomezený, není spojitý.
+
+\begin{ex}
+   Pøíklad nespojitého (lineárního) operátoru:
+   Uva¾ujme prostor $C[0,1]$ spojitých funkcí na intervalu $[0,1]$
+   a jeho podprostor $C^1[0,1]\equiv\{f\in C[0,1]\,|\,f'\in C[0,1]\}$,
+   oba s metrikou $\varrho_{\infty}$.
+   Definujme $A\,:f\mapsto f'\,:C^1[0,1]\rightarrow C[0,1]$, $f\in C^1[0,1]$.
+   Uva¾ujme $f_n:\,x\mapsto x^n$ pro $n\in\mathbb{N}$.
+   Zvolme $n\in\mathbb{N}$,
+   pak $\varrho_{\infty}(f_n,f_1)=\max_{x\in[0,1]}|x-x^n|=
+   \max_{x\in[0,1]}|x(1-x^{n-1})|\leq 1$.
+   Mno¾ina $\{f_n\}$ je tedy omezená.
+   Na druhou stranu $\varrho_{\infty}(Af_n,Af_1)=\varrho(nx^{n-1},0)=
+   \max_{x\in[0,1]}|nx^n-1|=n$ je neomezená.
+   Operátor $A$ je neomezený, a tedy není spojitý.
+\end{ex}
+
+\begin{ex}
+   Pøíklad spojitého operátoru:
+   Uva¾ujme opìt prostor $C[0,1]$
+   a definujme operátor $A:\,f\mapsto\int_0^1f(x)\,dx:
+   \,C[0,1]\rightarrow\mathbb{R}$, $f\in C[0,1]$.
+   Pou¾ijeme-li napø. metriku $\varrho_{\infty}$,
+   snadno se uká¾e, ¾e operátor $A$ pøevádí konvergentní posloupnosti
+   na konvergentní.
+\end{ex}
+
+\section{Vìta o pevném bodì a její aplikace}
+
+Nech» $(X,\varrho)$ je metrický prostor a $A:\,X\rightarrow X$ je operátor na $X$.
+Prvku $x\in X$ øíkáme pevný bod operátoru $A$, pokud $Ax=x$.
+Operátor $A$ nazýváme kontrakce (kontraktivní operátor), pokud existuje
+$0\leq \alpha <1$ tak, ¾e $\varrho(Ax,Ay)\leq\varrho(x,y)$ pro ka¾dé $x,y\in X$.
+
+Ka¾dá kontrakce je spojitá.
+
+Banachova vìta o pevném bodì:
+Ka¾dá kontrakce definovaná na úplném metrickém prostoru má právì jeden pevný bod.
+
+Dùkaz: Nech» $x_0\in X$ a definujme rekurzivnì 
+$x_n=Ax_{n-1}=A^2x_{n-2}=\cdots=A^nx_0$ pro $n\in\mathbb{N}$.
+Nech» $m,n\in\mathbb{N}$, $m\leq n$, pak
+\[
+   \begin{split}
+      \varrho(x_m,x_n)&=\varrho(A^mx_0,A^nx_0)\leq\alpha^m\varrho(x_0,x_{n-m})\\
+                      &\leq\alpha^m(\varrho(x_0,x_1)+\varrho(x_1,x_2)+\cdots
+                       +\varrho(x_{n-m-1},x_{n-m})\\
+                      &=\alpha^m(\varrho(x_0,x_1)+\varrho(Ax_0,Ax_1)+\cdots
+                       +\varrho(A^{n-m-1}x_0,A^{n-m-1}x_1)\\
+                      &\leq\alpha^m\varrho(x_0,x_1)(1+\alpha+\cdots
+                       +\alpha^{n-m-1})\\
+                      &\leq\frac{\alpha^m}{1-\alpha}\varrho(x_0,x_1)
+   \end{split}
+\]
+Pøitom jsme vyu¾ili trojúhelníkové nerovnosti~\ref{item:m3}
+a souètu nekoneèné geometrické øady s kvocientem $\alpha<1$.
+Pro zvolené $\varepsilon>0$ a dostateènì velká $m$ je $\varrho(x_m,x_n)<\varepsilon$,
+tak¾e posloupnost $\{x_n\}$ je cauchyovská a v dùsledku úplnosti $(X,\varrho)$
+má limitu $x=\lim_{n\rightarrow\infty}x_n\in X$.
+Proto¾e $x_n\rightarrow x$, plyne ze spojitosti $A$, ¾e
+$Ax=A\lim_{n\rightarrow\infty}x_n=\lim_{n\rightarrow\infty}Ax_n
+=\lim_{n\rightarrow\infty}x_{n+1}=x$.
+Na¹li jsme tedy pevný bod $x$ kontrakce $A$ vèetnì konstruktivního návodu,
+jak takový bod nalézt vèetnì odhadu rychlosti konvergence.
+Jsou-li dále $x,y\in X$ dva pevné body kontrakce $A$, máme
+$\varrho(x,y)=\varrho(Ax,Ay)\leq\alpha\varrho(x,y)$.
+Toto je ale mo¾né jen pøípadì, ¾e $\varrho(x,y)$, tj. $x=y$.
+Tím jsme dokázali jednoznaènost pevného bodu.
+
+\paragraph{Aplikace vìty o pevném bodì pøi numerickém øe¹ení nelineárních rovnic.}
+Øe¹me rovnici 
+\begin{equation}\label{eq:nelin}
+   f(x)=0
+\end{equation}
+kde $f$ je reálná funkce reálné promìnné $x$.
+Jednou z metod pro její øe¹ení je metoda pevného bodu.
+Pøepi¹me rovnici~(\ref{eq:nelin}) do tvaru
+\[
+   x = g(x)
+\]
+($g$ se nazývá iteraèní funkce).
+Zvolme $x_0\in I$ a definujme
+\begin{equation}\label{eq:iter}
+   x_n = g(x_{n-1}), \; n\in\mathbb{N}.
+\end{equation}
+Pøedpokládejme, ¾e existuje uzavøený interval $I$ tak, ¾e $g(I)\subset I$,
+iteraèní funkce je diferencovatelná na $I$ a platí $|g'(x)|\leq 1$ pro $x\in I$
+a nìjakou konstantu $0\leq K<1$.
+Pak má~(\ref{eq:nelin}) øe¹ení $x^*\in I$ a posloupnost $\{x_n\}$ konverguje k $x^*$.
+
+Dùkaz: Dvojice $(I,|\cdot|)$ je uzavøený metrický podprostor $(\mathbb{R},|\cdot|)$,
+je tedy je úplný. Nech» $x,y\in I$, $x<y$. Pak
+\[
+   \left|\frac{g(y) - g(x)}{y-x}\right| = |g'(c)| \leq K,
+\]
+kde $c\in(x,y)$ (z vìty o støední hodnotì).
+Odtud $|g(y) - g(x)| \leq K|y-x|$ pro ka¾dé $x,y\in I$,
+a tedy $g$ je kontrakce na $I$.
+Z vìty o pevném bodì tedy plyne, ¾e existuje $x^*\in I$ takové,
+¾e $x^*=g(x^*)$ a z dùkazu této vìty plyne $x^n\rightarrow x^*$.
+
+Zpravidla se uvádí slab¹í formulace, kde pøedpokládáme, ¾e $g$
+je spojitì diferencovatelná na nìjakém otevøeném okolí pevného bodu $x^*$
+a platí na nìm $|g'(x)|\leq K<1$. Zvolíme-li $x_0$ v dostateènì malém okolí
+bodu $x^*$, konverguje posloupnost definovaná v~(\ref{eq:iter}) k $x^*$.
+
+\begin{ex}
+   Hledejme koøen rovnice $f(x)=x^2-x-2=0$.
+   Zvolme $g(x)=\sqrt{x+2}$. 
+   Mo¾ných voleb funkce $g$ je nìkolik,
+   ne v¹echny vedou ke konvergenci iterací~(\ref{eq:iter}).
+   Volbou kladného znaménka odmocniny jsme redukovali mno¾inu pevných bodù
+   ze dvou na jeden.
+   Zvolme $I=[0,7]$. Pak $g(0)\sqrt{2}\geq 0$ a $g(7)=3\leq 7$,
+   je tedy $g(I)\subset I$.
+   Derivací $g$ podle $x$ máme $g'(x)=1/(2\sqrt{x+2})$.
+   Platí $g'(x)<1$ pro ka¾dé $x>-7/4$, tedy i pro $x\in I$.
+   Odtud posloupnost iterací~(\ref{eq:iter}) konverguje ke koøenu
+   rovnice $f(x)=0$ na $I$, tj. k $x^*=2$.
+   Volíme-li napø. $x_0=7$, máme
+   $x_1=7.0000$, $x_2=3.0000$, $x_3=2.2361$, $x_4=2.0582$,
+   $x_5=2.0145$, $x_6=2.0036$, $x_7=2.0009$ atd.
+\end{ex}
+
+\paragraph{Aplikace vìty o pevném bodì v teorii diferenciálních rovnic.}
+Nech» $G$ je otevøená souvislá mno¾ina (oblast) v $\mathbb{R}^2$,
+$(x_0,y_0)\in G$ a nech» $f$ je spojitá na $G$ 
+a splòuje Lipschitzovu podmínku v argumentu $y$
+($f$ je lipschitzovská, lipschitzovsky spojitá)
+$|f(x,y_1)-f(x,y_2)|\leq M|y_1-y_2|$ pro ka¾dé $(x,y_1)\in G$, $(x,y_2)\in G$,
+kde $M>0$ je pevná konstanta (nezávislá na $x$, $y_1$, $y_2$,
+tzv. Lipschitzova konstanta).
+Pak existuje $\delta > 0$ tak, ¾e rovnice $y'(x) = f(x,y)$ má právì jedno øe¹ení
+$y(x)=\varphi(x)$ na intervalu $[x_0-\delta,x_0+\delta]$ splòující
+poèáteèní podmínku $\varphi(x_0)=y_0$.
+
+Dùkaz: Øe¹ení rovnice $y'(x) = f(x,y)$ s poèáteèní podmínkou $\varphi(x_0)=y_0$
+mù¾eme zapsat ve tvaru
+\begin{equation}\label{eq:int_eq}
+   \varphi(x) = y_0 + \int\limits_{x_0}^x f(x,\varphi(t))\,dt.
+\end{equation}
+Funkce $f$ je na $G$ spojitá (poznamenejme, ¾e na funkci $f$
+se mù¾eme dívat jako na operátor $f\,\mathbb{R}^2\rightarrow\mathbb{R}$),
+tedy je omezená, tj. existuje $K>0$ tak, ¾e $|f(x,y)|\leq K$ na nìjaké
+podoblasti $G'\subset G$ takové, ¾e $(x_0,y_0)\in G'$.
+Vyberme $\delta>0$ tak, ¾e oblast $G'$ obsahuje obdélník
+$R\equiv [x_0-\delta,x_0+\delta]\times [y_0-K\delta,y_0+K\delta]$
+a zároveò $\delta\leq 1/M$.
+Oznaème $C^*\equiv\{\psi\in C[x_0-\delta,x_0+\delta]\,|\,
+(\forall x\in[x_0-\delta,x_0+\delta])(|\varphi(x)-y_0|\leq K\delta)\}$
+a pou¾ijme metriku $\varrho_{\infty}$.
+Metrický prostor $(C^*,\varrho_{\infty})$ je uzavøený podprostor prostoru
+$(C[x_0-\delta,x_0+\delta],\varrho_{\infty})$, který je úplný, a tedy
+$(C^*,\varrho_{\infty})$ je rovnì¾ úplný.
+Definujme operátor $\psi=A\phi$, $\phi\in C^*$ pøedpisem
+\[
+   \psi(x)=(A\varphi)(x)\equiv y_0+\int\limits_{x_0}^x f(t,\varphi(t))\,dt.
+\]
+Uká¾eme, ¾e je $A:\,C^*\rightarrow C^*$ a ¾e $A$ je kontrakce.
+Abychom ovìøili, ¾e $A$ je operátor do $C^*$, musíme ovìøit podmínku
+$(\forall x\in[x_0-\delta,x_0+\delta])(|(A\varphi)(x)-y_0|\leq K\delta)$.
+Platí
+\[
+   |(A\varphi)(x)-y_0|=\left|\int\limits_{x_0}^xf(t,\varphi(t))\,dt\right|
+                      \leq\int\limits_{x_0}^x|f(t,\varphi(t))|\,dt
+                      \leq K|x-x_0|\leq K\delta.
+\]
+Abychom ovìøili kontraktivnost operátoru, nech» $\varphi,\psi\in C^*$, 
+$x\in[x_0-\delta,x_0+\delta]$, pak
+\[
+  \begin{split}
+   |(A\varphi)(x)-(A\psi)(x)|&=
+    \left|\int\limits_{x_0}^xf(t,\varphi(t))-f(t,\psi(t)\,dt\right|\\
+    &\leq\int\limits_{x_0}^x|f(t,\varphi(t))-f(t,\psi(t)|\,dt\\
+    &\leq M\int\limits_{x_0}^x|\varphi(t)-\psi(t)|\,dt
+    \leq M\delta\,\varrho_{\infty}(\varphi,\psi),
+  \end{split}
+\]
+odkud $\varrho_{\infty}(A\varphi,A\psi)\leq M\delta\varrho(\varphi,\psi)
+=\alpha\varrho(\varphi,\psi)$, kde $\alpha\equiv M\delta<1$.
+Z vìty o pevném bodì existuje tedy $\varphi\in C^*$ tak, ¾e
+$A\varphi=\varphi$, tj. existuje právì jedno øe¹ení integrální 
+rovnice~(\ref{eq:int_eq}) v $C^*$.
+

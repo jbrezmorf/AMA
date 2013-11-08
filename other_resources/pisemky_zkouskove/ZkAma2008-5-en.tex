@@ -1,0 +1,96 @@
+\documentclass[fleqn,12pt]{report}
+\usepackage{a4}
+%\documentstyle[fleqn,czech,a4,12pt]{report}
+\newcommand{\e}{{\rm e}}
+%\newcommand{\klasif}{\vfill {\bf Klasifikace:}\begin{enumerate}\item 20--17 bodù\item 16--13 bodù\item 12--10 bodù\item 9--0 bodù\end{enumerate}}
+\newcommand{\nadpis}[1]{\newpage\noindent{\Huge Applied Mathematics}
+
+\begin{flushright}
+\_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_\\
+name and surname~~~~~~~~
+\end{flushright}
+
+\noindent{\Large #1}
+
+~
+
+}
+\pagestyle{empty}
+\headheight 0pt
+\headsep 0pt
+\begin{document}
+\nadpis{Excercise Nr. 1}
+Find the solution of linear ordinary differential equations with the right-hand side
+\begin{displaymath}
+\begin{array}{rcrcrcr}
+\dot x_1&=&3 x_1&-&4 x_2&+& \e^{2t}\\
+\dot x_2&=&2 x_1&-&3 x_2&-&2\e^{2t}
+\end{array}
+\end{displaymath}
+with the initial condition $x_1(0)=2, x_2(0)=3$.
+
+\nadpis{Excercise Nr. 2}
+Construct the equations of the Finite Difference Method for the solution of the 
+elliptic partial differential equation
+\begin{displaymath}
+3\frac{\partial^2}{\partial x^2} u(x,y) + \frac{\partial^2}{\partial y^2} u(x,y)-2 u(x,y)=2xy+1
+\end{displaymath}
+in the rectangular region $\Omega=\langle 0;\frac 23\rangle\times\langle 0;0{,}8\rangle$ 
+with Dirichlet boundary conditions $u(0,y)= -y$, $u(\frac 23,y)= 2y$, $u(x,0)= 0$, $u(x, 0{,}8)= -0{,}8+3{,}6 x$,
+with the mesh step $h=\frac15$ and the initial mesh point $[0;0]$.
+
+~
+
+Draw the mesh, denote its nodes, classify them to internal and boundary ones, and
+construct the equation system for approximation of the values of the function $u$ 
+in all nodes. Write down the values of the function $u$ in the nodes lying at 
+the region boundary. Construct the equations for boundary nodes lying out of the 
+boundary using the linear interpolation method.
+
+\nadpis{Theoretical part}
+
+{\Large Question 1:}
+Verify whether the set $M = \{ p(x) = a x^3 + a x^2 + b x + c ;  \frac{d^2 p}{d x ^2} (1) = b \}$
+is a vector subspace of the space of polynomials up to the second degree. Discuss it.
+
+\vspace{6cm}
+{\Large Question 2:}
+Explain what does it mean that the set $M$ is dense in the metric space $X$. Is the space of 
+continuous functions $C((-1; 1))$ dense in the space $L^2((-1; 1))$? Explain what does this question 
+mean for functions from $L^2$.
+
+\vspace{5cm}
+{\Large Question 3:}
+Write down the properties of fundamental matrix and standard fundamental matrix 
+of solution of a system of linear ordinary differential equations. How the standard 
+fundamental matrix differs from a general fundamental matrix?
+
+\vfill
+~\hfill{\tiny turn over}\newpage
+
+{\Large Question 4:}
+What is it a general one-step method? Write down the class of the problems that can be solved using it.
+Write down its formula and an example of any specific one-step method.
+
+\vspace{6cm}
+{\Large Question 5:}
+Using the integration per partes or Green Theorem verify that the differential operator
+$A(u)=(-x\frac{\partial ^2 u}{\partial x^2} - y\frac{\partial ^2 u}{\partial y^2}  +  u  )$ 
+is symmetric positive deffinite so that
+$(A u , v) = (u, A v)$ for all $u,v \in L^2(\Omega)$  and
+$(A u, u) \geq c (u,u)$ where $c>0$,
+in the space of twice continuously differentiable functions with zero trace on 
+the boundary $\partial \Omega$ where $\Omega$ is the Cartesian product of intervals $(-1;0)\times (0;1)$.
+
+\vspace{6cm}
+{\Large Question 6:}
+Let is given the general problem:
+$A u = f$ in $\Omega$
+with the boundary condition $u = 0$ on $\partial \Omega$.
+Formulate the Theorem on the Minimum of a Quadratic Functional.
+Deduce the Least Square Method (Courant Method) for finding the approximate solution of this problem 
+for basis vectors $\varphi_1,\dots,\varphi_n$. Write down the conditions sufficient for 
+convergence of the sequence of approximate solutions to the solution $u_0$ of 
+the equation $A u = f$.
+
+\end{document}

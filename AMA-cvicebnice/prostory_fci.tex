@@ -1,0 +1,478 @@
+ \chapter{Normované prostory}
+
+ 
+
+\section{Vektorové prostory funkcí}
+   V definicích metrik $l^1$, $l^2$, $l^\infty$ se uvnitř vždy vyskytuje rozdíl $x-y$ (po složkách). To je ovšem možné jen pokud
+   víme jak prvky odčítat. To je možné pokud množina metrického prostoru tvoří {\it vektorový prostor}. 
+   \begin{definition}
+      Množinu $X$ na níž je definováno sčítání prvků - {\it vektorů} a násobení (reálným) číslem - {\it skalárem} 
+      nazveme (reálným) vektorovým prostorem, pokud operace sčítání a násobení splňují následující:
+      \begin{description}
+        \item $(V1)$ sčítání je komutativní, tj. nezáleží na pořadí : $\vc x+\vc y = \vc y+\vc x$
+        \item $(V2)$ sčítání je asociativní, tj. nezáleží na ozávorkování : $(\vc x+\vc y)+\vc z = \vc x+(\vc y+\vc z)$
+        \item $(V3)$ existence nulového prvku, jehož přičtení nemění žádný vektor : $\vc x + \vc 0 =\vc x$
+        \item $(V4)$ existence inverzního prvku: $\forall \vc x \exists \vc y: \vc y+\vc x=\vc 0$
+        \item $(V5)$ distributivita (roznásobování) vektorového sčítání: $a(\vc x + \vc y) = a\vc x +a\vc y$
+        \item $(V6)$ distributivita skalárního sčítání: $(a+b)\vc x=a\vc x + b \vc x$
+        \item $(V7)$ násobení skalární jedničkou nemění vektor: $1 \vc x = \vc x$
+      \end{description}
+   \end{definition}
+   Jelikož sčítání vektorů a sčítání skalárů jsou princpiálně odlišné operace, je dobré ve značení odlišit vektory a skaláry. 
+   Budeme tedy vektory značit tučně: $\vc a,\vc b, \vc \phi$ a skaláry normálně $a,b, \phi$. Tenzory nebo matice budeme značit dvojitým fontem:
+   $\tn A, \tn B$.
+
+   Podmnožina vektorového prostoru nemusí být vektorový prostor. Např. množina $M=\{ (1,0)\ ,\ (2,0)\} \subset \Real^2$ není vektorovým
+   prostorem jelikož do ní nepatří bod $(3,0)=(1,0)+(2,0)$. Množina $M$ není uzavřená vzhledem k operacím sčítání a násobení. {\it Vektorovým 
+   podprostorem} nazýváme podmnožinu $M$, která je uzavřená vzhledem k operacím sčítání a násobení tj. pokud $\vc x$ a $\vc y$ patří do $M$, patří
+   tam i $a\vc x+ b\vc y$. Z každé množiny $M\subset X$ můžeme vektorový prostor udělat tím, že k ní přidáme všechny 
+   konečné lineární kombinace jejích prvků, píšeme:
+   \[
+       Lin(M)=\big\{ z\in X\where z=\sum_{i=1}^n a_i \vc x_i,\text{ pro libovolnou $n$-tici $\{x_i\} \subset M$} \big\}.
+   \]
+   Množina $Lin(M)$ je vektorovým podprostorem prostoru $X$ a říkáme jí {\it lineární obal $M$}.
+
+\subsection{Cvičení}
+\begin{enumerate}
+ \item Ověřte podle definice vektorového prostoru, že množina všech  funkcí z $\Real^N$ do $\Real^M$ tvoří vektorový prostor s operacemi
+  \[
+      (f + g)(x) = f(x)+g(x),\quad (af)(x) = af(x).
+  \]
+ \item Ověřte, že množina polynomů stupně nejvýše $n$, tj. $P^n$ je podprostorem prostoru všech funkcí.
+ \item Rozhodněte zda následující množiny jsou vektorovými prostory. Své tvrzení dokažte.
+ \begin{enumerate}
+        \item $M$ je podmnožina $\Real^2$ vektorů ve tvaru $\vc x=(x,2x)$, tj. $M=\{(x,2x)\where x\in \Real\}$.
+                \vysl{je vektorový prostor}
+        \item $M$ je podmnožina $\Real^3$ vektorů ve tvaru $\vc x=(x,y,3)$, tj. $M=\{(x,y,3)\where x,\,y\in \Real\}$.
+                \vysl{není vektorový prostor}
+        \item $M = \{p(\cdot) \in P^2\where p'(x) = x\}$
+                \vysl{je vektorový prostor}
+        \item $M$ je množina spojitých funkcí na intervalu $(0,1)$, tj. $C(0,1)$.
+                \vysl{je vektorový prostor}
+        \item $M$ je množina všech funkcí se spojitou derivací na $[0,1]$
+                \vysl{je normovaný prostor}
+        \item $M$ je množina polynomů, takových, že  $\abs{p(x)}\le 1$ ne intervalu $[-1, 1]$
+                \vysl{není vektorový prostor}     
+        \item $M$ je množina funkcí, pro které $\int_{-\infty}^{\infty} f =1$. Zálaží na tom jak je definován integrál?
+                \vysl{je vektorový prostor}
+         
+\end{enumerate}
+\item Ověřte, že množina diferenciálních operátorů tvoří vektorový prostor. (\dots detaily)
+\item Ověřte, že množina distribucí tvoří vektorový prostor. (\dots detaily)
+\end{enumerate}
+
+
+\section{Normované prostory}
+   Na vektorových prostorech je možno definovat speciální případ metriky - {\it normu}.
+   \begin{definition}
+      Nechť $X$ je vektorový prostor a $\norm{\argdot}: X\to \Real$ reálná funkce na $X$ splňující:
+      \begin{description}
+        \item $(N1)$ norma je nulová jen pro nulový prvek: $\norm{\vc x}=0 \equiv \vc x=\vc 0$
+        \item $(N2)$ skalár je možno vytknout v absolutní hodnotě: $\norm{a \vc x} = \abs{a}\norm{\vc x}$
+        \item $(N3)$ trojúhelníková nerovnost: $\norm{x+y}\le \norm{\vc x} + \norm{\vc y}$
+      \end{description}
+   \end{definition}
+   Pokud je na vektorovém prostoru $X$ definována norma $\norm{\argdot}$ mluvíme o {\it normovaném lineárním prostoru}. Na takovém prostoru
+   nám norma dává metriku: $\rho(\vc x,\vc y) = \norm{\vc x-\vc y}$.
+   \begin{exercise}
+      Rozmyslete si jak z vlastností normy plynou vlastnosti příslušné metriky. Potřebujete k důkazu symetrie (M1) vlastnost (N1)?
+   \end{exercise}
+  
+   Zde už ale neplatí, že by každá  podmnožina normovaného prostoru $X$ byla opět normovaným prostorem, jelikož podmnožina nemusí být lineárním
+   prostorem. Ale platí, že lineární obal $Lin(M)$ každé podmnožiny $M\subset X$ je opět normovaným prostorem se stejnou normou jako na $X$. 
+   
+   \subsection{Příklady normovaných lineárních prostorů}
+   \begin{itemize}
+    \item Množina reálných čísel $\Real$ tvoří normovaný prostor, normou je standardně absolutní hodnota $\abs{\cdot}$.
+    \item Množina $n$-tic reálných čísel $\Real^n$ tvoří vektorový prostor. Metriky prostorů $l^p_n$, $l^\infty_n$ jsou indukovány normami:
+          \[
+                \norm{(x_1,x_2,\dots,x_n)}_{l^p_n}=\big(\sum_{i=1}^n \abs{x_i}\big)^{1/p}
+          \]
+          \[
+                \norm{(x_1,x_2,\dots,x_n)}_{l^\infty_n}=\max_{i=1,\dots,n} \abs{x_i}
+          \]
+    \item Množina $C([0,1])$ spojitých funkcí na uzavženém intervalu je vektorovým prostorem. Analogicky k normám $l^p_n$ můžeme na zde zavést
+          normu tak, že sumu nahradíme integrálem:
+          \[
+                \norm{f}_{L^p([0,1])} = \Big( \int_0^1 \abs{f(x)}^p \d x \Big)^{1/p} 
+          \]
+          Analogicky k $l^\infty_n$ zavedeme normu
+          \[
+                \norm{f}_{L^\infty([0,1])} = \sup_{x\in[0,1]} \abs{f(x)}.
+          \]
+          Zde $\sup$ znamená supremum. To je jistá obdoba maxima. Rozdíl je v tom, že pro nekonečnou množinu např. 
+        $\{ 1-1/n\}$ nemusí existovat maximum (= největší prvek množiny), ale supremum (= nejmenší číslo větší než všechny prvky množiny) existuje (je rovno $1$). Zde se hodí ještě jedna poznámka. Jedna ze základních vět
+        analýzy říká, že spojitá funkce nabývá na uzavřeném intervalu svého maxima. Tedy v případě funkcí na 
+        intervalu $[0,1]$ vždy existuje bod $x_m\in [0,1]$, kde je funkce $\abs{f(x)}$ maximální a tudíž supremum
+         je totéž jako maximum. Definice normy pomocí suprema přijde vhod pro obecnější definiční obory, což
+        je obsahem dalšího příkladu.
+   \item Množina funkcí spojitých na množině $\Omega\subset \Real^m$ tvoří spolu se supremovou (maximovou) normou
+          \[
+                \norm{f}_{L^\infty(\Omega)} = \sup_{x\in \Omega]} \abs{f(x)}.
+          \]
+          standardní normovaný prostor $C(\Omega)$.
+   \item Množina funkcí spojitě diferencovatelných na množině $\Omega\subset \Real^m$ tvoří s normou
+        \[
+                \norm{f}_{C^1(\Omega)}=\norm{f}_{C(\Omega)} 
+                        + \sum_{i=1}^m \sup_{x\in \Omega} \bigabs{\frac{\prtl f}{\prtl x_i}}
+        \]
+        standardní prostor $C^1(\Omega)$. Podobně se definuje prostor $n$ krát spojitě diferencovatelných funkcí 
+        $C^n(\Omega)$.
+        
+          - $L^2$, $L^\infty$
+          - $H^k$ prostory
+
+   \end{itemize}
+
+\subsection{Cvičení}
+ Ověřte, že množina $M$ s ``normou'' $\norm{\cdot}$ tvoří normovaný prostor. K tomu je třeba ověřit,
+ že množina je uzavřená na sčítání a násobení skalárem, a ověřit vlastnosti normy. Pokud myslíte, že některá vlastnost 
+ není splněna, je třeba uvést protipříklad. Tedy konkrétní prvky množiny, pro které vlastnost neplatí.
+
+\begin{enumerate}
+ \item Na vektorovém prostoru $V=\{ ax^2 + bx + b\}$ (rozmyslete se o jaký jde vektorový prostor) uvažujte funkce:
+       \begin{align*}
+          \norm{ p}_a =  \abs{p'(-1) + p'(1)} \\ 
+          \norm{ p}_b = \abs{p'(-1) + p'(1)} + \abs{p''(0)} \\
+          \norm{ p}_c = \abs{p'(-1) + p'(1)} + \abs{p''(0)}^{\frac12} \\
+          \norm{ p}_d = \big(\abs{p'(-1) + p'(1)}^\frac12 + \abs{p''(0)}^\frac12\big)^2  
+       \end{align*}
+       Která z nich je normou? Dokažte její vlastnosti. Každá ze zbylých funkcí porušuje právě jednu z vlastností normy. Zjistěte o kterou vlastnost se jedná,
+       najděte prvky $V$ pro které vlastnost neplatí a dokažte, že zbylé vlastnosti platí.
+        
+ \end{enumerate}
+
+\section{Prostory se skalárním součinem}
+\begin{itemize}
+ \item definice skalárního součinu (R a C)
+ \item Schwartzova nerovnost
+ \item příklady: $R^N$, $l^2$, $L^2$, $H^k$
+ \item ortogonální prvky a množiny
+ \item existence nejbližšího prvku, promítání na uzavřené podprostory
+ \item ortogonální doplněk, rozklad
+ \item ortogonální báze, Gram-Schmidtův ortogonalizační proces
+\end{itemize}
+
+\subsection{Cvičení}
+\begin{enumerate}
+ \item Dokažte, že množina
+  \[
+     \mathcal E =\{\frac{1}{\sqrt{2\pi}}, \frac{1}{\sqrt{\pi}}\sin nx, \frac{1}{\sqrt{\pi}}\cos nx\where n\in N\}
+  \]
+  tvoří ortonormální soustavu. Plyne z toho už, že jde o ortonormální bázi?
+
+  \item Nechť $M$ je množina polynomů druhého stupně chápaná jako podprostor $L^2([0,1])$. Najděte ortogonální průmět funkce $e^x$ na $M$
+
+   \item Pokud je množina vektorů $\{e_i\}$ ortonormélní bází v Hilbertova prostoru $X$, pak platí zobecněná Pythagorova věta, tzv. Parsevalova rovnost:
+  \begin{equation}\label{parseval}
+      \sum_{i=1}^\infty \abs{(e_i, f)}^2 = \norm{f}^2
+  \end{equation}
+  a to pro libovolný prvek $f\in X$. Rozviňte funkci $f(x)=x$ do Fourierovy řady v prostoru $L^2(-\pi,\pi)$ a použijte 
+  \eqref{parseval} pro výpočet součtu 
+  \[
+     \sum_{i=1}^\infty \frac{1}{n^2} = ?
+  \]
+
+  \item Najděte ortonormální bázi prostoru $\Lin\{1,x,x^2\}\subset H^1(0,1)$. Na prostoru $H^1(0,1)$ je definován standardní skalární součin
+  \[
+     (f,g)= \int_0^1 f'(x)g'(x)+f(x)g(x) \dx. 
+  \]
+  $\Lin\, M$ značí lineární obal množiny $M$, tedy podprostor všech lineárních kombinací vektorů z množiny $M$.
+
+  \item Uvažujte prostor $H^1(0,1)$ s nestandardním skalárním součinem 
+  \[
+     (f,g)=\int_0^1 x^2 f'(x) g'(x) +f(x) g(x) \dx
+  \]
+  ověřte, že se skutečně jedná o skalární součin. A pro funkce $1$ a $e^x$ ověřte Schwartzovu nerovnost.
+
+
+\end{enumerate}
+
+\section{Operátory na prostorech funkcí}
+Operátor $A:X \to Y$ je zobrazení, které zobrazuje prvky (funkce) z normovaného prostoru $X$ do normovaného prostoru $Y$
+(tiše předpokládáme, že oba prostory jsou též úplné). Budeme uvažovat jen operátory lineární a spojité
+Operátor je {\it lineární} pokud:
+\[ 
+        A(f+g)=A(f)+A(g), \text{ a } A(cf)=cA(f)
+\]
+pro libovolné funkce $f,g\in X$ a libovolnou konstantu $c\in \Real$. Operátor je {\it spojitý}, pokud
+pro každou posloupnost $f_n$ funkcí konvergující v prostoru $X$ k funkci $f$ , tj.
+\[ \norm{f_n - f}_X \to 0 \]
+platí, že obrazy těchto funkcí konvergují k obrazu funkce $f$, tj.
+\[ \norm{ A(f_n) - A(f) }_Y \to 0 .\]
+
+Příklad: Derivace je operátorem z prostoru $H^1((0,1))$ do $L^2((0,1))$, tedy
+\[
+        A:H^1((0,1)) \to L^2((0,1)),\quad A(f)=\frac{\prtl f}{\prtl x}.
+\]
+Tento operátor je lineární, jelikož derivace je lineární, v každém bodě $x\in (0,1)$ platí:
+\[
+        A(f+g)[x]=\frac{\prtl(f+g)}{\prtl x}[x]=
+        \frac{\prtl f}{\prtl x}[x] +\frac{\prtl g}{\prtl x}[x]=A(f)[x]+A(g)[x]  
+\]
+a
+\[
+  A(cf)[x]=\frac{\prtl (cf)}{\prtl x}[x]=c\frac{\prtl f}{\prtl x}[x]=cA(f).
+\]
+A je také spojitý, jelikož pokud 
+\[
+   \norm{f_n - f}_X^2 = \norm{f_n - f}^2_{H^1}=\int_0^1 (f_n-f)^2 +\int_0^1 (f'_n-f')^2 \to 0
+\]
+pak musí konvergovat k nule oba integrály jelikož jsou oba nezáporné a tudíž platí
+\[
+  \norm{ A(f_n) - A(f) }^2_X =\norm{f'_n-f'}^2_{L^2} =\int_0^1 (f'_n-f')^2 \to 0. 
+\]
+
+Zatím to vypadá, že operátory jsou zobecněním funkcí, ale jelikož jsou lineární podobají se spíše maticím.
+Matice jsou vlastně zápisy lineárních zobrazení mezi konečně rozměrnými vektorovými prostory. Násobení maticí je
+pak provedení příslušného operátoru.  Snadno si ověříte, že násobení maticí je vždy spojité zobrazení, tedy že
+\[
+        x_n,x\in \Real^n:\ x_n \to x\quad \impl \quad \tn M x_n \to \tn M x \text{ v } \Real^m
+\]
+pro libovolnou matici $\tn M\in \Real^{m,n}$. Matice jsou tedy další důležitý příklad operátorů.
+Na nekonečně rozměrných prostorech, jako jsou prostory funkcí, nemusí být každý lineární operátor spojitý!
+
+Pokud operátor $A:X\to Y$ operuje mezi prostory $X$ a $Y$, které jsou podrostory nějakého prostoru $Z$ se
+skalárním součinem, definujeme podobně jako u matic
+
+{\it symetrický operátor} pokud:
+\[      (Af,g)_Z = (f,Ag)_Z  \quad \text{pro všechna } f,g\in X \]
+ 
+ a {\it pozitivně definitní operátor} pokud existuje $c>0$ takové, že
+\[ (Af,f)_Z\ge c (f,f)_Z=\norm{f}_Z^2\quad \text{pro všechna } f\in X. \]
+
+Pro ``přehazování'' derivací funkcí více proměnných lze použít Greenovu větu:
+
+\begin{theorem}
+Nechť $f,g$ jsou diferencovatelné funkce na oblasti s hladkou hranicí $\Omega\subset \Real^N$, pak
+\[
+        \int_\Omega \frac{\prtl f}{x_i} g\d \vc x = \int_{\prtl\Omega} fg \vc n_i \d\sigma
+          -\int_{\Omega} f\frac{\prtl g}{x_i}\d \vc x,
+\]
+kde $\prtl\Omega$ je hranice oblasti $\Omega$ a $\vc n_i$ je $i$-tá složka vektoru $\vc n$, což je tzv. {\it vnější normála} tedy jednotkový vektor kolmý na hranici a směřující ven z oblasti.
+Normála je definována pro každý bod hranice, přes kterou integrujeme.
+\end{theorem}
+
+
+\section{Cvičení}
+\subsection{Vlastnosti norem}
+ 
+
+ {\bf Neřešené příklady: }
+ \begin{enumerate}
+        \item $M$ je podmnožina $\Real^3$ vektorů ve tvaru $\vc x=(x,y,3)$, tj. $M=\{(x,y,3)\where x,\,y\in \Real\}$.
+                Za normu $\norm{\vc x}$ berte eukleidovskou normu.
+                \vysl{není vektorový prostor}
+        \item $M$ je podmnožina $\Real^2$ vektorů ve tvaru $\vc x=(x,2x)$, tj. $M=\{(x,2x)\where x\in \Real\}$.
+                 $\norm{(x_1,x_2)}=\abs{x_1}$.
+                \vysl{je normovaný prostor}
+        \item $M$ je $\Real^2$, $\norm{(x_1,x_2)}=(\sqrt{x_1}+\sqrt{x_2})^2$.
+                \vysl{$\norm{\argdot}$ nesplňuje vlastnost (N3)}
+        \item $M$ je množina polynomů nejvýše 2. stupně, tj. $M=\{a_1x^2+a_2x +a_3\where a_i\in\Real\}$.
+                $\norm{p}=\norm{a_2x^2+a_3x +a_4} = \abs{p(0)}+\abs{p(1)}+\abs{p(2)}$.
+                \vysl{je normovaný prostor}
+        \item $M$ jako v předchozím příkladu. $\norm{p}=\abs{p'(0)}+\abs{p'(1)}+\abs{p'(2)}$, 
+                  kde $p'(0)$ je hodnota derivace polynomu $p$ v bodě $0$.
+                \vysl{$\norm{\cdot}$ nesplňuje vlastnost (N1)}
+        \item $M$ opět stejná. 
+                \[\norm{p}=\big\vert \int_0^1 p(x) \d x \big\vert + \sqrt{p(1)^2+ p(0)^2}\]
+                Je třeba použít nerovnost 
+                \[ \sqrt{\sum_{i=1}^{n} (a_i+b_i)^2}\le \sqrt{\sum_{i=1}^{n} a_i^2}+\sqrt{\sum_{i=1}^n b_i^2} \]
+                \vysl{je normovaný prostor}
+        \item $M$ je množina spojitých funkcí se spojitou derivací na $[-1,1]$, tj. $M=C^1([0,1])$. 
+                \[\norm{f}=\sqrt{\norm{f}_{L^2([-1,1])}^2+\norm{f'}_{L^2([-1,1])}^2}.\]
+                což je norma prostoru $H^1([-1,1])$.
+                Použijte trojúhelníkovou nerovnost prostoru $L^2([-1,2])$:
+                \[ \sqrt{\int_{-1}^{1} (f(x)+g(x))^2\d x}\le 
+                        \sqrt{\int_{-1}^{1} f(x)^2\d x} +\sqrt{\int_{-1}^{1} g(x)^2\d x}\]
+                \vysl{je normovaný prostor}     
+        \item $M$ je opět $C([0,1])$, ale $\norm{f}=\int_{0}^{1} \abs{f(x)}^2 \d x$
+                \vysl{$\norm{\argdot}$ nesplňuje vlastnosti (N2) a (N3)}
+\end{enumerate}
+
+\subsection{Výpočet norem}
+V následujících úlohách je cílem vypočítat normu/normy funkce. Důležitou kontrolou je, že norma je vždy nezáporná.
+{\bf Řešený příklad: } Spočítejte $L^1$, $L^\infty$, a $H^1$ normu pro funkci
+        \[
+                f(x)=(x+1)(x-2)
+        \]
+        na intervalu $[-2,3]$.
+
+ {\bf Řešení: }
+
+{\bf Neřešené příklady: }
+        \begin{enumerate}
+         \item $\norm{f}_{L^1([0,2])}$ a $\norm{f}_{L^\infty([0,1])}$ pro $f(x)=-x(x-1)$.
+          \vysl{$1$, $\frac14$ }
+         \item $\norm{f}_{L^1([0,1])}$ a $\norm{f}_{L^2([0,1])}$ pro $f(x)=x^{-\frac12}$
+           \vysl{$2$, $\infty$ }
+         \item $\norm{f}_{L^2([0,2\pi])}$ pro $f(x) =\sin(kx)$ a $f(x)=\cos(kx)$ kde $k$ je libovolné celé číslo.
+           \vysl{$\sqrt{\pi}$} 
+         \item $\norm{f}_{L^1([-\infty,\infty]}$ a $\norm{f}_{L^\infty([-\infty,\infty]}$  pro $f(x)=\frac{1}{1+x^2}$
+           \vysl{$\Pi$, $1$ }
+         \item normu v prostoru $H^1([-1,1)$ pro funkce $\sqrt[3]{x}$ a $\sqrt[3]{x^2}$, pro které hodnoty parametru
+                $p$ bude mít funkce $x^p$ konečnou normu?
+            \vysl{$\infty$, $\sqrt{(\frac67)^2+(6)^2}$, $p>\frac12$}
+        \end{enumerate}
+
+\subsection{Konvergence v prostorech funkcí}
+V následujících příkladech vypočtěte limitu posloupnosti funkcí v daném prostoru (dané normě):
+\begin{enumerate}
+        \item $f_n(x)= x^2+ \frac{x}{n}$ v normě $L^2([0,2])$
+                \vysl{$x^2$}
+    \item stejná posloupnost v normě $L^\infty([0,2])$
+        \vysl{$x^2$}
+    \item $f_n(x)= x^{\frac{1}{2n+1}}$ v normě $L^1([-1,1])$
+        \vysl{$sgn(x)$}
+    \item stejná posloupnost v normě $L^{\infty}([-1,1])$
+        \vysl{nekonverguje}
+    \item $f_n(x)= \cos(\frac{x}{n}) e^x$ v normě $L^1([-1,1])$
+        \vysl{$e^x$}
+    \item \[f_n(x)=
+                \left\{\begin{aligned}
+                        n^{1/2} \text{ na $[0,\frac1n]$}\\
+                        0 \text{ na $(\frac1n,1]$}
+                       \end{aligned}\right.
+               \]
+               v normách $L^1{(0,1)}$ a $L^2{(0,1)}$.
+                \vysl{$0$, nekonverguje}
+    \item Konverguje posloupnost $f_n(x)=\sin(nx)$ na intervalu $[-\pi,\pi]$ v nějaké $L^p$ - normě?
+         Pokuste se vysvětlit proč.
+         \vysl{v žádné normě; Existuje bodová limita?}
+\end{enumerate}
+
+\subsection{Vlastnosti množin v metrických prostorech}
+V následujících úlohách máte uvést příklady množin splňující požadované vlastnosti. Na vašem řešení je
+v tomto případě nejdůležitější argumentace, ža vámi uvedená množina skutečně splňuje dané vlastnosti.
+Napište definice použitých pojmů.
+\begin{enumerate}
+ \item Najděte všechny hromadné a izolované body množin:
+        \begin{enumerate}
+                \item $A={-1}\cup(1,\infty)$ v prostoru $\Real$
+                \vysl{$A$, \{-1\}}
+                \item $B=\{x\in \Qnum\where x\in[0,1]\}\times\{y=1/n\where n\in\Nnum\}$ v prostoru $\Real^2$
+                \vysl{$\{x\in \Real\}\times\{y=1/n \vee y=0\}$, $\emptyset$}
+                \item $C=\{f_n(x)\where n\in \Nnum\}$,
+                
+                        \[ f_n(x)=\left\{\begin{aligned}
+                                                \sin(nx), &&x\in(0,\frac x n)\\
+                                                0,                &&x\in[\frac x n,1)                   
+                                         \end{aligned}\right.\]
+                         v normě $L^1$.
+                \vysl{$f(x)=0$, $C$}     
+                \item $C$ v normě $L^\infty$
+                \vysl{$\emptyset$, $C$}
+        \end{enumerate}
+ \item Najděte množinu $M$ (v nějakém metrickém prostoru):
+        \begin{enumerate}
+                \item s prázdným vnitřkem a nekonečným množstvím hromadných bodů.
+                \item s prázdným vnitřkem a nekonečným množstvím hromadných bodů, z nichž některé
+                nepatří do $M$
+                \item s prázdným vnitřkem a nekonečným množstvím hromadných bodů, z nichž nekonečno
+                nepatří do $M$
+                \item * s prázdným vnitřkem a nekonečným množstvím hromadných bodů, z nichž žádný
+                nepatří do $M$
+        \end{enumerate}
+        \vysl{kružnice v $\Real$, kružnice s dírami, viz. předchozí příklad, za pivo}
+        \item Existuje množina se dvěma izolovanými body a prázdnou hranicí? Pečlivě zdůvodněte.
+\item Uveďte příklad spočetné množiny funkcí husté v prostoru $C((0,\pi))$.
+                \vysl{ $ \{ \sum_{n=1}^\infty r_n \sin(nx)\where r_n\in \Qnum \}$ tedy něco jako lineární obal množiny
+                $\{\sin(nx)\}$ ale jen s použitím racionálních čísel.}
+ \item Ve které normě je prostor $C((0,1))$ úplný, a ve které je neúplný?
+           \vysl{neuplný v $L^1$ - proč?, úplný v \dots to už je příliš lehké}
+ \item Uveďte příklad metrického prostoru (množiny) $M$ funkcí na intervalu $(0,1)$, který je úplný v
+       $L^\infty$ normě. Uveďte příklad prostoru $N$ funkcí na stejném intervalu, který je v
+       $L^\infty$ normě naopak neúplný a je podmnožinou $M$.
+       \vysl{ např. $N=\{f(x)=1/n\where n\in \Nnum\}$, $M=N\cup \{ f(x)=0 \} $}
+  \item Najděte dva normované prostory $M$, $N$ splňující podmínky předchozího příkladu, ale s $L^1$
+                normou. Tedy $N\subset M$, $M$ úplný a $N$ neúplný prostor funkcí v $L^1$-normě
+                na intevalu $(0,1)$.
+                \vysl{ např. $M=L^1((0,1))$, $N=C((0,1))$ }
+\end{enumerate}
+
+\subsection{Operátory}
+V následujícím ověřte, že operátor $A:X\to Y$ je lineární, symetrický a pozitivně definitní na daném prostoru
+se skalárním součinem $Z$ (předpokládáme $X, Y \subset Z$. Použijte integraci per partes, nebo Greenovy větu. V některých případech nelze pomocí Greenovy věty dokázat přímo pozitivní definitu, tedy
+\[
+  (Af,f)_X \ge c(f,f),
+\]
+ale pouze
+\[
+  (Af,f)_X \ge c(f',f')_X
+\]
+tehdy je nutno použít dodatečné nerovnosti
+\begin{equation}\label{poincare}
+  (f',f')_X \ge c(f,f)_X,
+\end{equation}
+která pro některé prostory funkcí platí. V takovém případě je to explicitně uvedeno v zadání.
+
+\begin{enumerate}
+\item 
+\[
+A:C^2((0,1))\to L^2((0,1)),\quad A(f)=\big(-\frac{\prtl^2 f}{\prtl x^2} +f \big),
+\]
+\[ Z=L^2((0,1)) \]
+Použijte per partes.
+\item 
+\[
+A:C^2(\Omega)\to L^2(\Omega),\quad A(f)=\big(-2\frac{\prtl^2 f}{\prtl x^2} -3 \frac{\prtl^2 f}{\prtl y^2} \big),
+\]
+\[ Z=L^2(\Omega),\quad \Omega=[0,1]\times[0,1] \]
+Požijte per partes v obou osách a také nerovnost \eqref{poincare}. 
+\item
+\[
+A:C^2((1,2))\to L^2((1,2)),\quad A(f)=-\frac{\prtl }{\prtl x}\big( x^2 \frac{\prtl f}{\prtl x} \big)+ f,
+\]
+\[ Z=L^2((1,2))\]
+Použijte nerovnost \eqref{poincare}.
+\item 
+\[
+A:C^2(\Omega)\to L^2(\Omega),\quad A(f)=\big(-\frac{\prtl^2 f}{\prtl x^2} -\frac{\prtl^2 f}{\prtl y^2} + f \big),
+\]
+\[ Z=L^2(\Omega),\quad \Omega= \text{  koule v }\Real^2\]
+Požijte Greenovu větu.
+
+
+\end{enumerate}
+
+
+
+\begin{verbatim}
+http://en.wikipedia.org/wiki/Metric_space
+http://en.wikipedia.org/wiki/Vector_space
+http://en.wikipedia.org/wiki/Norm_(mathematics)
+http://en.wikipedia.org/wiki/Normed_vector_space
+http://en.wikipedia.org/wiki/Closed_set
+http://en.wikipedia.org/wiki/Open_set
+http://en.wikipedia.org/wiki/Boundary_(topology)
+http://en.wikipedia.org/wiki/Limit_point
+\end{verbatim}
+
+
+\begin{verbatim}  
+Author: Atkinson, Kendall E.
+Title: An introduction to numerical analysis
+Edition: 2nd ed.
+Publisher/year: [New York] : John Wiley & Sons, 1989
+Physical descr. : xvi, 693 s. : il.
+Signatures: A 58130
+---------------------------------------------------------------
+Author: Tyrtyshnikov, Jevgenij Jevgeněvič
+Title: <>brief introduction to numerical analysis
+Publisher/year: Boston : Birkhäuser, 1997
+Physical descr.: xii, 202 s. : il.
+Signatures: A 59461
+---------------------------------------------------------------
+Author: Novák, J.
+Title: General topology and its relations to modern analysis and algebra
+Publisher/year: Praha : Československá akademie věd, 1962
+Physical descr. : 363 s.
+Signatures: A 10836
+---------------------------------------------------------------
+Author: Stoer, Josef; Bulirsch, Roland; Bartels, R.; Gautschi, W.; Witzgall, C.; Marsden, Jerrold E.
+Title: Introduction to numerical analysis. [series editor J. E. Marsden ... et al.]
+Edition: 3rd ed.
+Publisher/year: New York : Springer, 2002
+Physical descr. : xv, 744 s. : il., graf.
+Signatures: A 56811
+\end{verbatim} 

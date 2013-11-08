@@ -1,0 +1,216 @@
+ \chapter{Řešení parciálních diferenciálních rovnic}
+Na příkladu konkrétní parciální diferenciální rovnice si ukážeme jak se teoretický aparát funkcionální analýzy použije 
+k důkazu existence a jednoznačnosti řešení. Dále použijeme Galerkinovu metodu pro přibližné řešení rovnice.
+
+
+\section{Modelová rovnice}
+
+Budeme řešit rovnici
+\begin{equation}
+    \label{ModelEq}
+   -\Lapl u + \lambda u =f \quad\text{na }\Omega.
+\end{equation}
+Oblast $\Omega$ bude čtverec $\Omega=(0,\pi) \times (0, \pi)$. Neznámou je funkce $u(x,y)$ na tomto čtverci.
+Diferenciální operátor $\Lapl$ (tzv. \df{Laplaceův operátor} je součet druhých parciálních derivací:
+\[
+  \Lapl u(x,y) = \frac{\prtl^2 u}{\prtl x^2}(x,y) + \frac{\prtl^2 u}{\prtl y^2}(x,y).
+\]
+Na pravé straně rovnice je daná funkce $f(x,y)$, $\lambda \ge 0$ je reálný parametr. Aby řešení rovnice bylo jednoznačné, je třeba jí doplnit
+okrajovými podmínkami. Budeme uvažovat konstantní Dirichletovu podmínku na vodorovných stranách čtverce $\Gamma_d$ a homogenní (nulovou) Neumanovu podmínku na svislých stranách čtverce $\Gamma_n$, tj.
+\begin{align}
+  \label{DirichletBC}
+  u(x,y) &= 1     \quad\text{on } \Gamma_d = (0,\pi) \times \{0, \pi\}\\
+  \label{NeumanBC}
+  \grad u(x,y) \cdot \vc n(x,y) &= 0  \quad\text{on } \Gamma_n = \{0, \pi\} \times (0,\pi) 
+\end{align}
+Zde $\grad u(x,y)$ je gradient, tj. dvousložkový vektor prvních parciálních derivací funkce $u$ v bodě $[x,y]$. Vnější normála $\vc n(x,y)$ je jednotkový vektor kolmý k hranici a směřující ven z oblasti $\Omega$.
+V našem případě je $\vc n = (-1, 0)$ na levé svislé hranici a $\vc n = (1, 0)$ na pravé svislé hranici. Skalární součin gradientu a vnější normály je vlastně derivace veličiny $u$ ve směru kolmém k hranici.
+
+Právě popsaná rovnice může představovat jednoduchý model vedení tepla. Funkce $u$ je rozložení teploty na čtvercovém plechu, který je je po svislých stranách dokonale tepleně izolován (normálová derivace má význam toku tepla).
+Na horním a dolním okraji plechu je udržována konstantní teplota $u=1$. Pro $\lambda =0$ udává funkce $f$ přísun tepla na různých místech plochy plechu.
+Případ  $\lambda > 0$ a $f(x,y) = \lambda u_f(x,y)$ může modelovat situaci, kdy plech je ohříván jiným tělesem s rozložením teploty $u_f(x,y)$ a to skrze izolačí vrstvu s 
+tepelnou vodivostí $\lambda$. Rovnici by pak bylo lepší zapsat ve tvaru:
+\[
+   -\Lapl u = \lambda(u_f - u) \quad\text{na }\Omega.   
+\]
+
+
+Stejná rovnice popisuje proudění v porézním materiálu (pomalé proudění). Funkce $u$ odpovídá tlaku, $-\grad u$ je rychlost tekutiny. Podobná rovnice popisuje potenciál elektrického pole při zadaném rozložení náboje.
+Obecně se tato rovnice vyskytuje ve všech procesech, kde je přítomý nejaký druh difúze.
+
+
+\section{Slabé řešení}
+Pro splnění rovnice \eqref{ModelEq} v klasickém smyslu musí hledaná funkce $u$ mít druhé parciální derivace v každém bodě oblasti $\Omega$. Dále si ukážeme jak je možno definovat 
+řešení rovnice i pro méně hladké funkce konkrétně pro $u\in H^1(\Omega)$ (funkce s první derivací v $L^2$). 
+
+Předpokládejme, že nějaká funkce $u$ je řešením v klasickém smyslu. 
+Zvolíme si libovolnou funkci (tzv. testovací funkci) $\phi(x,y)$ z prostoru $C^{\infty}(\Omega)$, což jsou funkce jejichž derivace jsou všchny spojité.
+Navíc budeme požadovat, aby $\phi = 0$ na hranici $\Gamma_d$. Vynásobíme v každém bodě $[x,y]\in \Omega$ rovnici \eqref{ModelEq} funkcí $\phi$ a následně přeintegrujeme přes oblast $\Omega$
+dostaneme:
+\[
+  \int_\Omega (-\Lapl u(x,y) + \lambda u(x,y)) \phi(x,y) = \int_\Omega f(x,y)\phi(x,y)
+\]
+V našem případě můžeme integrál přes $\Omega$ napsat jako dvojitý integrál, například levá strana:
+\[
+  \int_\Omega (-\Lapl u + \lambda u) \phi =
+  - \int_0^\pi \int_0^\pi \frac{\prtl^2 u}{\prtl x^2} \phi \d x\d y\\ 
+  - \int_0^\pi \int_0^\pi \frac{\prtl^2 u}{\prtl y^2} \phi \d y\d x\\
+  + \int_0^\pi \int_0^\pi \lambda u \phi \d x \d y.
+\]
+Ve druhém členu jsme prohodili pořadí integrálů. V prvních dvou integrálech nyní provedeme integraci per partes:
+\begin{multline}
+  \int_\Omega (-\Lapl u + \lambda u) \phi = 
+   \int_0^\pi \int_0^\pi \frac{\prtl u}{\prtl x} \frac{\prtl \phi}{\prtl x} \d x\d y - \int_0^\pi \Big[ \frac{\prtl u}{\prtl x} \phi \Big]_{x=0}^\pi \d y\\
+  + \int_0^\pi \int_0^\pi \frac{\prtl u}{\prtl x} \frac{\prtl \phi}{\prtl x} \d y\d x - \int_0^\pi \Big[ \frac{\prtl u}{\prtl y} \phi \Big]_{y=0}^\pi \d x
+  + \int_0^\pi \int_0^\pi \lambda u \phi \d x \d y.
+\end{multline}
+Pomocí operátoru gradientu můžeme výsledek napsat ve stručnější formě:
+\begin{equation}
+  \label{Green}
+  \int_\Omega \grad u \cdot \grad \phi - \int_{\prtl\Omega} (\grad u \cdot \vc n)\phi + \int_\Omega \lambda u\phi
+  =\int_\Omega f\phi
+\end{equation}
+Rozmyslete si, že integrál přes hranici $\prtl\Omega$ je skutečně roven příslušným členům v předchozí formuli, jelikož vnější normála $\vc n$ nabývá hodnot $(-1,0)$ a $(1,0)$ pro integraci přes $\Gamma_d$  
+(v $x$-ovém směru) a hodnot $(0,-1)$ a $(0,1)$ pro integraci přes $\Gamma_n$ (v $y$-ovém směru).
+
+Rovnice \eqref{Green} platí i pro nečtvercové oblasti $\Omega$ a je důsledkem tzv. Greenovy věty:
+\begin{theorem}[Greenova]
+   Nechť $u$ a $v$ jsou funkce z $H^1(\Omega)$, kde $\Omega\subset \Real^N$ je oblast v $N$ rozměrném Eukleidově prostoru. 
+   Pokud je hranice oblasti $\Omega$ hladká (třídy $C^1$), pak platí
+   \[
+      \int_\Omega \frac{\prtl u}{\prtl x_i} v + u \frac{\prtl v}{\prtl x_i} = \int_{\prtl\Omega} uv n_{i}
+   \]
+   kde $n_{i}$ značí $i$-tou složku vektoru vnější normály k hranici $\prtl\Omega$.
+\end{theorem}
+
+Rovnici \eqref{Green} můžeme ještě dále zjednodušit. Výraz $(\grad u \cdot \vc n)\phi$ je na celé hranici $\prtl\Omega$ nulový. 
+Na Dirichletovské hranici je $\phi = 0$ a na Neumanovské hranici je $\grad u \cdot \vc n = 0$. V našem případě tedy celý hraniční člen vypadne. 
+Pokud bychom uvažovali nenulovou Neumanovskou podmínku $\grad u \cdot \vc n = q$ zbyl by nám v rovnici hraniční integrál $\int_{\Gamma_n} q\phi$.
+
+Poslední úpravou bude aplikace dirichletovy okrajové podmínky. Zvolme si libovolnou hladkou funkci $u_0$ takovou, že $u_0= 1$ na $\Gamma_d$.
+Hledané řešení můžeme napsat jeko součet $u = u_0 +w$, kde $w$ je nová hledaná funkce. Dosazením do \eqref{Green} dostaneme:
+\begin{equation}
+  \label{WeekForm}
+ \int_\Omega \grad w \cdot \grad \phi + \int_\Omega \lambda w\phi
+  =\int_\Omega f\phi - \int_\Omega \grad u_0 \cdot \grad \phi - \int_\Omega \lambda u_0\phi
+\end{equation}
+Jak lze chápat tuto rovnici v termínech funkcionální analýzy? Na pravé straně máme funkcionál, označme ho $F$, který je definován pro libovolnou
+funkci $\phi \in H$, kde 
+\begin{equation}
+    \label{Hspace}
+    H \eqdef \{ \psi \in H^1(\Omega) \where \psi = 0\text{ na }\Gamma_d\}
+\end{equation}
+je podprostor prostoru $H^1(\Omega)$ funkcí s nulou na Dirichletovské hranici. Hodnotu funkcionálu $F$ pro funkci $\phi$ tedy defunujeme:
+\[
+ \langle F, \phi \rangle \eqdef \int_\Omega f\phi - \int_\Omega \grad u_0 \cdot \grad \phi - \int_\Omega \lambda u_0\phi.
+\]
+
+Na levé straně rovnice máme také funkcionál, ale tentokrát závisí na hledaném řešení $w$. Pro tuto závislost zavedeme operátor $A$ z prostoru $H$
+do jeho duálního prostoru funkcionálů $H^\star$, definovaný předpisem:
+\[
+  \langle A(w), \phi \rangle \eqdef \int_\Omega \grad w \cdot \grad \phi + \int_\Omega \lambda w\phi
+\]
+
+Rovnici \eqref{WeekForm} můžeme tedy symbolicky zapsat:
+\begin{equation}
+    \label{WeakFormGen}
+    \langle A(w), \phi \rangle = \langle F, \phi \rangle 
+\end{equation}
+ 
+A to platí pro libovolnou $\phi \in C^\infty(\Omega)$, $\phi = 0$ na $\Gamma_d$,
+nicméně tento prostor je hustý v prostoru $H$.
+Tj. pro každou funkci $\phi\in H$ existuje posloupnost hladkých $\phi_n$ taková, že 
+\[
+  \phi_n \to \phi \quad \text{ v }H.
+\]
+Jelikož na $H$ přebíráme normu z $H^1$ lze limitu ekvivalentně zapsat jako:
+\[
+   \lim_{n\to\infty}\norm{\phi_n - \phi}_{H^1(\Omega)}=0. 
+\]
+
+Pro libovolné pevné řešení $w\in H$ jeou $A(w)$ a $F$ spojité lineární funcionály a proto
+\[
+  \langle A(w), \phi_n\rangle \to \langle A(w), \phi \rangle
+\]
+a 
+\[
+  \langle F, \phi_n\rangle \to \langle F, \phi \rangle.
+\]
+
+Proto pro libovolné $u$, které splňuje rovnici \eqref{ModelEq} v klasickém smyslu splňuje funkce $w=u - u_0$ 
+rovnici  \eqref{WeekFormGen} a splňuje tak následující definici slabého řešení:
+
+\begin{definition}
+ Slabým řešením rovnice \eqref{ModelEq} nazveme funkci $u=w+u_0$ takovou, že $w$ je z prostoru $H$
+ a splňuje rovnici \eqref{WeekForm} pro všechna $\phi \in H$.
+\end{definition}
+
+Zkráceně řečeno, každé klasické řešení je i slabým řešením, nicméně slabé řešení může existovat i pro nespojité pravé strany $f$ případně
+nehladké okrajové podmínky a podobně. U slabého řešení požadujeme, jen aby mělo první parciální derivace v $L^2(\Omega)$, tedy klidně nespojité.
+Klasické řešení musí mít spojité druhé parciální derivace. 
+
+Šikovným použitím testovacích funkcí  $\phi\in H$ a zpětným ``přehozením derivace`` lze dokázat opačné tvrzení: Pokud $u$ je slabé řešení a navíc má spojité druhé derivace, pak 
+je $u$ i klasickým řešením. 
+
+\section{Existence a jednoznačnost slabého řešení}
+Existence a jednoznačnost řešení je základní vlastnost dobrého matematického modelu reality. Přitom není možné argumentovat tím, že v realitě 
+se vždy systém nějak chová (existence) a nachází se vždy v jednom stavu (jednoznačnost). O matematickém modelu totiž nevíme zda realitu popisuje. 
+Otázka existence a jednoznačnosti je také podstatná pro numerické řešení rovnic. 
+
+Pro velkou třídu lineárních PDR je otázka  existence a jednoznačnost řešení zodpovězena následující větou:
+\begin{theorem}
+Nechť $V$ je Hilbertův prostor.
+Nechť $A$ je lineární operátor z $V$ do duálu $V^\star$, který je 
+\begin{enumerate}
+ \item omezený, tj. 
+  \[
+     \langle A(v), \phi \rangle \le \norm{A}\norm{v}_V\norm{\phi}_V \quad \text{pro všechna }\phi\in V
+  \]
+  \item eliptický (positivně definitní), tj.
+  \[
+     \langle A(v), v \rangle \ge \alpha \norm{v}^2_V
+  \]
+  pro nějakou konstantu $\alpha > 0$.
+\end{enumerate}
+Pak pro každý omezený lineární funkcionál $F\in V^\star$, má rovnice 
+\[
+    A(v)=F
+\]
+právě jedno řešení $v \in V$ a platí
+\[
+   \norm{v}_V \le C \norm{F}_{V^\star}.
+\]
+\end{theorem}
+
+
+\section{Přibližné řešení}
+\subsection{Galerkinova metoda}
+\subsection{Ritzova metoda}
+\subsection{Metoda nejmenších čtverců}
+\subsection{Konvergence k přesnému řešení}
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

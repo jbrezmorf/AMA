@@ -1,0 +1,467 @@
+\chapter{Metrický prostor}
+
+\section{Metrický prostor}
+  Každý z nás už asi zažil, že podle mapy měl být cíl vaší cesty 5km, ale v terénu to vydalo třeba 8km. Nebo vzdálenost 
+  dvou měst vzdušnou čarou je vždy o dost nižšší než ujeté kilometry na tachmetru. Vidíme tedy, že kromě vzdálenosti vzdušnou čarou,
+  která odpovídá Eukleidovské vzdálenosti bodů v prostoru, můžeme zavést i různé jiné vzdálenosti podle druhu dopravního prostředku a 
+  dalších okolností. Abstrakcí vzdálenosti je tzv. metrika. Musíme však mít množinu objektů jejichž vzdálenost budeme měřit. 
+  Metrický prostor je pak tato množina spolu se vzdáleností pro libovolné dva prvky. To je obsah následující definice.
+
+  \begin{definition}
+   Metrický prostor je dvojice  $(X, \rho)$, kde $X$ je množina a $\rho$ je reálná funkce na dvojicích prvků z $X$, tj.
+   $ \rho: X\times X \to \Real$ splňující následující vlastnosti.
+   \begin{description}
+        \item $(M1)$ $\rho$ je symetrická: $\rho(x,y) = \rho(y,x)$
+        \item $(M2)$ $\rho$ je nulová právě tehdy, když $x=y$: $\rho(x,y) = 0 \equiv x=y$.
+        \item $(M3)$ $\rho$ splňuje {\it trojúhelníkovou nerovnost}: $\rho(x,y)\le\rho(x,z)+\rho(z,y)$.
+   \end{description}
+   Takovou funkci $\rho$ nazýváme {\it metrikou}, {\it vzdálenostní funkcí}, nebo jen {\it vzdáleností}.
+  \end{definition}
+  \begin{exercise}
+  Dokažte, že z vlastností $(M1) - (M3)$ plyne, že $\rho$ je nezáporná funkce. Začněte 
+  \[2\rho(x,y) = \rho(x,y)+\rho(x,y)= \dots\]
+  a postupně použijte vlastnosti $(M1)$, $(M3)$, $(M2)$.
+  \end{exercise}
+
+  Často se metrický prostor označujeme stejným symbolem jako množinu, na které je definovaný. To je ovšem možné pouze pokud
+  jsme se dohodli, jakou metriku na te množině budeme používat.
+
+  \begin{remark} \label{metricky_podprostor}
+        Jestliže $(X,\rho)$ je metrický prostor a $Y$ je podmnožina $X$. Pak dvojice $(Y,\rho)$ je také metrickým prostorem.
+        Říkáme, že $Y$ je metrický {\it podprostor} prostoru $X$.
+  \end{remark}
+  
+  \subsection{Příklady metrických prostorů:}
+  \begin{enumerate}
+    \item Prostor $\Real$. Množina reálných čísel spolu s metrikou danou absolutní hodnotou: $\rho(x,y)=\abs{x-y}$ je metrickým prostorem.
+        Podle poznámky \ref{metricky_podprostor} je metrickým prostorem i libovolná podmnožina. Speciálně množina racionálních čísel 
+        tvoří podprostor $(\tn Q,\abs{x-y})$.
+    \item Prostory $\Real^n$. Množina $n$-tic reálných čísel $\Real^n$ s {\it Eukleidovskou metrikou}
+  \[
+     l_n^2(x,y) = \sqrt{\sum_{i=1}^{n} (x_i-y_i)^2} 
+  \]
+  tvoří standardní prostor $\Real^n$ nebo též $l_n^2$. V případě $\Real^2$ si můžeme představit mapu a 
+  eukleidovská metrika odpovídá vzdélenosti vzdušnou čarou. 
+  \item Prostory $l^p_n$. Opět uvažujeme množinu $\Real^n$, ale v metrice použijeme místo exponentu $2$ libovolný exponent $p$ z intervalu $[0,\infty)$.
+  Dostaneme prostor $l_n^p$ s metrikou
+  \[
+        l_n^p(x,y) = \big(\sum_{i=1}^{n} \abs{x_i-y_i}^p\big)^{1/p}. 
+  \]
+  Speciálně pro $p=1$ máme "sčítací" metriku
+  \[
+     \rho(x,y) = \sum_{i=1}^{n} \abs{x_i-y_i} 
+  \]
+  a prostor $l_n^1$. Na množině $\Real^2$ tato metrika odpovídá "pouliční" vzdálenosti ve městě s pravoúhlou soustavou ulic.
+  \item Prostor $l_n^p$. Pro "$p\to \infty$" dostáváme tzv. {\it maximovou metriku}
+  \[
+     l_n^\infty(x,y) = \max_{i=1..n} \abs{x_i-y_i}.
+  \]
+  a příslušný prostor $l^\infty_n$ na množině $\Real^n$. 
+  \item Prostor $C([0,1])$, $C(I)$. Uvažujeme množinu spojitých funkcí na uzavřeném intervalu $[0,1]$ a analogii $l_n^\infty$ metriky:
+        \[
+          L^\infty(f,g)=\max_{x\in[0,1]} \abs{f(x)-g(x)}
+        \]
+        Zde ovšem musíme dát pozor. Děláme maximum přes nekonečnou množinu a toto maximum nemusí existovat (např. maximum množiny $(0,1)$ není 
+        číslo $1$ jelikož do této množiny nepatří). Nicméně z analýzy víme, že spojitá funkce na uzavřeném intervalu nabývá maxima. Takže naše definice
+        metriky je v pořádku. Zápis $C([0,1])$ označuje jak množinu spojitých funkcí na intervalu $[0,1]$ tak právě definovaný prostor s $L^\infty$
+        metrikou. Podobně můžeme definovat prostor $C(I)$ pro libovolný uzavřený interval $I$.
+  \item Prostory $( C(I), L^p )$. Podobně jako v předchozím příkladě můžeme zobecnit i metriky $l_n^p$. Na množině $C(I)$ zavedeme metriku
+        \[
+          L^p(f,g)=\big(\int_I \abs{f(x)-g(x)}^p\d x\big)^{1/p}. 
+        \]
+  \item Prostory s normou. Doposud uvedené příklady metrických prostorů jsou odvozeny od prostorů s normou, které zavedeme dále.
+        To platí obecně: Každý prostor s normou je příkladem metrického prostoru.
+  \item Diskrétní metrika. Na libovloné množině $X$ můžeme zavést tzv. {\it diskrétní metriku}
+  \[
+     \delta(x,y)=\left\{
+     \begin{aligned}
+        0&  \text{ pro }x= y\\
+        1&  \text{ pro }x\ne y 
+     \end{aligned}
+     \right.
+  \]
+  tuto metriku (narozdíl od předchozích případů) lze použít na libovolné množině bez jakékoliv struktury. 
+  \item Metrikcké prostory se neomezují jen na $n$-tice čísel, body v prostoru a funkce. V praxi se používá
+   např. {\it Levenshteinova metrika} pro měření "vzdálenosti" znakových řetězců, {\it Hausdorfova metrika} pro 
+   vzdálenost množin, speciální metriky pro porovnávání tvaru dvou- a troj- rozměrných objektů bez ohledu na jejich natočení a umístění v prostoru,
+  a mnoho dalších aplikací.
+\end{enumerate}
+
+\subsection{Cvičení}
+
+viz. zdroje exercise1.pdf
+
+\section{Množiny v metrických prostorech}
+Pojem metrického prostoru umožňuje zobecnit pojem otevřeného a uzavřeného intervalu a dále pojmy známé z analýzy
+jako spojitost, konvergence, úplnost. Nejprve si zopakujme základní množinové operace.
+Nechť $M,N\subset X$ jsou podmnožiny metrického prostoru $X$. Definujeme
+\begin{itemize}
+   \item sjednocení: $M\cup N\equiv\{x\in X\,|\,x\in M\;\vee\;x\in N\}$;
+   \item průnik: $M\cap N\equiv\{x\in X\,|\,x\in M\;\&\;x\in N\}$;
+   \item rozdíl: $M\setminus N\equiv\{x\in X\,|\,x\in M\;\&\;x\not\in N\}$;
+   \item doplněk: $M^c\equiv\{x\in X\,|\,x\not\in M\}$;
+\end{itemize}
+zřejmě platí $M\setminus N=M\cap N^c$ a $M^c = X\setminus M$.
+
+V metrickém prostoru $(X,\rho)$ definujeme kouli $B_r(x)$ v bodě $x\in X$ o poloměru $r\in\Real$ jako množinu bodů, které mají od
+$x$ vzdálenost menší než $r$:
+\[
+        B_r(x)=\{ y\in X\where \rho(x,y)< r\}.
+\]
+Jak vypadají koule v prostorech $l^p_2$? Jak vypadají koule v prostoru s diskrétní metrikou, např. $(\tn Q, \delta)$?
+
+Dále zavedeme pojem {\it okolí}. Okolí bodu $x$ ($\mathcal O(x)$)je libovolné množina, která obsahuje nějakou (malou) kouli se středem v bodě $x$. {\it Prstencové okolí}
+bodu $x$ ($\mathcal P(x)$) je jeho okolí bez bodu $x$ samotného.
+
+Nechť $M\subset X$ je podmnožina metrického prostoru $X$ a $x\in X$.
+Říkáme, že $x$ je
+\begin{itemize}
+   \item {\it vnitřním bodem} množiny $M$, pokud exituje okolí $\mathcal O(x)$, které je podmnožinou $M$:
+        \[
+          \exists r>0\,:\ B_r(x)\subset M
+        \]
+   \item {\it vnějším bodem} množiny $M$, pokud exituje okolí $\mathcal O(x)$, které je má s $M$ prázdný průnik:
+        \[
+          \exists r>0\,:\ B_r(x)\cap M=\emptyset
+        \]
+   \item {\it hraničním bodem} množiny $M$, pokud každé okolí $\mathcal O(x)$ má neprázdný průnik jak s množinou $M$ tak s jejím doplňkem $M^c$:
+        \[
+          \forall r>0\,:\ B_r(x)\cap M\neq\emptyset \;\&\; B_r(x)\cap M^c\neq\emptyset
+        \]
+   \item {\it hromadným bodem} množiny $M$, pokud každé prstencové okolí $\mathcal P(x)$ má s množinou $M$ neprázdný průnik.
+        \[         
+          \forall r>0\,:\ (B_r(x)\setminus\{x\})\cap M\neq\emptyset
+        \]
+   \item {\it izolovaným bodem} množiny $M$, pokud existuje prstencové okolí $\mathcal P(x)$, které má s $M$ prázdný průnik.
+        \[
+         \exists r>0\,:\ B_r(x)\cap M=\{x\}
+        \]
+\end{itemize}
+
+Pro množinu $M$ pak definujeme:
+\begin{itemize}
+ \item {\it vnitřek} $\inter{M}$ jako množinu jejích vnitřních bodů
+ \item {\it hranici} $\partial M$ jako množinu jejích hraničních bodů
+ \item {\it uzávěr} $\close{M}$ jako množinu vnitřních a hraničních bodů. 
+\end{itemize}
+
+Pro vlastní potřebu označíme $Hr(M)$ množinu hromadných bodů $M$ a $Iz(M)$ množinu izolovaných bodů $M$.
+
+Některé vztahy mezi zavedenými pojmy (rozmyslete si proč platí):
+\begin{itemize}
+ \item $\close{M} = M\cup \prtl M$
+ \item $\inter{M} = M\subset \prtl M$ 
+
+ \item $\close{M}=\inter{M}\cup \prtl M$ přičemž vnitřek a hranice jsou disjunktní: $\inter{M} \cap \prtl M = \emptyset$
+ \item $\close{M}=Hr(M) \cup Iz(M)$ přičemž hromadné a izolované body jsou disjunktní: $Hr(M) \cap Iz(M) = \emptyset$
+
+ \item množina izolovaných bodů $Izol(M)$ je podmnožinou hranice tj. $Iz(M) \subset \prtl M$
+ \item vnitřek je podmnožina hromadných bodů tj. $\inter{M} \subset Hr(M)$
+
+ \item hromadný bod množiny $M$ nemusí patřit do $M$ tj. neplatí $Hr(M) \subset M$ (najděte příklad)
+ \item izolovaný bod $M$ vždy patří do $M$ tj. $Iz(M) \subset M$
+
+ \item v každém okolí hromadného bodu množiny $M$ leží nekonečně bodů z $M$
+ \item pro izolovaný bod $M$ existuje okolí ve kterém není žádný jiný bod z $M$
+\end{itemize}
+
+Množina $M\subset X$ je
+\begin{itemize}
+   \item otevřená $\Leftrightarrow \; M=M^0$,
+   \item uzavřená $\Leftrightarrow \; M=\overline{M}$.
+\end{itemize}
+Platí, že množina $M$ je otevřená, pravě když její doplněk $M^c$ je uzavřená
+a naopak. (důsledek de Morganových zákonů: $M\cup N=(M^c\cap N^c)^c$, $M\cap N=(M^c\cup N^c)^c$ pro množiny $\inter{M}$, $\prtl M$)
+
+
+\subsection{Poslopnosti, úplnost, ekvivalence metri}
+O prvku $x\in X$ řekneme, že je limitou posloupnosti $\{x_n\}\subset X$,
+pokud $\varrho(x_n,x)\rightarrow 0$ pro $n\rightarrow\infty$,
+tj. kovergenci prvků metrického prostoru převedeme na konvergenci reálné posloupnosti.
+Definici můžeme formalizovat následovně:
+výrok $\varrho(x_n,x)\rightarrow 0$ pro $n\rightarrow\infty$
+je ekvivalentní výroku
+$(\forall \varepsilon>0)(\exists N\in\mathbb{N})(\forall n\in\mathbb{N})
+(n>N\;\Rightarrow\;\varrho(x_n,x)<\varepsilon)$.
+
+Z jednoznačnosti limity reálné posloupnosti a vlastnosti~\ref{item:m1}
+metriky plyne jednoznačnost limity posloupnosti v metrickém prostoru.
+
+Můžeme-li na množině $X$ definovat více metrik, např. $\varrho_1$ a $\varrho_2$,
+nemusí konvergence v jedné metrice být vždy ekvivalentní konvergenci v druhé metrice.
+Toto platí jen pro tzv. ekvivalentní metriky, tj. metriky, pro něž existují
+kladné konstanty $\alpha$ a $\beta$ tak, že 
+$\alpha\varrho_1(x,y)\leq\varrho_2(x,y)\leq\beta\varrho_1(x,y)$.
+Metriky $\varrho_1$ a $\varrho_2$ na $X$ jsou ekvivalentní, právě když
+$(\forall x\in X)(\forall r>0)(\exists r_1<r)(\exists r_2>r)
+ (B_{r_1}^{\varrho_1}\subset B_r^{\varrho_2}\subset B_{r_2}^{\varrho_1})$.
+
+Množina $M$ je uzavřená, pokud každá konvergentní posloupnost z $M$
+má limitu v $M$.
+
+{Úplné metrické prostory}
+
+$\{x_n\}\subset X$ je cauchyovská $\Leftrightarrow$
+$(\forall\varepsilon>0)(\exists N\in\mathbb{N})(\forall m,n\in\mathbb{N})
+(m,n>N\;\Rightarrow\;\varrho(x_m,x_n)<\varepsilon)$.
+Metrický prostor $(X,\varrho)$ nazveme úplný, pokud každá cauchyovská posloupnost
+$\{x_n\}\in X$ konverguje k prvku $x\in X$ v metrice $\varrho$.
+
+Každá konvergentní posloupnost je nutně cauchyovská.
+
+Uzavřený metrický podprostor (uzavřená podmnožina metrického prostoru
+s metrikou daného prostoru) úplného metrického prostoru je úplný.
+
+Příklady úplných a neúplných metrických prostorů:
+   \begin{enumerate}
+   \item Příkladem neúplného metrického prostoru je $(\mathbb{Q},|\cdot|)$.
+         Víme, že posloupnost $x_n=(1+1/n)^n$, $n\in\mathbb{N}$,
+         konverguje k číslu $e=\exp(1)\not\in\mathbb{Q}$.
+   \item Metrický prostor $(\mathbb{R},|\cdot|)$ je úplný.
+   \item Metrické prostory 
+         $(\mathbb{R}^n,\varrho_1)$, $(\mathbb{R}^n,\varrho_2)$, 
+         $(\mathbb{R}^n,\varrho_{\infty})$ jsou úplné.
+   \item Metrický prostor $(C(I),\varrho_{\infty})$ je úplný,
+         prostory $(C(I),\varrho_{1})$ a $(C(I),\varrho_{2})$ nikoliv.
+         Obecně úplnost metrického prostoru závisí na použité metrice
+         (viz diskuze o ekvivalentních metrikách výše).
+   \item Diskrétní metrický prostor $X$ je úplný
+         (cauchyovské posloupnosti mají tvar $(x,x,\ldots,x,\ldots)$
+         a konvergují k $x$, kde $x\in X$).
+   \end{enumerate}
+
+\subsection{Cvičení}
+V následujících úlohách máte uvést příklady množin splňující požadované vlastnosti. Na vašem řešení je
+v tomto případě nejdůležitější argumentace, ža vámi uvedená množina skutečně splňuje dané vlastnosti.
+Napište definice použitých pojmů.
+\begin{enumerate}
+ \item Najděte všechny hromadné a izolované body množin:
+        \begin{enumerate}
+                \item $A={-1}\cup(1,\infty)$ v prostoru $\Real$
+                \vysl{$A$, \{-1\}}
+                \item $B=\{x\in \Qnum\where x\in[0,1]\}\times\{y=1/n\where n\in\Nnum\}$ v prostoru $\Real^2$
+                \vysl{$\{x\in \Real\}\times\{y=1/n \vee y=0\}$, $\emptyset$}
+                \item $C=\{f_n(x)\where n\in \Nnum\}$,
+                
+                        \[ f_n(x)=\left\{\begin{aligned}
+                                                \sin(nx), &&x\in(0,\frac x n)\\
+                                                0,                &&x\in[\frac x n,1)                   
+                                         \end{aligned}\right.\]
+                         v normě $L^1$.
+                \vysl{$f(x)=0$, $C$}     
+                \item $C$ v normě $L^\infty$
+                \vysl{$\emptyset$, $C$}
+        \end{enumerate}
+ \item Najděte množinu $M$ (v nějakém metrickém prostoru):
+        \begin{enumerate}
+                \item s prázdným vnitřkem a nekonečným množstvím hromadných bodů.
+                \item s prázdným vnitřkem a nekonečným množstvím hromadných bodů, z nichž některé
+                nepatří do $M$
+                \item s prázdným vnitřkem a nekonečným množstvím hromadných bodů, z nichž nekonečno
+                nepatří do $M$
+                \item * s prázdným vnitřkem a nekonečným množstvím hromadných bodů, z nichž žádný
+                nepatří do $M$
+        \end{enumerate}
+        \vysl{kružnice v $\Real$, kružnice s dírami, viz. předchozí příklad, za pivo}
+        \item Existuje množina se dvěma izolovanými body a prázdnou hranicí? Pečlivě zdůvodněte.
+\item Uveďte příklad spočetné množiny funkcí husté v prostoru $C((0,\pi))$.
+                \vysl{ $ \{ \sum_{n=1}^\infty r_n \sin(nx)\where r_n\in \Qnum \}$ tedy něco jako lineární obal množiny
+                $\{\sin(nx)\}$ ale jen s použitím racionálních čísel.}
+ \item Ve které normě je prostor $C((0,1))$ úplný, a ve které je neúplný?
+           \vysl{neuplný v $L^1$ - proč?, úplný v \dots to už je příliš lehké}
+ \item Uveďte příklad metrického prostoru (množiny) $M$ funkcí na intervalu $(0,1)$, který je úplný v
+       $L^\infty$ normě. Uveďte příklad prostoru $N$ funkcí na stejném intervalu, který je v
+       $L^\infty$ normě naopak neúplný a je podmnožinou $M$.
+       \vysl{ např. $N=\{f(x)=1/n\where n\in \Nnum\}$, $M=N\cup \{ f(x)=0 \} $}
+  \item Najděte dva normované prostory $M$, $N$ splňující podmínky předchozího příkladu, ale s $L^1$
+                normou. Tedy $N\subset M$, $M$ úplný a $N$ neúplný prostor funkcí v $L^1$-normě
+                na intevalu $(0,1)$.
+                \vysl{ např. $M=L^1((0,1))$, $N=C((0,1))$ }
+\end{enumerate}
+
+
+\section{Věta o pevném bodě a její aplikace}
+
+Nechť $(X,\varrho)$ je metrický prostor a $A:\,X\rightarrow X$ je operátor na $X$.
+Prvku $x\in X$ říkáme pevný bod operátoru $A$, pokud $Ax=x$.
+Operátor $A$ nazýváme kontrakce (kontraktivní operátor), pokud existuje
+$0\leq \alpha <1$ tak, že $\varrho(Ax,Ay)\leq\varrho(x,y)$ pro každé $x,y\in X$.
+
+Každá kontrakce je spojitá.
+
+Banachova věta o pevném bodě:
+Každá kontrakce definovaná na úplném metrickém prostoru má právě jeden pevný bod.
+
+Důkaz: Nechť $x_0\in X$ a definujme rekurzivně 
+$x_n=Ax_{n-1}=A^2x_{n-2}=\cdots=A^nx_0$ pro $n\in\mathbb{N}$.
+Nechť $m,n\in\mathbb{N}$, $m\leq n$, pak
+\[
+   \begin{split}
+      \varrho(x_m,x_n)&=\varrho(A^mx_0,A^nx_0)\leq\alpha^m\varrho(x_0,x_{n-m})\\
+                      &\leq\alpha^m(\varrho(x_0,x_1)+\varrho(x_1,x_2)+\cdots
+                       +\varrho(x_{n-m-1},x_{n-m})\\
+                      &=\alpha^m(\varrho(x_0,x_1)+\varrho(Ax_0,Ax_1)+\cdots
+                       +\varrho(A^{n-m-1}x_0,A^{n-m-1}x_1)\\
+                      &\leq\alpha^m\varrho(x_0,x_1)(1+\alpha+\cdots
+                       +\alpha^{n-m-1})\\
+                      &\leq\frac{\alpha^m}{1-\alpha}\varrho(x_0,x_1)
+   \end{split}
+\]
+Přitom jsme využili trojúhelníkové nerovnosti~\ref{item:m3}
+a součtu nekonečné geometrické řady s kvocientem $\alpha<1$.
+Pro zvolené $\varepsilon>0$ a dostatečně velká $m$ je $\varrho(x_m,x_n)<\varepsilon$,
+takže posloupnost $\{x_n\}$ je cauchyovská a v důsledku úplnosti $(X,\varrho)$
+má limitu $x=\lim_{n\rightarrow\infty}x_n\in X$.
+Protože $x_n\rightarrow x$, plyne ze spojitosti $A$, že
+$Ax=A\lim_{n\rightarrow\infty}x_n=\lim_{n\rightarrow\infty}Ax_n
+=\lim_{n\rightarrow\infty}x_{n+1}=x$.
+Našli jsme tedy pevný bod $x$ kontrakce $A$ včetně konstruktivního návodu,
+jak takový bod nalézt včetně odhadu rychlosti konvergence.
+Jsou-li dále $x,y\in X$ dva pevné body kontrakce $A$, máme
+$\varrho(x,y)=\varrho(Ax,Ay)\leq\alpha\varrho(x,y)$.
+Toto je ale možné jen případě, že $\varrho(x,y)$, tj. $x=y$.
+Tím jsme dokázali jednoznačnost pevného bodu.
+
+{Aplikace věty o pevném bodě při numerickém řešení nelineárních rovnic.}
+Řešme rovnici 
+\begin{equation}\label{eq:nelin}
+   f(x)=0
+\end{equation}
+kde $f$ je reálná funkce reálné proměnné $x$.
+Jednou z metod pro její řešení je metoda pevného bodu.
+Přepišme rovnici~(\ref{eq:nelin}) do tvaru
+\[
+   x = g(x)
+\]
+($g$ se nazývá iterační funkce).
+Zvolme $x_0\in I$ a definujme
+\begin{equation}\label{eq:iter}
+   x_n = g(x_{n-1}), \; n\in\mathbb{N}.
+\end{equation}
+Předpokládejme, že existuje uzavřený interval $I$ tak, že $g(I)\subset I$,
+iterační funkce je diferencovatelná na $I$ a platí $|g'(x)|\leq 1$ pro $x\in I$
+a nějakou konstantu $0\leq K<1$.
+Pak má~(\ref{eq:nelin}) řešení $x^*\in I$ a posloupnost $\{x_n\}$ konverguje k $x^*$.
+
+Důkaz: Dvojice $(I,|\cdot|)$ je uzavřený metrický podprostor $(\mathbb{R},|\cdot|)$,
+je tedy je úplný. Nechť $x,y\in I$, $x<y$. Pak
+\[
+   \left|\frac{g(y) - g(x)}{y-x}\right| = |g'(c)| \leq K,
+\]
+kde $c\in(x,y)$ (z věty o střední hodnotě).
+Odtud $|g(y) - g(x)| \leq K|y-x|$ pro každé $x,y\in I$,
+a tedy $g$ je kontrakce na $I$.
+Z věty o pevném bodě tedy plyne, že existuje $x^*\in I$ takové,
+že $x^*=g(x^*)$ a z důkazu této věty plyne $x^n\rightarrow x^*$.
+
+Zpravidla se uvádí slabší formulace, kde předpokládáme, že $g$
+je spojitě diferencovatelná na nějakém otevřeném okolí pevného bodu $x^*$
+a platí na něm $|g'(x)|\leq K<1$. Zvolíme-li $x_0$ v dostatečně malém okolí
+bodu $x^*$, konverguje posloupnost definovaná v~(\ref{eq:iter}) k $x^*$.
+
+
+   Hledejme kořen rovnice $f(x)=x^2-x-2=0$.
+   Zvolme $g(x)=\sqrt{x+2}$. 
+   Možných voleb funkce $g$ je několik,
+   ne všechny vedou ke konvergenci iterací~(\ref{eq:iter}).
+   Volbou kladného znaménka odmocniny jsme redukovali množinu pevných bodů
+   ze dvou na jeden.
+   Zvolme $I=[0,7]$. Pak $g(0)\sqrt{2}\geq 0$ a $g(7)=3\leq 7$,
+   je tedy $g(I)\subset I$.
+   Derivací $g$ podle $x$ máme $g'(x)=1/(2\sqrt{x+2})$.
+   Platí $g'(x)<1$ pro každé $x>-7/4$, tedy i pro $x\in I$.
+   Odtud posloupnost iterací~(\ref{eq:iter}) konverguje ke kořenu
+   rovnice $f(x)=0$ na $I$, tj. k $x^*=2$.
+   Volíme-li např. $x_0=7$, máme
+   $x_1=7.0000$, $x_2=3.0000$, $x_3=2.2361$, $x_4=2.0582$,
+   $x_5=2.0145$, $x_6=2.0036$, $x_7=2.0009$ atd.
+
+
+{Aplikace věty o pevném bodě v teorii diferenciálních rovnic.}
+Nechť $G$ je otevřená souvislá množina (oblast) v $\mathbb{R}^2$,
+$(x_0,y_0)\in G$ a nechť $f$ je spojitá na $G$ 
+a splňuje Lipschitzovu podmínku v argumentu $y$
+($f$ je lipschitzovská, lipschitzovsky spojitá)
+$|f(x,y_1)-f(x,y_2)|\leq M|y_1-y_2|$ pro každé $(x,y_1)\in G$, $(x,y_2)\in G$,
+kde $M>0$ je pevná konstanta (nezávislá na $x$, $y_1$, $y_2$,
+tzv. Lipschitzova konstanta).
+Pak existuje $\delta > 0$ tak, že rovnice $y'(x) = f(x,y)$ má právě jedno řešení
+$y(x)=\varphi(x)$ na intervalu $[x_0-\delta,x_0+\delta]$ splňující
+počáteční podmínku $\varphi(x_0)=y_0$.
+
+Důkaz: Řešení rovnice $y'(x) = f(x,y)$ s počáteční podmínkou $\varphi(x_0)=y_0$
+můžeme zapsat ve tvaru
+\begin{equation}\label{eq:int_eq}
+   \varphi(x) = y_0 + \int\limits_{x_0}^x f(x,\varphi(t))\,dt.
+\end{equation}
+Funkce $f$ je na $G$ spojitá (poznamenejme, že na funkci $f$
+se můžeme dívat jako na operátor $f\,\mathbb{R}^2\rightarrow\mathbb{R}$),
+tedy je omezená, tj. existuje $K>0$ tak, že $|f(x,y)|\leq K$ na nějaké
+podoblasti $G'\subset G$ takové, že $(x_0,y_0)\in G'$.
+Vyberme $\delta>0$ tak, že oblast $G'$ obsahuje obdélník
+$R\equiv [x_0-\delta,x_0+\delta]\times [y_0-K\delta,y_0+K\delta]$
+a zároveň $\delta\leq 1/M$.
+Označme $C^*\equiv\{\psi\in C[x_0-\delta,x_0+\delta]\,|\,
+(\forall x\in[x_0-\delta,x_0+\delta])(|\varphi(x)-y_0|\leq K\delta)\}$
+a použijme metriku $\varrho_{\infty}$.
+Metrický prostor $(C^*,\varrho_{\infty})$ je uzavřený podprostor prostoru
+$(C[x_0-\delta,x_0+\delta],\varrho_{\infty})$, který je úplný, a tedy
+$(C^*,\varrho_{\infty})$ je rovněž úplný.
+Definujme operátor $\psi=A\phi$, $\phi\in C^*$ předpisem
+\[
+   \psi(x)=(A\varphi)(x)\equiv y_0+\int\limits_{x_0}^x f(t,\varphi(t))\,dt.
+\]
+Ukážeme, že je $A:\,C^*\rightarrow C^*$ a že $A$ je kontrakce.
+Abychom ověřili, že $A$ je operátor do $C^*$, musíme ověřit podmínku
+$(\forall x\in[x_0-\delta,x_0+\delta])(|(A\varphi)(x)-y_0|\leq K\delta)$.
+Platí
+\[
+   |(A\varphi)(x)-y_0|=\left|\int\limits_{x_0}^xf(t,\varphi(t))\,dt\right|
+                      \leq\int\limits_{x_0}^x|f(t,\varphi(t))|\,dt
+                      \leq K|x-x_0|\leq K\delta.
+\]
+Abychom ověřili kontraktivnost operátoru, nechť $\varphi,\psi\in C^*$, 
+$x\in[x_0-\delta,x_0+\delta]$, pak
+\[
+  \begin{split}
+   |(A\varphi)(x)-(A\psi)(x)|&=
+    \left|\int\limits_{x_0}^xf(t,\varphi(t))-f(t,\psi(t)\,dt\right|\\
+    &\leq\int\limits_{x_0}^x|f(t,\varphi(t))-f(t,\psi(t)|\,dt\\
+    &\leq M\int\limits_{x_0}^x|\varphi(t)-\psi(t)|\,dt
+    \leq M\delta\,\varrho_{\infty}(\varphi,\psi),
+  \end{split}
+\]
+odkud $\varrho_{\infty}(A\varphi,A\psi)\leq M\delta\varrho(\varphi,\psi)
+=\alpha\varrho(\varphi,\psi)$, kde $\alpha\equiv M\delta<1$.
+Z věty o pevném bodě existuje tedy $\varphi\in C^*$ tak, že
+$A\varphi=\varphi$, tj. existuje právě jedno řešení integrální 
+rovnice~(\ref{eq:int_eq}) v $C^*$.
+
+\subsection{Cvičení}
+
+
+\begin{enumerate}
+   \item Dokažte pomocí BVPP, že posloupnost $x_n = cos(x_n)$ má pevný bod na intervalu $[0,1]$. Odhadněte počet iterací pořebných k získání 4 platných cifer a porovnejte to s 
+         výpočtem na kalkulačce.
+   \item Řešte pomocí BVPP rovnici $x^2-1 = 0$.
+   \item Řešme rovnici $x^2-2x+2 = 0$. Použijeme iterace $x_{n+1} = (x_n^2+2)/2$. Ukažte, že Lipschicovská konstanta je menší než $1$ na intervalu $[-1/2, 1/2]$. Podle BVPP by měl existovat pevný bod, ale
+     ůvodní rovnice nemá žádný reálný kořen (ověřte). Kde je chyba?
+   \item Použijte větu o pevném bodě pro řešení rovnice:
+  \[ \cos x = e^x\]
+   Rovnici upravte do tvaru $\arctan( \argdot) = x$. 
+   Kolik má uvedená rovnice řešení? Zvolte vhodné počáteční přiblížení a proveďte 4 iterace pro získání největšího nenulového řešení. Lze pomocí stejného tvaru hledat všechna řešení uvedené rovnice? Zdůvodněte.
+  \item 
+   Rovnice $\sqrt{x}=e^x-1$ má řešení na intervalu $I=(0,1)$, pro ověření načrtněte grafy. Proveďte transformaci na tvar
+   $f(x)=\ln(\sqrt(x)+1)=x$ a ověřte předpoklady věty o pevném bodě, tj. že funkce $f$ zobrazuje interval $I$ do sebe,
+   a že má derivaci v absolutní hodnotě menší než 1.
+   Iteracemi najděte řešení s přesností na 2 desetinná místa.
+   \item
+   Najděte maximum funkce $f(x)=x\sin x$ na intervalu $[0,2\pi]$ s přesností na 2 desetinná místa. Pro řešení nelineární rovnice použijte větu o pevném bodě. Diskutujte její předpoklady.
+   \item
+
+\end{enumerate}
+
+
+
+
+

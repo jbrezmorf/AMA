@@ -1,0 +1,100 @@
+\documentclass[fleqn,12pt]{report}
+\usepackage{a4}
+%\documentstyle[fleqn,czech,a4,12pt]{report}
+\newcommand{\e}{{\rm e}}
+%\newcommand{\klasif}{\vfill {\bf Klasifikace:}\begin{enumerate}\item 20--17 bodù\item 16--13 bodù\item 12--10 bodù\item 9--0 bodù\end{enumerate}}
+\newcommand{\nadpis}[1]{\newpage\noindent{\Huge Applied Mathematics}
+
+\begin{flushright}
+\_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_ \_\\
+name and surname~~~~~~~~
+\end{flushright}
+
+\noindent{\Large #1}
+
+~
+
+}
+\pagestyle{empty}
+\headheight 0pt
+\headsep 0pt
+\begin{document}
+\nadpis{Excercise Nr. 1}
+Find the solution of linear ordinary differential equations with the right-hand side
+\begin{displaymath}
+\begin{array}{rcrcrcr}
+\dot x_1&=&~    &~&3 x_2&+& 2\e^{2t}\\
+\dot x_2&=&- x_1&+&4 x_2&+& \e^{2t}
+\end{array}
+\end{displaymath}
+with the initial condition $x_1(0)=-1, x_2(0)=1$.
+
+\nadpis{Excercise Nr. 2}
+Construct the equations of the Finite Difference Method for the solution of the 
+elliptic partial differential equation
+\begin{displaymath}
+2\frac{\partial^2}{\partial x^2} u(x,y) + 3\frac{\partial^2}{\partial y^2} u(x,y)+ u(x,y)=(x-y)^2
+\end{displaymath}
+in the rectangular region $\Omega=\langle 0;1\rangle\times\langle 0;0.8\rangle$ 
+with the Dirichlet boundary conditions $u(0,y)= -y$, $u(1,y)= 2y$, $u(x,0)= 0$, $u(x, 0.8)= -0.8+2.4 x$,
+with the mesh step $h=\frac14$ and the initial mesh point $[0;0]$.
+
+~
+
+Draw the mesh, denote its nodes, classify them to internal and boundary ones, and
+construct the equation system for approximation of the values of the function $u$ 
+in all nodes. Write down the values of the function $u$ in the nodes lying at 
+the region boundary. Construct the equations for boundary nodes lying out of the 
+boundary using the linear interpolation method.
+
+\nadpis{Theoretical part}
+
+{\Large Question 1:}
+Verify whether the set $M = \{ p(x) = a x^3 + b x^2 + c x + d ;  \frac{d p}{d x} (1) = 3b \}$ 
+is a vector subspace of the space of polynomials up to the third order. Discuss it.
+
+\vspace{6cm}
+{\Large Question 2:}
+Formulate the Riesz Theorem on Linear Functional Representation in a Hilbert
+Space. Write down the main ideas used in its proof.
+
+\vspace{5cm}
+{\Large Question 3:}
+What is the General One Step Method? Write down which types of problems can be 
+solved using it and write down its general formula. Write down an example of one 
+specific one step method.
+
+\vfill
+~\hfill{\tiny turn over}\newpage
+
+{\Large Question 4:}
+Write down a general boundary problem governed by a {\em system of ordinary 
+differential equations}. Which special types of boundary conditions for a system 
+of ordinary differential equations of the first order do you know?
+
+\vspace{6cm}
+{\Large Question 5:}
+Verify which of the differential operators
+$A_1 (u) = ( -4 \frac{\partial ^2 u}{\partial x^2} -  \frac{\partial ^2 u}{\partial y^2}  +  u  )$, 
+$A_2 (u) = ( -4x \frac{\partial ^2 u}{\partial x^2} - y \frac{\partial ^2 u}{\partial y^2} )$ 
+is symmetrical and which one is positive deffinite
+in the space of twice continuously differentiable functions with zero trace on the boundary
+$\partial\Omega$ where $\Omega$ is the Cartesian product of intervals $(0;2)\times (0;2)$.
+Give reasons for your answer -- discuss it.
+
+{\bf Hint:} 
+symmetrical operator:  $(A u , v) = (u, A v)$ for all $u,v \in C^2(\Omega)$  and  
+positive deffinite operator $(A u, u) \geq c (u,u)$ where $c>0$.
+
+\vspace{6cm}
+{\Large Question 6:}
+Let is given the general problem:
+$A u = f$ in $\Omega$
+with the boundary condition $u = 0$ on $\partial \Omega$.
+Formulate the Theorem on the Minimum of a Quadratic Functional.
+Deduce the Ritz Method for finding the approximate solution of this problem for basis 
+vectors $\varphi_1,\dots,\varphi_n$. Write down the conditions sufficient for 
+convergence of the sequence of approximate solutions to the solution $u_0$ of 
+the equation $A u = f$.
+
+\end{document}

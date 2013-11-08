@@ -1,0 +1,271 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Obyčejné diferenciální rovnice}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+obyčejná diferenciální rovnice -- vztah mezi neznámou funkcí jedné proměnné a jejími derivacemi;
+řád ODR -- řád nejvyšší derivace v ODR.
+
+ODR $n$-tého řádu: $F(x,y,y',\ldots,y^{(n)})=0$;
+řešení (integrál) ODR -- funkce, která vyhovuje rovnici v daném oboru.
+
+ODR 1. řádu: $F(x,y,y')=0$, resp. $y'=f(x,y)$ (rozřešená vzhledem k derivaci).
+
+\begin{enumerate}
+   \item \emph{Rovnice se separovanými proměnnými} ve tvaru $f(x)+g(y)y'=0$,
+   kde $f,g$ jsou funkce. 
+   Je-li $f$ spojitá na $(a,b)$ a $g$ je spojitá na $(c,d)$,
+   potom každé řešení na $I\subset(a,b)$ splňuje na $I$ rovnici
+   \[
+      \int f(x)\,dx + \int g(y)\,dy = C, \; C\in\mathbb{R}.
+   \]
+   Funkce určená na intervalu $J\subset(c,d)$ touto rovnicí, je řešením diferenciální rovnice na $J$.
+   %
+   \item \emph{Lineární diferenciální rovnice 1. řádu} ve tvaru $y'+f(x)y=g(x)$,
+   kde $f,g$ jsou funkce spojité na $(a,b)$.
+   Je-li $g=0$, nazývá se rovnice homogenní, v opačném případě je nehomogenní.
+   Homogenní rovnici řešíme separací proměnných; máme
+   \[
+      y'+f(x)y = 0.
+   \]
+   Odtud integrací dostaneme
+   \[
+      y(x) = Ce^{-\int f(x)\,dx}, \; C\in\mathbb{R}.
+   \]
+   Nehomogenní rovnici řešíme variací konstanty. Uvažujeme ho ve tvaru
+   \[
+      y(x) = C(x)e^{-\int f(x)\,dx},
+   \]
+   kde $C$ je funkce parametru $x$.
+   Dosazením do původní rovnice máme
+   \[
+      C'(x) = g(x)e^{\int f(x)\,dx}.
+   \]
+   Pak tedy
+   \[
+      y(x)=\left[\int g(x)e^{\int f(x)\,dx}\,+K\right]\,e^{-\int f(x)\,dx}, \;K\in\mathbb{R}
+   \]
+   je řešením nehomogenní rovnice na intervalu $(a,b)$.
+   %
+   \item \emph{Bernoulliho rovnice} (příklad převodu nelineární rovnice na lineární) ve tvaru 
+   $y'+f(x)y=g(x)y^(\alpha)$, $f,g$ funkce spojité na $(a,b)$, $\alpha\in\mathbb{R}\setminus\{0,1\}$.
+   Pro $\alpha>0$ je jedním z řešení funkce $y=0$.
+   Ostatní řešení získáme následovně.
+   Násobeníme-li rovnici $y^{-\alpha}$, dostaneme
+   \[
+      y^{-\alpha}y' + f(x)y^{1-\alpha} = g(x).
+   \]
+   Položíme-li $z=y^{1-\alpha}$, potom $z'=(1-\alpha)y^{-\alpha}y'$.
+   Dosazením do původní rovnice tedy máme
+   \[
+      \frac{1}{1-\alpha}z' + f(x)z = g(x),
+   \]
+   což je lineární diferenciální rovnice 1. řádu.
+   %
+   \item \emph{Lineární diferenciální rovnice $n$-tého řádu s konstantními koeficienty}
+   je rovnice ve tvaru
+   \[
+      a_ny^{(n)}+a_{n-1}y^{(n-1)}+\cdots+a_1y'+a_0y = f(x),
+   \]
+   kde $f$ je spojitá na nějakém intervalu $(a,b)$, $a_i\in\mathbb{R}$ ($i=0,1,\ldots,n$) a $a_n\neq 0$.
+   Na tomto intervalu existuje řešení této rovnice;
+   toto je určeno jednoznačně počátečními podmínkami
+   $y(x_0)=y_0, \; y'(x_0)=y_0^{1},\; \ldots, \; y^{(n)}(x_0)=y_0^{n}$
+   pro nějaké $x_0\in(a,b)$. 
+   Rovnice
+   \[
+      a_ny^{(n)}+a_{n-1}y^{(n-1)}+\cdots+a_1y'+a_0y = 0
+   \]
+   se nazývá homogenní (je-li $f(x)\neq 0$ někde v $(a,b)$, nazývá se rovnice nehomogenní).
+   Řešení homogenní rovnice tvoří vektorový podprostor $C(a,b)$
+   a existuje $n$ lineárně nezávislých funkcí (s nenulovým Wronského determinantem), 
+   které jsou jejím řešením (fundamentální systém řešení).
+   Každé řešení lze potom jednoznačně zapsat jako lineární kombinaci funkcí fundamentálního systému.
+   Nechť $\lambda\in\mathbb{C}$ je kořen charakteristické rovnice
+   \[
+       a_n\lambda^n+a_{n-1}\lambda^{n-1}+\cdots+a_1\lambda+a_0 = 0
+   \]
+   s násobností $r$.
+   Je-li $\lambda\in\mathbb{R}$, jsou funkce
+   \[
+      S(\lambda)=\{x^ie^{\lambda x}\,| \; i=0,1,\ldots,r-1\}
+   \]
+   řešením homogenní rovnice.
+   Je-li $\lambda\in\mathbb{C}$ kořen charakteristické rovnice
+   (a tedy i $\bar{\lambda}$ je kořenem), kde $\lambda=\sigma+\mathrm{i}\omega$ s $\sigma,\omega\in\mathbb{R}$, 
+   jsou funkce
+   \[
+      S(\lambda)=\{x^ie^{\sigma x}\cos\omega x,\;x^ie^{\sigma x}\sin\omega x\,|\;i=0,1,\ldots,r-1\}
+   \]
+   rovněž řešením homogenní rovnice (přesněji reálná řešení).
+   Množina
+   \[
+      S = \bigcup\,\{S(\lambda)\,|\,\lambda\text{ je kořen charakteristické rovnice}\}
+   \]
+   tvoří fundamentální systém řešení homogenní rovnice.
+   Řešení nehomogenní rovnice (tj. rovnice s nenulovou pravou stranu) hledáme
+   např. jako v případě řešení lineární rovnice prvního řádu variací konstant. 
+   Stačí nalézt alespoň jedno řešení, neboť řešení nehomogenní rovnice lze psát
+   jako součet libovolného řešení nehomogenní rovnice (partikulární řešení)
+   a funkce, která je lineární kombinací fundamentálního systému řešení homogenní rovnice. 
+   Uvažujme pravou stranu ve speciálním tvaru $p(x)e^{\lambda x}$,
+   kde $p$ je polynom v $x$. Je-li $\lambda$ $r$-násobný kořen charakteristické rovnice ($r\geq 0$)
+   a $p$ je stupně $k$, pak hledáme řešení ve tvaru $t^rP(x)e^{\lambda x}$,
+   kde $P$ je polynom v $x$ rovněž stupně $k$.
+   Má-li pravá strana tvar $p(x)e^{\sigma x}\cos\omega x+q(x)e^{\sigma x}\sin\omega x$,
+   kde $p$ a $q$ jsou polynomy v $x$ stupně nejvýše $k$,
+   a je-li $\sigma+\mathrm{i}\omega$ (a tedy rovněž $\sigma-\mathrm{i}\omega$)
+   $r$-násobný kořen charakteristické rovnice ($r\geq 0$),
+   hledáme řešení ve tvaru $t^rP(x)e^{\sigma x}\cos\omega x+t^rQ(x)e^{\sigma x}\sin\omega x$,
+   kde $P$ a $Q$ jsou polynomy proměnné $x$ nejvýše $k$.
+\end{enumerate}
+
+\section*{Řešené příklady}
+
+\begin{ex}
+   Řešte rovnici $xy'=2y+y'$.
+\end{ex}
+\begin{sol}
+   Rovnici převedeme do ekvivalentního tvaru $(x-1)y'=2y$ (jedná se o rovnici se separovatelnými proměnnými,
+   tj. rovnici, kterou lze převést na rovnici se separovanými proměnnými).
+   Nechť $y\neq 0$ (nulové řešení je řešením rovnice) a $x\in(1,\infty)$.
+   Pak dostaneme rovnici $y'/y=2/(x-1)$. Funkce $1/y$ je spojitá v $(0,\infty)$ (rovněž v $(-\infty,0)$)
+   a $1/(x-1)$ je spojitá na uvažovaném intervalu $(1,\infty)$.
+   Integrací máme
+   \[
+      \ln|y| = \ln|x-1|+C, \; C\in\mathbb{R}.
+   \]
+   Odlogaritmováním dostaneme
+   \[
+      |y| = C(x-1)^2, \; C>0.
+   \]
+   Protože uvažujeme $y>0$ a pravá strana je kladná, máme řešení
+   \[
+      y(x) = C(x-1)^2, \; C>0.
+   \] 
+   Uvažujeme-li $y<0$, dostaneme řešení
+   \[
+      y(x) = -C(x-1)^2, \;C>0.
+   \]
+   Protože nulová funkce je rovněž řešením původní diferenciální rovnice,
+   její řešení na intervalu $(1,\infty)$ mají tedy tvar
+   \[
+      y(x) = C(x-1)^2, \; C\in\mathbb{R}.
+   \]
+   (Podobně můžeme dostat řešení na intervalu $(-\infty,1)$.)
+\end{sol}
+
+\begin{ex}
+   Řešte rovnici $y'-y\,\mathrm{cotg}\,x=e^x\,\sin\,x$.
+\end{ex}
+\begin{sol}
+   Jedná se o nehomogenní lineární rovnici prvního řádu.
+   Nejprve nalezneme řešení homogenní rovnice $y'-y\,\mathrm{coth}\,x=0$.
+   Funkce $\mathrm{cotg}\,x$ je spojitá na každém intervalu ve tvaru
+   $(k\pi,(k+1)\pi)$, kde $k\in\mathrm{Z}$.
+   Pro jednoduchost uvažujme $x\in(0,\pi)$.
+   Integrací dostaneme
+   \[
+      \ln |y| = \ln |\sin x|+C, \; C\in\mathrm{R}.
+   \]
+   Odlogaritmováním je
+   \[
+      |y| = C\sin x, \; C>0
+   \]
+   Protože pravá strana je kladná a nulové řešení je rovněž řešením homogenní rovnice, 
+   máme řešení homogenní rovnice ve tvaru
+   \[
+      y(x) = C\sin x,\; C\in\mathrm{R}.
+   \]
+   Řešení nehomogenní rovnice nalezneme variací konstanty, čili položme $C\equiv C(x)$.
+   Dosazením řešení ve tvaru $y(x)=C(x)\sin x$ do původní rovnice máme $C'(x) = e^x$,
+   odkud $C(x) = e^x+K$, $K\in\mathbb{R}$.
+   Obecné řešení nehomogenní rovnice na intervalu $(0,\pi)$ je tedy
+   \[
+      y(x) = (e^x+K)\sin x, \; K\in\mathbb{R}.
+   \]
+\end{sol}
+
+\begin{ex}
+   Řešte rovnici $y''-y=x^2e^x$ s počátečními podmínkami $y(0)=1$, $y'(0)=0$.
+\end{ex}
+\begin{sol}
+   Kořeny charakteristické rovnice $\lambda^2-1=0$ jsou $\lambda_1=1$, $\lambda_2=-1$,
+   takže fundamentální systém řešení příslušné homogenní rovnice je tvořen funkcemi $e^x$ a $e^{-x}$.
+   Řešení nehomogenní rovnice hledáme ve tvaru $y_p(x)=x(ax^2+bx+c)e^x$, kde $a,b,c\in\mathbb{R}$.
+   Derivováním dostaneme
+   \[
+      (y''_p-y_p)(x) = (6ax^2+(6a+4b)x+2b+2c)e^x
+   \]
+   a porovnáním s pravou stranou máme podmínky $6a=1$, $6a+4b=0$ a $2b+2c=0$, odkud
+   $a=1/6$, $b=-1/4$ a $c=1/4$, takže obecné řešení nehomogenní rovnice má tvar
+   \[
+      y(x) = \left(\frac{1}{6}x^2-\frac{1}{4}x+\frac{1}{4}\right)e^x+c_1e^x+c_2e^{-x}, \; c_1,c_2\in\mathbb{R}.
+   \]
+   Konstanty $c_1$ a $c_2$ určíme z počátečních podmínek.
+   Derivací je
+   \[
+      y'(x) = \left(\frac{1}{6}x^2+\frac{1}{12}x\right)e^x+c_1e^x-c_2e^{-x},
+   \]
+   takže má platit $c_1+c_2=-1/4$ a $c_1-c_2=0$, odkud $c_1=c_2=-1/8$.
+   Řešením tedy je funkce
+   \[
+      y(x) = \left(\frac{1}{6}x^2-\frac{1}{4}x+\frac{1}{8}\right)e^x-\frac{1}{8}e^{-x}.
+   \]
+\end{sol}
+
+\begin{ex}
+   Řešte rovnici $y''-2y'+2y=\cos x$.% s počátečními podmínkami $y(0)=1$, $y'(0)=0$.
+\end{ex}
+\begin{sol}
+   Kořeny charakteristické rovnice $\lambda^2-2\lambda+2=0$ jsou $\lambda_1=1+\mathrm{i}$, $\lambda_2=1-\mathrm{i}$,
+   takže fundamentální systém řešení příslušné homogenní rovnice je tvořen funkcemi 
+   $e^x\cos x$ a $e^x\sin x$.
+   Protože $0+\mathrm{i}$ není kořenem charakteristické rovnice (resp. je $0$-násobným kořenem),
+   hledáme řešení nehomogenní rovnice ve tvaru $y_p(x)=a\cos x+b\sin x$, kde $a,b\in\mathbb{R}$.
+   Derivováním dostaneme
+   \[
+      (y''_p-2y'_p+2y_p)(x) = (a-2b)\cos x+(2a+b)\sin x
+   \]
+   a porovnáním s pravou stranou máme podmínky $a-2b=1$ a $2a+b=0$, odkud
+   $a=1/5$ a $b=-2/5$, takže obecné řešení nehomogenní rovnice má tvar
+   \[
+      y(x) = \left(c_1e^x+\frac{1}{5}\right)\cos x+\left(c_2e^x-\frac{2}{5}\right)\sin x, \; c_1,c_2\in\mathbb{R}.
+   \]
+\end{sol}
+
+\section*{Neřešené příklady}
+
+\begin{ex}
+   Řešte diferenciální rovnice
+   \begin{enumerate}
+      \item $yy'=e^y$,
+      \item $x+yy'=0$,
+      \item $(x^2+1)(y^2-1)+xyy'=0$, $y(1)=\sqrt{2}$,
+      \item $(x+1)y'+xy=0$, $y(0)=1$,      
+      \bigskip
+      \item $y'+\frac{y}{x}=x$,
+      \item $y'-\frac{2}{x+1}y=(x+1)^3$,
+      \bigskip
+      \item $xy'-y=x^2y^{-1}$,
+      \item $y'+xy=xy^3$,
+      \bigskip
+      \item $y''+y=(4x+2)\cos x+6\sin x$.
+   \end{enumerate}
+\end{ex}
+\begin{sol}
+   \begin{enumerate}
+      \item $(1+y)e^{-y}=C-x$, $C\in\mathbb{R}$,
+      \item $x^2+y^2=C$, $C\in\mathbb{R}$,
+      \item obecné řešení $\ln|y^2-1|+x^2+\ln x^2=C$, $C\in\mathbb{R}$; $C=1$, $y(x)=\sqrt{1+e^{1-x^2}/x^2}$,
+      \item $y(x)=(x+1)e^{-x}$,
+      %--
+      \item $y(x)=\frac{x^2}{3}+\frac{C}{x}$, $x>0$, $C\in\mathbb{R}$,
+      \item $y(x)=(\frac{1}{2}x^2+x+C)(x+1)^2$, $C\in\mathbb{R}$,
+      %--
+      \item $y^2=x^2(\ln\,x^2+C)$, $x>0$, $C\in\mathbb{R}$,
+      \item $y(x)=\pm\frac{1}{\sqrt{1+Ce^{x^2}}}$, $C\in\mathbb{R}$,
+      %--
+      \item $y(x)=(c_1-2x)\cos x + (c_2+x^2+x)\sin x$
+   \end{enumerate}
+\end{sol}
+

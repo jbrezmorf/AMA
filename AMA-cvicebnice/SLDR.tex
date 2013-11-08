@@ -1,0 +1,766 @@
+
+\chapter{Soustavy obyčejných diferenciálních rovnic}
+Soustavou obyčejných diferenciálních rovnic prvního řádu rozumíme (vektorovou) rovnici ve tvaru
+\[
+   \vec{y}' = \vec{f}(x,\vec{y}),
+\]
+kde $\vec{f}:\mathbb{R}\times\mathbb{R}^n\rightarrow\mathbb{R}^n$, $\vec{y}=(y_1,\ldots,y_n)^T$, $n\in\mathbb{N}$.
+
+Definujeme derivaci vektorové funkce vztahem $\vec{y}'=(y'_1,\ldots,y'_n)^T$.
+
+
+\section{Soustavy lineárních diferenciálních rovnic s konstantními koeficienty}
+\subsection{Obecný úvod}
+Soustava lineárních obyčejných diferenciálních rovnic ${\vec{x}}^(n) = \vec{f}(t,\vec{x},\vec{x}',\ldots,\vec{x}^{(n-2)}, \vec{x}^{(n-1)}), \vec{x}(\tau) = \vec{\xi_1},\vec{x}'(\tau) = \vec{\xi_2},\ldots,\vec{x}^{(n-2)}(\tau) = \vec{\xi_{n-2}}, \vec{x}^{(n-1)}(\tau) = \vec{\xi_{n-1}}$ s konstantními koeficienty je speciálním případem soustavy obyčenjných diferenciálních rovnic. Vlastnosti principy řešení soustav lineárních algebarických rovnic budou dále demonstrovány na soustavě diferenciálních rovnic prvního řádu, na které je možné soustavy rovnic vyšších řádů převést.\newline
+Linearita spolu s konstantností koeficientů soustavy se vyznačují možností zapsat tuto do tvaru 
+\begin{equation}
+  \dot{\vec{x}} = {\bf A} \vec{x} + \vec{b}(t), \vec{x}(\tau) = \vec{\xi}
+  \label{EQ:soustava}
+\end{equation}
+kde 
+\[
+ {\bf A} = 
+  \left[
+    \begin{array}{ccccc}
+     a_{11} & a_{12} & \ldots & a_{1(n-1)} & a_{1n} \\
+     a_{21} & a_{22} & \ldots & a_{2(n-1)} & a_{2n} \\
+     \ldots & \ldots & \ldots & \ldots & \ldots \\
+     a_{(n-1)1} & a_{(n-1)2} & \ldots & a_{(n-1)(n-1)} & a_{(n-1)n} \\
+     a_{n1} & a_{n2} & \ldots & a_{n(n-1)} & a_{nn} \\
+    \end{array}
+  \right],~a_{ij}\in\Re,~i,j\in{\bf N},~\forall{i,j},\frac{\partial a_{ij}}{\partial t} = 0
+\]
+Nejprve položme pro jednoduchost pravou stranu $\vec{b}(t)$ rovnou nule.
+
+báze (fundamentální matice) řešení soustavy bez pravé strany $\vec{b}(t)$, sloupcové vektory řešení uspořádané do matice
+\[
+ {\bf V} = 
+  \left[
+    \begin{array}{ccccc}
+     v_{11}(t) & v_{21}(t) & \ldots & v_{(n-1)1}(t) & v_{n1}(t) \\
+     v_{12}(t) & v_{22}(t) & \ldots & v_{(n-1)2}(t) & v_{n2}(t) \\
+     \ldots & \ldots & \ldots & \ldots & \ldots \\
+     v_{1(n-1)}(t) & v_{2(n-1)}(t) & \ldots & v_{(n-1)(n-1)}(t) & v_{n(n-1)}(t) \\
+     v_{1n}(t) & v_{2n}(t) & \ldots & v_{(n-1)n}(t) & v_{nn}(t) \\
+    \end{array}
+  \right],~v_{ij}(t)\in\Re,~i,j\in{\bf N},~\forall{i,j},\frac{\partial v_{ij}(t)}{\partial t} = 0
+\]
+Pro každý vektor řešení z fundamentální matice přirozeně platí
+\[
+ \dot{\vec{v}} = {\bf A} \vec{v}
+\]
+Řešení $\vec{x}(t)$ soustavy (\ref{EQ:soustava}) s nulovou pravou stranou $\vec{b}(t)$ je možno vyjádřit jako lineární kombinaci  vektorů $\vec{v_i}$ z fundamentální matice ${\bf V}$.
+\[
+ \vec{x}(t,c_1,c_2,\ldots,c_{n-1},c_n) = c_1 v_1(t) + c_2 v_2(t) + \ldots + c_{n-1}v_{n-1}(t) + c_{n} v_{n}(t)
+\]
+Maticově lze předchozí vztah přepsat do tvaru
+$ \vec{x}(t)= {\bf V}(t)\vec{c}$.
+Tento vztah musí nutně platit i pro počáteční podmínku a tedy
+$ \vec{x}(\tau) = {\bf V}(\tau)\vec{c}$. Z toho vyplývá, že $\vec{c} = {\bf V}^{-1}(\tau)\vec{x}(\tau)$, takže pro řešení platí $\vec{x}(t)= {\bf V}(t){\bf V}^{-1}(tau)\vec{x}(\tau)$. Součin
+\[
+ {\bf V}(t){\bf V}^{-1}(tau) = U(t,\tau)
+\]
+se označuje jako {\bf standardní fundamentální matice}.
+
+Jak nalézt fundamentální matici a standardní fundamentální matici?\newline
+Fundamentální matice představuje množinu vybraných známých řešení uvažované soustavy. Postup nalezení fundamentální matice soustavy bude odvozen na speciálních případech matice ${\bf A}$ a postupně bude zobecňován. Nejprve uvažujme ${\bf A} = {\bf E}$, tedy jednotkovou matici. Potom má každý řádek soustavy ${\bf A}\vec{x} = \dots{\vec{x}}$ tvar $x_i = \frac{dx_i}{dt}$ odkud $ln{x_i} = t$ a $x_i = e^{t}$. Zvolená jednotková matice má $n$-násobné vlastní číslo $\lambda_i = 1$.
+
+Jako další krok zvolme ${\bf A} = diag(\lambda_i)$, tj. diagonální matici s vlastními čísly $\lambda_i$ na diagonále. V takovém případě platí $\lambda_i x_i = \frac{dx_i}{dt}$ odkud $ln{x_i} = \lambda_i t$ a vychází $x_i = e^{\lambda_i t}$.\newline
+Dosadíme-li výsledek do rovnice ${\bf A}\vec{x} = \dot{\vec{x}}$ vyjde nám ${\bf A}\vec{x} = \lambda\vec{x}$, což je rovnice ve stejném tvaru, který platí pro vlastní čísla a vlastní vektory matice ${\bf A}$. Jinými slovy, jako vybraná množina řešení uvažované soustavy mohou posloužit vlastní vektory matice soustavy násobené exponenciálními funkcemi s $\lambda$-násobky nezávisle poroměnné v exponentech.
+
+{\it Ilustrativní příklad:}
+Mějme soustavu:
+\[
+  \left[
+    \begin{array}{ccc}
+     3 & 0 & 0\\
+     0 & 2 & 0\\
+     0 & 0 & 5\\
+    \end{array}
+  \right] 
+  \left[
+    \begin{array}{c}
+     x_1\\
+     x_2\\
+     x_3\\
+    \end{array}
+  \right] = 
+  \left[
+    \begin{array}{c}
+     \dot{x_1}\\
+     \dot{x_2}\\
+     \dot{x_3}\\
+    \end{array}
+  \right]
+\]
+Vyjde tedy
+\[
+ \begin{array}{cc}
+  3x_1 = \frac{dx_1}{dt} & x_1 = e^{3t} (+ c) \\
+  2x_2 = \frac{dx_2}{dt} & x_2 = e^{2t} (+ c) \\
+  5x_3 = \frac{dx_3}{dt} & x_3 = e^{5t} (+ c) \\
+ \end{array},~
+ \vec{x} = \left[
+    \begin{array}{c}
+     e^{3t}\\
+     e^{2t}\\
+     e^{5t}\\
+    \end{array}
+  \right]
+\]
+Dosazením výsledku do soustavy můžeme zkontrolovat jeho správnost.
+\[
+ \left[
+    \begin{array}{ccc}
+     3 & 0 & 0\\
+     0 & 2 & 0\\
+     0 & 0 & 5\\
+    \end{array}
+  \right]
+  \left[
+    \begin{array}{c}
+     e^{3t}\\
+     e^{2t}\\
+     e^{5t}\\
+    \end{array}
+  \right] = 
+  \dot{\vec{x}} = 
+  \left[
+    \begin{array}{c}
+     3e^{3t}\\
+     2e^{2t}\\
+     5e^{5t}\\
+    \end{array}
+  \right] = 
+  c_1\vec{v}_1\cdot e^{\lambda_1 t} + c_2\vec{v}_2\cdot e^{\lambda_2 t} + c_3\vec{v}_3\cdot e^{\lambda_3 t} = 
+  3\cdot\left[
+    \begin{array}{c}
+     1\\
+     0\\
+     0\\
+    \end{array}
+  \right] e^{3t} +
+  2\cdot\left[
+    \begin{array}{c}
+     0\\
+     1\\
+     0\\
+    \end{array}
+  \right] e^{2t} +
+  5\cdot\left[
+    \begin{array}{c}
+     0\\
+     0\\
+     1\\
+    \end{array}
+  \right] e^{5t}
+\]
+$v_i$ jsou vlastní vektory matice soustavy. Vlastními vektory by byly také jejich libovolné násobky. Tomu by ovšem musely být přizpůsobeny velikosti konstant $c_i$.
+
+
+
+
+
+Jak nalézt vlastní vektory?\newline
+Odečtení vlastního čísla od prvků na diagonále matice soustavy tuto matici singularizuje. $({\bf A} - {\bf E}\cdot \lambda)\vec{x} = 0$ Řešení je parametrické. Získáme směr.
+
+\subsubsection{příklady:}
+
+%
+ V 1-4 "odhadnete" linearni zavislost nebo nezavislost systemu funkci a spocitejte
+ Wronskeho determinant
+\begin{enumerate}
+ \item
+ $\vc y_1=(1+x^2;\frac{x}{2}+\frac{x^3}{4})$, $\vc y_2=(0;\frac{1}{x})$.
+ \item
+ $\vc y_1=(x-1;1)$, $\vc y_2=(x^3-1;x^2+x+1)$.
+ \item
+ $\vc y_1=(0;x;x^2)$, $\vc y_2=(2x;-1;x^2+1)$, $\vc y_3=(1;x^3;0)$.
+ \item
+ $\vc y_1=(1;x;e^x)$, $\vc y_2=(2e^x+1;x(x+1);e^x)$, $\vc y_3=(2e^x;x^2;0)$.
+ \item Najdete std. fund. mci $\tn U(t,0)$ soustavy
+ \[
+   \vc{\dot{u}}=
+   \left(\begin{matrix}
+     1&2\\4&3
+   \end{matrix}\right)
+   \vc u
+ \]
+pokud obecnym resenim je 
+$ \vc v(t,c_1,c_2)=(c_1 e^{5t}+c_2 e^{-t}, 2c_1e^{5t}-c_2 e^{-t})$
+
+\item
+Najdete std.fund. mci a reseni Cauchyovy ulohy
+  \begin{align}
+    \dot{x}_1=x^1+e^{2t}x_2,\quad x_1(0)=\xi_1,\\
+    \dot{x}_2=e^{-2t}x_1-x_2,\quad x_2(0)=\xi_2.
+  \end{align}
+pokud $\vc v(t)=(e^t\cos t,-e^{-t}\sin t)$ a $\vc w(t)=(e^t\sin t,e^{-t}\cos t)$ jsou resenim.
+
+\item
+Najdete fundamentalni matici soustavy
+\[
+  \vc{\dot{v}}(t)=\left(\begin{matrix}
+          4&2\\-1&1
+        \end{matrix}\right)\vc v(t).
+\]
+ve tvaru 
+\[
+ \tn V(t)=\left(\begin{matrix}
+ae^{3t},& be^{2t}\\
+ce^{3t},& de^{2t}
+           \end{matrix}\right)
+\]
+Najdete reseni Cauchyho ulohy $v(0)=(2,1)$.
+\item
+najdete obecne reseni soustavy
+\[
+  \vc{\dot{u}}=\left(\begin{matrix}1&-8\\-1&-1\end{matrix}\right)\vc u
+\]
+\item
+najdete fundamentalni matici soustavy
+\[
+  \vc{\dot{u}}=\left(\begin{matrix}-3&4&-2\\1&0&1\\6&-6&5\end{matrix}\right)\vc u
+\]
+
+\end{enumerate}
+\pagebreak
+reseni:
+\begin{enumerate}
+\setcounter{enumi}{4}
+\item
+ \[
+   \tn U(t,0)=\frac13
+   \left(\begin{matrix}
+      e^{5t}+2e^{-t},&e^{5t}-e^{-t}\\
+      2e^{5t}-2e^{-t},&2e^{5t}+e^{-t}
+   \end{matrix}\right)
+ \]
+ \item
+ \[
+ \tn U(t,0)=\frac12\left(\begin{matrix}
+                     1+e^{2t},&e^{2t}-1\\
+                     1-e^{-2t},&1+e^{-2t}
+                   \end{matrix}\right)
+ \]
+ \[
+   \vc u(t,0,\xi)=\frac12(\xi_1-\xi_2+[\xi_1+\xi_2]e^{2t},
+      \xi_1+\xi_2-[\xi_1-\xi_2]e^{-2t})
+ \]
+ \item
+ \[
+  \tn V(t)=\left(\begin{matrix}
+               2e^{3t}& e^{2t}\\
+               -e^{3t}& -e^{2t}
+             \end{matrix}\right) 
+\]
+\[
+  \vc u(t)=(6e^{3t}-4e^{2t};-3e^{3t}+4e^{2t})
+\]
+\item
+\[
+  \vc u(t)=(2c_1e^{3t}-4c_2e^{-3t},c_1e^{3t}+c_2e^{-3t})
+\]
+\item
+\[
+  \tn V(t)=\left(\begin{matrix} 
+     e^t,&0,&e^{-t}\\e^t,&e^{2t},&0\\0&2e^{2t}&-e^{-t}
+   \end{matrix}\right)
+\]
+\end{enumerate}
+
+
+\subsection{Homogení soustavy  - Metoda vlastních vektorů}
+
+Spocitejte alespon jeden priklad z kazde sekce.
+
+najdete standardni fundamentalni matici
+ \begin{align*}
+   1.&\quad
+   \left\{
+   \begin{aligned}
+     &y_1'=2y_1+y_2\\
+     &y_2'=3y_1+4y_2
+   \end{aligned}\right.
+   &
+   2.&\quad
+   \left\{
+   \begin{aligned}
+     &y_1'-2y_1-4y_2=0\\
+     &y_2'-5y_1-3y_2=0
+   \end{aligned}\right.
+\end{align*}
+
+V pripade komplexnich vlastnich cisel postupujte stejne a vyuzijte vzorecku\\ 
+ $e^{a+ib}=e^a(\cos b+i\sin b)$. Overte, ze realna i komplexni cast 
+ vysledne vektorove funkce je resenim. Najdete fundamentalni matici slozenou jen z realnych
+ vyrazu. Najdete standardni fundamentalni matici - ta musi byt realna! Proc? Rozmyslete.
+ \begin{align*}
+   3.&\quad
+   \left\{
+   \begin{aligned}
+     &y_1'=y_1-5y_2\\
+     &y_2'=2y_1-y_2
+   \end{aligned}\right.
+   &
+   4.&\quad
+   \left\{
+   \begin{aligned}
+     &y_1'=y_2-7y_1\\
+     &y_2'+2y_1+5y_2=0
+   \end{aligned}\right.
+\end{align*}
+
+najdete libovolnou fundamentalni matici
+\begin{align*}
+   5.&\quad
+   \left\{
+   \begin{aligned}
+     &x'=2x+2z-y\\
+     &y'=2z+x\\
+     &z'=y-2x-z
+   \end{aligned}\right.
+   &
+   6.&\quad
+   \vc{\dot y}=\left(\begin{matrix}
+                       1&-1&-1\\
+                       1&1&0\\
+                       3&0&1
+                     \end{matrix}\right)\vc y
+\end{align*}
+
+
+\pagebreak
+reseni:
+\begin{enumerate}
+\item standardni fundamentalni matice
+\[
+  \tn U(t,0)=\frac14\left(\begin{matrix}
+                     e^{5t}+3e^t,&e^{5t}-e^t\\
+                     3e^{5t}-3e^t,&3e^{5t}+e^t
+                     \end{matrix}\right)
+\]
+\item
+\[
+  \tn U(t,0)=\frac19\left(\begin{matrix}
+                     -4e^{7t}-5e^{-2t},& -4e^{7t}+4e^{-2t}\\
+                     -5e^{7t}+5e^{-2t},&-5e^{7t}-4e^{-2t}
+                     \end{matrix}\right)
+\]
+\item
+standardni fundamentalni matice
+\[
+  \tn U(t,0)=\left(\begin{matrix}
+                     \cos3t+\frac13\sin3t,&-\frac53\sin3t\\
+                     \frac23\sin3t,&-\frac13\sin3t+\cos3t
+                   \end{matrix}\right)
+\]
+\item
+\[
+  \tn U(t,0)=e^{-6t}\left(\begin{matrix}
+                     \cos t-\sin t,&\sin t\\
+                     -2\sin t,&\sin t+\cos t
+                   \end{matrix}\right)
+\]
+\item mozna fundamentalni matice
+\[
+  \tn V(t)=\left(\begin{matrix}
+               0,&-2\cos t,&-2\sin t\\
+               2e^t,&2\cos t,&2\sin t\\
+               e^t,&-\sin t-\cos t,& \cos t -\sin t
+             \end{matrix}\right)
+\]
+\item
+\[
+  \tn V(t)=e^t\left(\begin{matrix}
+               0,&2\sin 2t,& 2\cos2t\\
+               1,&-\cos2t,&\sin2t\\
+               -2,&-3\cos2t,&3\sin2t
+             \end{matrix}\right)
+\]
+\end{enumerate}
+\subsection{Homogenní soustavy - Putzerova metoda}
+
+\subsection{Nehomogenní soustavy - variace konstant}
+%
+Uvadim dva resene priklady, abych pokud mozno napravil zmatky na cviceni. Jeste to okomentuju priste.
+\subsection{reseny priklad 4. z 29.10.}
+Najdete standardni fundamentalni matici pro Cauchyho ulohu
+ \begin{align*}
+   \left\{
+   \begin{aligned}
+     &y_1'=y_2-7y_1\\
+     &y_2'+2y_1+5y_2=0
+   \end{aligned}\right.
+\end{align*}
+Prislusna matice je
+\[
+  \begin{pmatrix}-7&1\\-2&-5\end{pmatrix}
+\]
+a jeji vlastni cisla $\lambda_1=-6+i$ a $\lambda_2=-6-i$, tedy komplexne sdruzena. Pokud ma realna
+matice komplexni vlastni cislo $\lambda$, musi byt vzdy vlastnim cislem i cislo komplexne
+sdruzene $\close{\lambda}$. Najdeme vlastni vektory $\vc v_1$, $\vc v_2$.
+\begin{description}
+  \item $\lambda_1=-6+i$:
+  \[
+    0=\begin{pmatrix}-7-(-6+i)&1\\-2&-5-(-6+i)\end{pmatrix}\vc v_1
+    =\begin{pmatrix}-1-i&1\\-2&1-i\end{pmatrix}\cdot 
+     \begin{pmatrix}1-i\\2\end{pmatrix}
+  \]
+  \item $\lambda_2=-6-i$:
+  \[
+    0=\begin{pmatrix}-7-(-6-i)&1\\-2&-5-(-6-i)\end{pmatrix}\vc v_2
+    =\begin{pmatrix}-1+i&1\\-2&1+i\end{pmatrix}\cdot 
+     \begin{pmatrix}1+i\\2\end{pmatrix}
+  \]
+\end{description}
+Vsimnete si, ze vlastni matice $\tn A-\lambda_1 \tn E$ je komplexne sdruzena s matici
+$\tn A-\lambda_2 \tn E$, coz je pravda obecne, jelikoz $\tn A$ je realna a vlastni cisla jsou komplexne sdruzena.
+Podobne vlastni vektory jsou komplexne sdruzene. Coz opet plati obecne, jelikoz komplexni sdruzeni
+soucinu je soucin komplexnich sdruzeni :-), tedy $\close a\,\close b=\close{ab}$. A proto i 
+pro soucin s matici plati
+\[
+  0=(\tn A-\lambda_1 \tn E)\vc v_1=\close{0}=\close{(\tn A-\lambda_1 \tn E)\vc v_1}
+  =(\tn A-\close{\lambda_1} \tn E)\close{\vc v_1}=(\tn A-\lambda_2 \tn E)\vc v_2.
+\]
+Postupujeme-li stejne jako v realnem pripade, vime, ze $u_1=e^{\lambda_1 t}\vc v_1$ a $u_2=e^{\lambda_2 t}\vc v_2$
+jsou resenim a tvori bazi vektoroveho prostoru reseni ovsem nad telesem komplexnich cisel.
+Navic vime, ze jsou to komplexne sdruzene vektorove funkce. Pro libovolne komplexni cislo $c$
+lze napsat jeho realnou a imaginarni cast takto
+\[
+  {\rm Re}\ c=\frac{c+\close{c}}{2},\quad{\rm Im}\ c=\frac{c-\close{c}}{2i}.
+\]
+Tedy jako {\it linearni kombinaci} cisel $c$ a $\close{c}$!
+Jelikoz je $u_1$ komplexne sdruzena funkce s $u_2$, jsou funkce $y_1={\rm Re}\ u_1={\rm Re}\ u_2$ a 
+$y_2={\rm Im}\ u_1=-{\rm Im}\ u_2$ take dvojici nezavislych reseni a nyni uz dvojici realnou.
+
+Zpet k nasemu prikladu. Za bazi realneho prostoru reseni, vezmeme 
+realnou a komplexni cast funkce 
+\[
+  e^{\lambda_1 t} \vc v_1
+  =e^{-6t}(\cos t+i\sin t)\begin{pmatrix}1-i\\2\end{pmatrix}
+  =e^{-6t}\begin{pmatrix}\cos t+\sin t+i(\sin t-\cos t)\\
+   2\cos t+i \sin t\end{pmatrix}
+\]
+tedy fundamentalni matice je 
+\[
+  \tn V(t)=e^{-6t}\begin{pmatrix}\cos t+\sin t& \sin t-\cos t\\
+                    2\cos t& 2\sin t
+                  \end{pmatrix}
+\]
+Nalezeni standardni fundamentalni matice uz znate. Hledame reseni Cauchyho ulohy
+pro obecny pocatecni bod $\vc u(0)=(\xi_1,\xi_2)$ ve tvaru $\tn V(t)\vc c$.
+V case $t=0$ dostavame rovnici pro vektor $\vc c$, $\tn V(0)\vc c=\vc \xi$, konkretne
+\[
+  \begin{pmatrix} 1&-1\\2&0\end{pmatrix}\begin{pmatrix}c_1 \\ c_2\end{pmatrix}=
+                                        \begin{pmatrix}\xi_1\\ \xi_2
+                                      \end{pmatrix}
+\]
+Resenim soustavy je $c_1=\frac12\xi_2$, $c_2=\frac12\xi_2-\xi_1$. Reseni obecne Cauchyho ulohy je tedy
+\begin{multline*}
+  \vc u(t)=e^{-6t}\begin{pmatrix}
+     \frac12\xi_2\,(\cos t+\sin t)+(\frac12\xi_2-\xi_1)(\sin t-\cos t)\\
+    \frac12\xi_2\,2\cos t+(\frac12\xi_2-\xi_1)2\sin t
+                  \end{pmatrix}\\
+   =e^{-6t}\begin{pmatrix}
+             (\cos t-\sin t)\xi_1+(\sin t)\xi_2\\
+             (-2\sin t)\xi_1+(\cos t+\sin t)\xi_2
+           \end{pmatrix}
+\end{multline*}
+odtud jiz precteme SFM. SFM je realna, jelikoz derivace komplexni slozky je nulova (z rovnice).
+
+\subsection{reseny priklad na nehomogenni soustavu}
+Je to prvni priklad ze cvika. Resme nehmogenni verzi prikladu 1. z 29.10. :
+\[
+  \left\{\begin{aligned}
+      y_1'(t)&=2y_1(t)+y_2(t)+1\\
+      y_2'(t)&=3y_1(t)+4y_2(t)+e^t
+         \end{aligned}\right.
+\]
+cilem je najit reseni pro obecnou pocatecni podminku $\vc y(0)=\vc \xi$.
+SFM homogenni soustavy je
+\[
+\tn U(t,0)=\frac14\begin{pmatrix}
+                     e^{5t}+3e^t,&e^{5t}-e^t\\
+                     3e^{5t}-3e^t,&3e^{5t}+e^t
+                     \end{pmatrix}
+\]
+
+Na cviceni jsem to nedopocital pomoci vzorecku
+\[
+  y(t)=\tn U(t,0)\Big(\vc\xi+\int_0^t \tn U(0,\tau)\vc f(\tau)\d\tau\Big),
+\]
+kde $\tn U(t_2,t_1)$ je SFM prechodu z casu $t_1$ do casu $t_2$ a $\vc f$ je prava strana soustavy tvaru 
+$\vc y'(t)-\tn A\vc v(t)=f(t)$.
+Lepsi je vzorecek jeste upravit na
+\[
+  y(t)=\tn U(t,0)\vc\xi+\int_0^t \tn U(t,0)\tn U(0,\tau) \vc f(\tau)\d\tau=
+  \tn U(t,0)\vc\xi+\int_0^t \tn U(t-\tau) \vc f(\tau)\d\tau
+\]
+tim usetrime to zaverecne nasobeni, na ktere jsem uz nemel moral.
+
+Konkretne. Nejprve pocitam $\tn U(t-\tau)\vc f(\tau)$:
+\[
+  \frac14
+  \begin{pmatrix}
+     e^{5(t-\tau)}+3e^{t-\tau},&e^{5(t-\tau)}-e^{t-\tau}\\
+     3e^{5(t-\tau)}-3e^{t-\tau},&3e^{5(t-\tau)}+e^{t-\tau}
+   \end{pmatrix}
+   \begin{pmatrix}
+     1\\e^\tau
+   \end{pmatrix}=
+   \frac14
+   \begin{pmatrix}
+     e^{5(t-\tau)}+3e^{t-\tau}+e^{5t-4\tau}-e^t\\
+     3e^{5(t-\tau)}-3e^{t-\tau}+3e^{5t-4\tau}+e^t
+   \end{pmatrix}
+\]
+Dale vysledek integruju podle $\tau$:
+\begin{multline*}
+  \int_0^t \tn U(t-\tau) \vc f(\tau)\d\tau=
+  \frac14
+  \begin{bmatrix}
+     -\frac15e^{5(t-\tau)}-3e^{t-\tau}-\frac14e^{5t-4\tau}-\tau e^t\\[0.5ex]
+     -\frac35e^{5(t-\tau)}+3^{t-\tau}-\frac34e^{5t-4\tau}+\tau e^t
+  \end{bmatrix}_0^t\\
+  =\frac14
+  \begin{pmatrix}
+    -\frac15-3-\frac14e^t-te^t+\frac15e^{5t}+3e^t+\frac14e^{5t}-0\\[0.5ex]
+    -\frac35+3-\frac34e^t+te^t+\frac15e^{5t}-3e^t+\frac34e^{5t}+0
+  \end{pmatrix}
+  =\frac14
+  \begin{pmatrix}
+    -\frac{16}{5}+\frac{11}{4}e^t-te^t+\frac{9}{20}e^{5t}\\[0.5ex]
+    \frac{12}{5}-\frac{15}{4}e^t+te^t+\frac{27}{20}e^{5t}
+  \end{pmatrix}
+\end{multline*}
+Tim jsme dostali partikularni reseni (pro $\vc\xi=0$).
+Pripsat k tomu $+U(t,0)\vc\xi$ uz jiste kazdy zvladne.
+
+Prave popsany postup, je vyhodny v tom, ze snadno napiseme inverzi matici
+SFM $\tn U$, nicmene pro soustavy 2x2 muze byt vyhodnejsi primocary postup 
+pomoci variace konstant. Hledam reseni ve tvaru $\vc y(y)=\tn V(t) \vc c(t)$,
+pricemz za fundamentalni matici $\tn V(t)$ beru tu co vznikne z vlastnich vektoru,
+jelikoz byva pomerne jednoducha. V nasem pripade je 
+\[
+  \tn V(t)=
+  \begin{pmatrix}
+    e^t&e^{5t}\\-e^{t}&3e^{5t}
+  \end{pmatrix}
+\]
+kdyz vektorovou funkci $\vc y(y)=\tn V(t) \vc c(t)$ dosadim do nehomogenni rovnice 
+dostanu pro urceni vektorove funkce $\vc c(t)$:
+\[
+  \tn V(t)\vc c'(t)=\vc f(t)
+\]
+konkretne
+\[
+  \begin{pmatrix}
+    e^t&e^{5t}\\-e^{t}&3e^{5t}
+  \end{pmatrix}
+  \vc c'(t)=
+  \begin{pmatrix}
+     1\\e^t
+   \end{pmatrix}
+\]
+To je soustava linearnich rovnic, ale s parametrem $t$. Pro reseni pouzijeme Cramerovo pravidlo
+\[
+  \begin{vmatrix}
+    e^t&e^{5t}\\-e^{t}&3e^{5t}
+  \end{vmatrix}=4e^{6t}
+\]
+\[
+  c_1'(t)=\frac1{4e^{6t}}
+  \begin{vmatrix}
+    1&e^{5t}\\e^t&3e^{5t}
+  \end{vmatrix}=\frac14\big(3e^{-t}-1\big),\quad
+  c_2'(t)=\frac1{4e^{6t}}
+  \begin{vmatrix}
+    e^t&1\\-e^{t}&e^{t}
+  \end{vmatrix}=\frac14\big(e^{-4t}-e^{-5t}\big)
+\]
+Integraci (neurcity integral) dostaneme $c_1(t)$ a $c_2(t)$:
+\[
+  c_1=\frac14\big(-3e^{-t}-t+K_1\big),\quad c_2=\frac14\big(-\frac14e^{-4t}-\frac15e^{-5t}+K_2\big)
+\]
+Obecne reseni tedy je:
+\[
+  \vc y(t)=\tn V(t)\vc c(t)=
+  \begin{pmatrix}
+    e^t&e^{5t}\\-e^{t}&3e^{5t}
+  \end{pmatrix}
+  \frac14
+  \begin{pmatrix}
+    -3e^{-t}-t+K_1\\
+    -\frac14e^{-4t}-\frac15e^{-5t}+K_2
+  \end{pmatrix}
+ =\frac14
+  \begin{pmatrix}
+     -3-te^t-\frac14e^t-\frac15+K_1e^t+K_2e^{5t}\\
+     3+te^t-\frac34e^t-\frac35-K_1e^t+3K_2e^{5t}
+  \end{pmatrix}
+\]
+Pokud chceme specialni partikularni reseni dane pocatecni podminkou $\vc y(0)=\vc \xi=0$,
+tedy stejne jako pri predchozim postupu, dopocitame konstanty $K_1$ a $K_2$ z rovnic
+\begin{align*}
+  -3-\frac14-\frac15+K_1+K_2&=0\\
+  3-\frac34-\frac35-K_1+3K_2&=0.
+\end{align*}
+Zkuste si to dopocitat a zkontrolovat. ($K_2=\frac9{20}$, $K_1=3$)
+
+Vsimnete si, ze jsme meli mnohem snazsi integrovani a nasobeni bylo srovnatelne
+mnoho. Pokud vsak vychozi fundamentalni matice nebude tak jednoducha, muze se 
+tento postup pekne zvrhnout.
+
+
+\subsection{Priklady k reseni}
+1. jeste jeden priklad na komplexni vlastni cisla; najdete SFM
+\[
+  \left\{
+  \begin{aligned}
+    y_1'-y_1&=4y_2\\
+    y_2'+7y_2&=5y_1
+  \end{aligned}\right.
+\]
+2. najdete partikularni reseni soustavy 
+\[
+  \left\{
+  \begin{aligned}
+    y_1'&=-y_1-2y_2+2e^{-t}\\
+    y_2'&=3y_1+4y_2+e^{-t}
+  \end{aligned}\right.
+\]
+
+
+3. najdete reseni Cauchyho ulohy s pocatecni podminkou $\vc y(0)=(-1,-2)$ pro soustavu:
+\[
+  \vc y'(t)=\begin{pmatrix}-3&-2\\2&2\end{pmatrix}\vc y(t)+
+  \begin{pmatrix}
+    t\\2t
+  \end{pmatrix}
+\]
+
+
+
+
+
+
+
+
+\pagebreak
+reseni:
+\begin{enumerate}
+\item
+\[
+  \tn U(t,0)=e^{-3t}\begin{pmatrix}
+                     \cos 2t-2\sin 2t,& 2\sin 2t\\
+                     -\frac52\sin 2t,&\cos2t+2\sin 2t
+                     \end{pmatrix}
+\]
+\item
+\[
+  \vc u_p(t)=\begin{pmatrix}
+                     -2e^{-t}+4e^t-2e^{2t}\\
+                     e^{-t}-4e^t+3e^{2t}
+             \end{pmatrix}
+\]
+\item
+\[
+  \vc y(t)=\frac13
+  \begin{pmatrix}
+    5(1+t)+8e^{-t}(t-1)\\
+    -10(1+t)-4e^{-t}(t-1)
+  \end{pmatrix}
+\]
+
+doporucuju postup cislo dva
+\end{enumerate}
+
+
+
+
+
+ 
+Pro nasledujici nehomogenni soustavy nejprve spocitejte 
+Putzerovou metodou SFM prislusne homogenni soustavy. Pak
+pouzijte vzorecek (viz. resene priklady z 5.11. na webu) 
+pro vypocet partikularniho reseni.
+
+\begin{align*}
+   1.&\quad
+   \left\{
+   \begin{aligned}
+     &y_1'=4y_1+y_2-e^{2t}\\
+     &y_2'=-2y_1+y_2
+   \end{aligned}\right.
+   &
+   2.&\quad
+   \left\{
+   \begin{aligned}
+     &y_1'=2y_1+y_2+2e^t\\
+     &y_2'=-y_2+4y_2+1
+   \end{aligned}\right.
+\end{align*}
+
+V nasledujicich dvou pripadech najdete SFM Putzerovou metodou
+\begin{align*}
+   3.&\quad
+   \left\{
+   \begin{aligned}
+     &y_1'=-y_1-y_2+5y_3\\
+     &y_2'=-2y_1+6y_3\\
+     &y_3'=-2y_1-y_2+6y_3
+   \end{aligned}\right.
+   &
+   4.&\quad
+   \left\{
+   \begin{aligned}
+     &y_1'=-y_2+3y_3\\
+     &y_2'=-4y_1+10y_3\\
+     &y_3'=-2y_1-y_2+6y_3
+   \end{aligned}\right.
+\end{align*}
+
+
+
+
+\pagebreak
+reseni:
+\begin{enumerate}
+\item
+\[
+  \vc y_p(t)=\begin{pmatrix}
+                     -2e^{3t}+e^{2t}(t+2)\\
+                     2e^{3t}+e^{2t}(2t-2)
+                     \end{pmatrix}
+\]
+\item
+\[
+  \vc y_p(t)=\frac{1}{18}\begin{pmatrix}
+                e^{3t}(25-12t)-27e^t+2\\
+                e^{3t}(13-12t)-9e^t-4     
+             \end{pmatrix}
+\]
+\item
+\[
+  \tn U(t)=
+  \begin{pmatrix}
+    e^t-2te^{2t},& -te^{2t},& -e^t+e^{2t}+4t e^{2t}\\
+    -2e^t+2e^{2t}-4te^{2t},& e^{2t}-2t e^{2t},& 2e^t-2e^{2t}+8t e^{2t}\\
+    -2t e^{2t},& -te^{2t},& e^{2t}+4t e^{2t}
+  \end{pmatrix}
+\]
+
+\item
+\[
+  \tn U(t)=e^{2t}
+  \begin{pmatrix}
+     1-2t+t^2,& -t+\frac12 t^2,& 3t-2t^2\\
+     -4t-2t^2,& 1-2t-t^2,& 10t+4t^2\\
+     -2t,& -t,& 1+4t
+  \end{pmatrix}
+\]
+\end{enumerate}
+
+
+

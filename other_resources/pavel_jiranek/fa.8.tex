@@ -1,0 +1,244 @@
+\chapter{Vývar z funkcionální analýzy}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Lineární prostory}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Nechť $\mathbb{R}$ je těleso reálných čísel.
+Neprázdnou množinu $V$ nazveme \emph{vektorovým prostorem} (prvky nazýváme vektory)
+nad tělesem $\mathbb{R}$, je-li definována operace sčítání 
+$+:V\times V\rightarrow V$ a operace násobení skalárem 
+$\cdot:\mathbb{R}\times V\rightarrow V$ tak, že:
+\begin{enumerate}
+   \item $(\forall x,y\in V)(x+y=y+x)$ -- komutativita $+$,
+   \item $(\forall x,y,z\in V)((x+y)+z=x+(y+z))$ -- asociativita $+$,
+   \item $(\exists 0\in V)(\forall x\in V)(0+x=x)$ -- existence nulového prvku 
+           (neutrální prvek vzhledem ke sčítání),
+   \item $(\forall x\in V)(\exists (-x)\in V)(x+(-x)=0)$ -- existence opačného prvku,
+   \item $(\forall \alpha,\beta\in\mathbb{R})(\forall x\in V)
+          (\alpha(\beta x)=(\alpha\beta x))$,
+   \item $(\forall x\in V)(1\cdot x = x)$,
+   \item $(\forall \alpha,\beta\in\mathbb{R})(\forall x\in V)
+         ((\alpha+\beta)x=\alpha x+\beta x)$ -- distributivita I,
+   \item $(\forall \alpha\in\mathbb{R})(\forall x,y\in V)
+         (\alpha(x+y)=\alpha x+\beta y)$ -- distributivita II.
+\end{enumerate}
+Pro $x,y\in V$ definujeme operaci odečítání vztahem $x-y=x+(-y)$,
+kde $-y$ je prvek opačný k $y$. Symbol $\cdot$ při násobení budeme zpravidla
+vynechávat.
+
+Důsledky definice: nulový prvek je jediný, ke každému prvku z $V$ existuje
+právě jeden opačný prvek, pro každé $x\in V$ platí $-x=(-1)\cdot x$
+a $0\cdot x = 0$ (pozor: nula na levé straně je nula v $\mathbb{R}$, nula na pravé
+straně je nulový prvek ve $V$!).
+
+Podmnožina $V_0\subset V$ vektorového prostoru $V$ je \emph{podprostor}
+prostoru $V$, pokud je uzavřená vzhledem ke sčítání vektorů a násobení skaláru
+a vektoru; značíme $V_0\subset\subset V$.
+
+\begin{ex}
+   Příkladem vektorového prostoru je prostor $n$-tic ($n\in\mathbb{N}$)
+   reálných čísel $\mathbb{R}^n$ s obvyklou definicí sčítání a násobení skalárem.
+   Nulovým prvkem je vektor $(0,\ldots,0)$.
+\end{ex}
+
+\begin{ex}
+   Množina $C[a,b]$ spojitých funkcí na uzavřeném intervalu je vektorový prostor
+   (součet spojitých funkcí je spojitá funkce, násobek skaláru a spojité funkce je
+   opět spojitá funkce).
+   Nulový prvek je nulová funkce na $[a,b]$.
+\end{ex}
+
+\begin{ex}
+   Množina $P_n[a,b]$ polynomů stupně nejvýše $n\in\mathbb{N}$, 
+   tj. všech funkcí ve tvaru
+   \[
+      p:\;t\mapsto\sum\limits_{i=0}^{n}\alpha_i t^i, \; t\in[a,b],
+   \]
+   kde $\{\alpha_i\}_{i=0}^n\subset\mathbb{R}$.
+   Protože každý polynom je spojitá funkce a $P_n[a,b]$ je uzavřený vzhledem
+   ke sčítání a násobení skalárem, platí $P_n[a,b]\subset\subset C[a,b]$.
+\end{ex}
+
+\section{Banachovy a Hilbertovy prostory}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Zobrazení $\|\cdot\|:\;V\rightarrow \mathbb{R}$ definované na lineárním prostoru $V$
+nazveme \emph{normou} na $V$, jestliže
+\begin{enumerate}
+   \item $(\forall x\in V)(\|x\|=0\;\Leftrightarrow x=0)$,
+   \item $(\forall x,y\in V)(\|x+y\|\leq\|x\|+\|y\|)$ -- trojúhelníková nerovnost,
+   \item $(\forall \alpha\in\mathbb{R})(\forall x\in V)(\|\alpha x\|=|\alpha|\|x\|)$
+         -- homogenita.
+\end{enumerate}
+
+Důsledky definice:
+\begin{itemize}
+   \item $(\forall x\in V\setminus\{0\})(\|x\|>0)$:
+         je-li $x\in V$, pak z trojúhelníkové rovnosti a homogenity plyne
+         $0=\|x-x\|\leq\|x\|+\|-x\|=\|x\|+\|x\|=2\|x\|$, takže $\|x\|\geq 0$;
+         ale rovnost nastane jen v případě, že $x=0$;
+   \item $(\forall x,y\in V)(|\|x\|-\|y\||\leq \|x-y\|)$;
+   \item norma je spojitá funkce prvků z $V$.
+\end{itemize}
+
+Prostor $V$ s definovanou normou $\|\cdot\|$ nazýváme 
+\emph{normovaný lineární prostor}.
+
+\begin{ex}
+   Nechť $x\in\mathbb{R}^n$, $x=(\alpha_1,\ldots,\alpha_n)$.
+   Na $\mathbb{R}^n$ můžeme definovat normy:
+   \[
+         \|x\|_1 \equiv \sum\limits_{i=1}^n |\alpha_i|,\;\;
+         \|x\|_2 \equiv \sqrt{\sum\limits_{i=1}^n \alpha_i^2},\;\;
+         \|x\|_{\infty} \equiv \max\limits_{i=1,\ldots,n}|\alpha_i|.
+   \]
+\end{ex}
+
+\begin{ex}
+   Nechť $f\in C[a,b]$.
+   Analogicky jako v případě $\mathbb{R}^n$ lze na $C[a,b]$ definovat normy:
+   \[
+      \begin{split}
+         \|f\|_1 \equiv \int\limits_a^b|f(t)|\,dt,\;\;
+         \|f\|_2 \equiv \sqrt{\int\limits_a^b|f(t)|^2\,dt},\;\;
+         \|f\|_{\infty} \equiv \max\limits_{t\in[a,b]}|f(t)|.
+      \end{split}
+   \]
+\end{ex}
+
+Úplné prostory: Normovaný prostor $V$ je \emph{úplný}, jestliže každá 
+Cauchyovská posloupnost%
+\footnote{Posloupnost $\{x_n\}\subset V$ je Cauchyovská, pokud 
+$(\forall \varepsilon<0)(\exists N\in\mathbb{N})(\forall m,n>N)
+(\|x_m-x_n\|<\varepsilon)$. Jinými slovy, pokud jsou si prvky této posloupnosti
+libovolně blízké počínaje nějakým indexem $N$. Platí, že každá konvergentní
+posloupnost je Cauchyovská, naopak to však platit nemusí.}
+ve $V$ konverguje k prvku ve $V$.
+Úplnému normovanému lineárnímu prostoru říkáme \emph{Banachův prostor}.
+
+\begin{ex}
+   Těleso reálných čísel $\mathbb{R}$ chápáno jako vektorový prostor nad $\mathbb{R}$
+   s normou $\|x\|=|x|$, $x\in\mathbb{R}$, je Banachův prostor,
+   neboť každá Cauchyovská posloupnost reálných čísel je konvergentní v $\mathbb{R}$.
+   Stejně tak prostor $\mathbb{R}^n$, $n\in\mathbb{N}$ je Banachův.
+\end{ex}
+
+\begin{ex}
+   Těleso $\mathbb{Q}$ racionálních čísel chápáno jako vektorový nad $\mathbb{Q}$
+   není Banachův prostor, neboť $\{x_n\}\subset\mathbb{Q}$, kde
+   $x_n\equiv (1+n^{-1})^n$, $n\in\mathbb{N}$, konverguje v $\mathbb{R}$
+   k číslu $e=\exp(1)\not\in\mathbb{Q}$.
+\end{ex}
+
+\begin{ex}
+   Prostor $C[a,b]$ s normou $\|\cdot\|_{\infty}$
+   je Banachův prostor, neboť konvergence spojitých funkcí v normě 
+   $\|\cdot\|_{\infty}$ je ekvivalentní stejnoměrné konvergenci spojitých funkcí,
+   jejíž limita je spojitá funkce na $[a,b]$.
+\end{ex}
+
+\begin{ex}
+   Prostor $C[a,b]$ s normou $\|\cdot\|_2$ není Banachův.
+   Pro jednoduchost uvažujme $a=-1$ a $b=1$ a pro $n\in\mathbb{N}$ definujme
+   \[
+      f_n\,:t\mapsto\begin{cases}
+          -1&\text{pro }t\in(-1,-\frac{1}{n})\\
+           1&\text{pro }t\in(\frac{1}{n},1)\\
+           nt&\text{pro }t\in[-\frac{1}{n},\frac{1}{n}].
+           \end{cases}
+   \]
+   Zřejmě $\{f_n\}\subset C[-1,1]$.
+   Definujeme-li dále
+   \[
+      f\,:t\mapsto\begin{cases}
+          -1&\text{pro }t\in(-1,0)\\
+           1&\text{pro }t\in(0,1)\\
+           0&\text{pro }t=0.
+           \end{cases}
+   \]
+   Samozřejmě $f\not\in C[-1,1]$.
+   Posloupnost $\{f_n\}$ však konverguje k $f$ v normě $\|\cdot\|_2$, neboť
+   \[
+     \begin{split}
+      \|f-f_n\|_2&=\int\limits_{-1}^1|f(t)-f_n(t)|\,dt
+                  =\int\limits_{-\frac{1}{n}}^0 (1+nt)\,dt
+                  +\int\limits_0^{\frac{1}{n}}(1-nt)\,dt
+                  =\frac{1}{2n}+\frac{1}{2n}=\frac{1}{n}.
+     \end{split}
+   \]
+   Protože $\frac{1}{n}\rightarrow 0$ pro $n\rightarrow\infty$,
+   také $\|f-f_n\|_2\rightarrow 0$, takže $f_n\rightarrow f$.
+   Našli jsme tedy posloupnost spojitých funkcí, která nekonverguje ke spojité funkci
+   v normě $\|\cdot\|_2$.
+\end{ex}
+
+Poznámka: Odpověď na otázku, zda je normovaný prostor Banachův, 
+může silně záviset na zvolené normě, jak bylo zřejmé z předchozího příkladu.
+Na prostorech konečné dimenze (prostory s konečnou bází) je odpověď jasná:
+je-li $\{x_1,\ldots,x_n\}\subset V$ báze $V$ a pro $x\in V$
+je $x=\sum\limits_{i=1}^n\alpha_ix_i$ ($\{\alpha_i\}_{i=1}^n\subset\mathbb{R}$)
+a definujeme-li $\|x\|_{\infty}\equiv\max\limits_{i=1,\ldots,n}|\alpha_i|$,
+lze ukázat, že $V$ je pak úplný v této normě, a tedy Banachův.
+Protože jsou v prostorech konečné dimenze všechny normy 
+ekvivalentní%
+\footnote{Dvě normy $\|\cdot\|_a$ a $\|\cdot\|_b$ na $V$ jsou ekvivalentní,
+pokud existují kladné konstanty $\alpha$ a $\beta$ takové, že
+$(\forall x\in V)(\alpha\|x\|_a\leq\|x\|_b\leq\beta\|x\|_a)$.},
+jsou konečně-dimenzionální normované prostory úplné (Banachovy)
+v každé normě!
+
+Nechť $V$ je lineární vektorový prostor.
+Zobrazení $\langle\cdot,\cdot\rangle:\,V\times V\rightarrow\mathbb{R}$
+nazveme skalární součin na $V$, pokud platí:
+\begin{enumerate}
+   \item $(\forall x\in V)(\langle x,x\rangle\geq 0\;
+            \&\;\langle x,x\rangle=0\;\Leftrightarrow x=0)$,
+   \item $(\forall x,y\in V)(\langle x,y\rangle=\langle y,x\rangle)$ -- symetrie,
+   \item $(\forall \alpha\in V)(\forall x,y\in V)
+          (\langle\alpha x,y\rangle=\alpha\langle x,y\rangle)$ -- homogenita,
+   \item $(\forall x,y,z\in V)
+          (\langle x,y+z\rangle = \langle x,y\rangle+\langle x,z\rangle)$ 
+          -- aditivita.
+\end{enumerate}
+Prostor $V$ s definovaným skalárním součinem nazýváme
+\emph{unitární prostor}, popř. Euklidův prostor.
+
+Důsledky definice:
+\begin{itemize}
+   \item $(\forall \alpha\in V)(\forall x,y\in V)
+          (\langle x,\alpha y\rangle=\alpha\langle x,y\rangle)$;
+   \item $(\forall x,y,z\in V)
+          (\langle x+y,z\rangle = \langle x,z\rangle+\langle y,z\rangle)$;
+   \item Schwarzova nerovnost: $(\forall x,y\in V)
+         (|\langle x,y\rangle|\leq\sqrt{\langle x,x\rangle}\sqrt{\langle y,y\rangle})$.
+\end{itemize}
+
+Definujeme-li pro $x\in V$ $\|x\|=\sqrt{\langle x,x\rangle}$,
+dostaneme porovnáním s definicí normy za použití vlastností skalárního součinu
+a důsledků této definice, že $\|\cdot\|$ je norma na $V$.
+Je-li tedy prostor $V$ unitární, je zároveň normovaný.
+Je-li navíc $V$ úplný v této normě, tj. Banachův, nazývá se \emph{Hilbertův prostor}.
+
+\begin{ex}
+   Nechť $x,y\in\mathbb{R}^n$, $x=(\alpha_1,\ldots,\alpha_n)$,
+   $x=(\beta_1,\ldots,\beta_n)$.
+   Na $\mathbb{R}^n$ lze definovat Euklidův skalární součin vztahem
+   \[
+      \langle x,y\rangle=\sum\limits_{i=1}^n \alpha_i \beta_i.
+   \]
+   Tento skalární součin definuje normu $\|\cdot\|_2$ na $\mathbb{R}^n$.
+\end{ex}
+
+\begin{ex}
+   Nechť $f,g\in C[a,b]$.
+   Obdobně i zde můžeme definovat skalární součin vztahem
+   \[
+      \langle x,y\rangle=\int\limits_a^b f(t)g(t)\,dt.
+   \]
+   Tento skalární součin definuje normu $\|\cdot\|_2$ na $C[a,b]$.
+\end{ex}
+
+Řekneme, že dva vektory $x,y\in V$ jsou \emph{ortogonální}, 
+pokud $\langle x,y\rangle=0$.
+

@@ -1,0 +1,286 @@
+\documentclass[a4paper,10pt]{book}
+%\usepackage[active]{srcltx}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%
+\newtheorem{theorem}{Věta}[section]
+\newtheorem{proposition}[theorem]{Tvrzení}
+\newtheorem{definition}[theorem]{Definice}
+\newtheorem{remark}[theorem]{Poznámka}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Důsledek}
+\newtheorem{exercise}[theorem]{Cvičení}
+
+%\numberwithin{equation}{document}
+%
+\def\div{{\rm div}}
+\def\Lapl{\Delta}
+\def\grad{\nabla}
+\def\supp{{\rm supp}}
+\def\dist{{\rm dist}}
+%\def\chset{\mathbbm{1}}
+\def\chset{1}
+%
+\def\Tr{{\rm Tr}}
+\def\to{\rightarrow}
+\def\weakto{\rightharpoonup}
+\def\imbed{\hookrightarrow}
+\def\cimbed{\subset\subset}
+\def\range{{\mathcal R}}
+\def\leprox{\lesssim}
+\def\argdot{{\hspace{0.18em}\cdot\hspace{0.18em}}}
+\def\Distr{{\mathcal D}}
+\def\calK{{\mathcal K}}
+\def\FromTo{|\rightarrow}
+\def\convol{\star}
+\def\impl{\Rightarrow}
+\DeclareMathOperator*{\esslim}{esslim}
+\DeclareMathOperator*{\esssup}{ess\,supp}
+\DeclareMathOperator{\ess}{ess}
+\DeclareMathOperator{\osc}{osc}
+\DeclareMathOperator{\curl}{curl}
+\DeclareMathOperator{\cotg}{cotg}
+
+%
+%\def\Ess{{\rm ess}}
+%\def\Exp{{\rm exp}}
+%\def\Implies{\Longrightarrow}
+%\def\Equiv{\Longleftrightarrow}
+% ****************************************** GENERAL MATH NOTATION
+\def\Real{{\rm\bf R}}
+\def\Rd{{{\rm\bf R}^{\rm 3}}}
+\def\RN{{{\rm\bf R}^N}}
+\def\D{{\mathbb D}}
+\def\Nnum{{\rm\bf N}}
+\def\Qnum{{\rm\bf Q}}
+\def\Measures{{\mathcal M}}
+\def\d{\,{\rm d}}               % differential
+\def\sdodt{\genfrac{}{}{}{1}{\rm d}{{\rm d}t}}
+\def\dodt{\genfrac{}{}{}{}{\rm d}{{\rm d}t}}
+%
+\def\vc#1{\mathbf{\boldsymbol{#1}}}     % vector
+\def\tn#1{{\mathbb{#1}}}    % tensor
+\def\abs#1{\lvert#1\rvert}
+\def\Abs#1{\bigl\lvert#1\bigr\rvert}
+\def\bigabs#1{\bigl\lvert#1\bigr\rvert}
+\def\Bigabs#1{\Big\lvert#1\Big\rvert}
+\def\ABS#1{\left\lvert#1\right\rvert}
+\def\norm#1{\bigl\Vert#1\bigr\Vert} %norm
+\def\close#1{\overline{#1}}
+\def\inter#1{#1^\circ}
+\def\eqdef{\mathrel{\mathop:}=}     % defining equivalence
+\def\where{\,|\,}                    % "where" separator in set's defs
+\def\timeD#1{\dot{\overline{{#1}}}}
+%
+% ******************************************* USEFULL MACROS
+\def\RomanEnum{\renewcommand{\labelenumi}{\rm (\roman{enumi})}}   % enumerate by roman numbers
+\def\rf#1{(\ref{#1})}                                             % ref. shortcut
+\def\prtl{\partial}                                        % partial deriv.
+\def\Names#1{{\scshape #1}}
+\def\rem#1{{\parskip=0cm\par!! {\sl\small #1} !!}}
+\def\vysl#1{\par$[$ #1 $]$}
+
+%
+%
+% ******************************************* DOCUMENT NOTATIONS
+% document specific
+%***************************************************************************
+%
+\addtolength{\textwidth}{2cm}
+\addtolength{\vsize}{2cm}
+\addtolength{\topmargin}{-1cm}
+\addtolength{\hoffset}{-1cm}
+\begin{document}
+\parskip=2ex
+\parindent=0pt
+\pagestyle{empty}
+
+\chapter{Soustavy obyčejných diferenciálních rovnic}
+\section{Obyčejné diferenciální rovnice}
+obyčejná diferenciální rovnice -- vztah mezi neznámou funkcí jedné proměnné a jejími derivacemi;
+řád ODR -- řád nejvyšší derivace v ODR.
+
+ODR $n$-tého řádu: $F(x,y,y',\ldots,y^{(n)})=0$;
+řešení (integrál) ODR -- funkce, která vyhovuje rovnici v daném oboru.
+
+ODR 1. řádu: $F(x,y,y')=0$, resp. $y'=f(x,y)$ (rozřešená vzhledem k derivaci).
+
+\subsection{Rovnice se separovanými proměnnými}
+   Rovnici ve tvaru ve tvaru $f(x)+g(y)y'=0$, kde $f,g$ jsou funkce nazýváme
+   rovnicí se separovanými proměnými.
+   Je-li $f$ spojitá na $(a,b)$ a $g$ je spojitá na $(c,d)$,
+   potom každé řešení na $I\subset(a,b)$ splňuje na $I$ rovnici
+   \[
+      \int f(x)\,dx + \int g(y)\,dy = C, \; C\in\mathbb{R}.
+   \]
+   Funkce určená na intervalu $J\subset(c,d)$ touto rovnicí, je řešením diferenciální rovnice na $J$.
+
+   {\bf Příklad}
+   Řešte rovnici $yy'=e^y$.
+
+   Prvně si uvědomíme, že ve standardním tvaru je pravá strana rovnice $e^y/y$ což je lipschitcovská funkce
+   proměnné $y$ všude kromě bodu $y=0$.
+   Derivaci napíšeme jako symbolický zlomek diferencí:
+   \[
+    	y\frac{\d y}{\d x}=e^y
+   \]
+   a úpravami převedeme na jednu stranu všechny členy  obsahující $y$ a na druhou čelny obsahující $x$:
+   \[
+    	ye^{-y}\,\d y=1\,\d x
+   \]
+   nyní integrujeme (per partes) a dostáváme
+   \[
+      -(1+y)e^{-y}+C=x
+   \]
+   Což je předpis pro řešení zapsané jako funkce $x(y)$. V souladu s větou o existenci a jednoznačnosti
+   zjistíme, že pro $y=0$ není rovnice splněna. Ovšem na intervalech $y\in(-\infty,0)$ a  $y\in(0,\infty)$
+   existuje jednoznačné řešení. Na každém z nich můžeme volit jinou konstantu $C$. Pokud bude dána počáteční
+   podmínka např. $x(1)=0$, bude řešení jednoznačné jen na intervalu $y\in(0,\infty)$. Nicméně, když si nakreslíme graf,
+   zjistíme, že na intervalu $y\in(-\infty,0)$ existuje právě jedna volba $C$, tak aby na sebe obě části navazovaly
+   v bodě nula. Tomu říkáme, že existuje jednoznačné spojité prodloužení.
+  
+\subsection{Lineární diferenciální rovnice 1. řádu}
+   Jsou rovnice ve tvaru $y'+f(x)y=g(x)$, kde $f,g$ jsou funkce spojité na $(a,b)$.
+   Je-li $g=0$, nazývá se rovnice homogenní, v opačném případě je nehomogenní.
+   
+   {\bf Homogenní rovnici} řešíme separací proměnných; máme
+   \[
+      y'+f(x)y = 0.
+   \]
+   Odtud integrací dostaneme
+   \[
+      y(x) = Ce^{-\int f(x)\,dx}, \; C\in\mathbb{R}.
+   \]
+
+   {\bf Příklad}
+   Řešte rovnici $xy'=2y+y'$.
+
+   Rovnici převedeme do ekvivalentního tvaru $(x-1)y'=2y$ (jedná se o rovnici se separovatelnými proměnnými,
+   tj. rovnici, kterou lze převést na rovnici se separovanými proměnnými).
+   Nechť $y\neq 0$ (nulové řešení je řešením rovnice) a $x\in(1,\infty)$.
+   Pak dostaneme rovnici $y'/y=2/(x-1)$. Funkce $1/y$ je spojitá v $(0,\infty)$ (rovněž v $(-\infty,0)$)
+   a $1/(x-1)$ je spojitá na uvažovaném intervalu $(1,\infty)$.
+   Integrací máme
+   \[
+      \ln|y| = \ln|x-1|+C, \; C\in\mathbb{R}.
+   \]
+   Odlogaritmováním dostaneme
+   \[
+      |y| = C(x-1)^2, \; C>0.
+   \]
+   Protože uvažujeme $y>0$ a pravá strana je kladná, máme řešení
+   \[
+      y(x) = C(x-1)^2, \; C>0.
+   \] 
+   Uvažujeme-li $y<0$, dostaneme řešení
+   \[
+      y(x) = -C(x-1)^2, \;C>0.
+   \]
+   Protože nulová funkce je rovněž řešením původní diferenciální rovnice,
+   její řešení na intervalu $(1,\infty)$ mají tedy tvar
+   \[
+      y(x) = C(x-1)^2, \; C\in\mathbb{R}.
+   \]
+   (Podobně můžeme dostat řešení na intervalu $(-\infty,1)$.)
+
+   Úplná množina řešení jsou tedy paraboly procházející bodem $(x=1,y=0)$, přičemž konstanta $C$ může být
+   různá na levé a pravé straně od bodu $x=1$! Tedy při dané počáteční podmínce např. $y(2) = 0$ je řešení
+   jednoznačné, $y(x)=0$, pouze pro $x>1$. To přesně odpovídá větě o existenci a jednoznačnosti, jelikož v bodě
+   $x=1$ není pravá strana rovnice spojitá v proměnné $x$.
+
+   {\bf Nehomogenní rovnici} řešíme variací konstanty. Uvažujeme ho ve tvaru
+   \[
+      y(x) = C(x)e^{-\int f(x)\,dx},
+   \]
+   kde $C$ je funkce parametru $x$.
+   Dosazením do původní rovnice máme
+   \[
+      C'(x) = g(x)e^{\int f(x)\,dx}.
+   \]
+   Pak tedy
+   \[
+      y(x)=\left[\int g(x)e^{\int f(x)\,dx}\,+K\right]\,e^{-\int f(x)\,dx}, \;K\in\mathbb{R}
+   \]
+   je řešením nehomogenní rovnice na intervalu $(a,b)$.
+   %
+
+   {\bf Příklad}
+   Řešte rovnici $y'-y\,\mathrm{cotg}\,x=e^x\,\sin\,x$.
+   
+   Jedná se o nehomogenní lineární rovnici prvního řádu.
+   Nejprve nalezneme řešení homogenní rovnice $y'-y\,\mathrm{cotg}\,x=0$.
+   Funkce $\mathrm{cotg}\,x$ je spojitá na každém intervalu ve tvaru
+   $(k\pi,(k+1)\pi)$, kde $k\in\mathrm{Z}$.
+   Pro jednoduchost uvažujme $x\in(0,\pi)$.
+   Provedeme separaci:
+   \[
+    	y^{-1}\,\d y=\cotg x\,\d x.
+   \]
+   a integrací (substituce za $\sin x$) dostaneme
+   \[
+      \ln |y| = \ln |\sin x|+C, \; C\in\mathrm{R}.
+   \]
+   Odlogaritmováním je
+   \[
+      |y| = C\sin x, \; C>0
+   \]
+   Protože pravá strana je kladná ( pro $x\in(0,\pi)$ ) a nulové řešení je rovněž řešením homogenní rovnice,
+   máme řešení homogenní rovnice ve tvaru
+   \[
+      y(x) = C\sin x,\; C\in\mathrm{R}.
+   \]
+   Řešení nehomogenní rovnice nalezneme variací konstanty, čili položme $C\equiv C(x)$.
+   Dosazením řešení ve tvaru $y(x)=C(x)\sin x$ do původní rovnice máme $C'(x) = e^x$,
+   odkud $C(x) = e^x+K$, $K\in\Real$.
+   Obecné řešení nehomogenní rovnice na intervalu $(0,\pi)$ je tedy
+   \[
+      y(x) = (e^x+K)\sin x, \; K\in\Real.
+   \]
+
+
+\subsection*{Neřešené příklady}
+\begin{enumerate}
+  \item 
+    $ x+yy'=0 $
+  \item 
+    $ (x^2 +1)(y^2-1)+ xyy'=0,\ y(1)=\sqrt{2},$
+  \item
+    $ (x+1)y'+xy=0, y(0)=1$
+  \item
+    $y'+\frac{y}{x}=x$
+  \item
+    $y'-\frac{2}{x+1}y=(x+1)^3$
+  \item
+    $xy'-y=x^2 y^{-1}$
+\end{enumerate}
+reseni:
+\begin{enumerate}
+  \item
+    $y^2+x^2=C$
+    pro vsechna $C>0$, je reseni pro $x\in(-\sqrt C,+\sqrt C)$.
+  \item
+    obecne
+    $ 1-y^2=\frac{C}{x^2}e^{-x^2},\ y=+\sqrt{1-\frac{C}{x^2} e^{-x^2}} $
+    partikularni reseni $C=-e$,
+    $y=\sqrt{1+x^{-x}e^{1-x^2}}$
+     pro $x\in(0,\infty)$ a libovolna volba $C$ pro $x\in(-\infty,0)$.
+  \item  
+    $y=(1+x)e^{-x}$
+  \item
+    $y=\frac{x^2}{3}+\frac{C}{x}$
+    reseni ma dve vetve s nezavislou volbou $C$: $x\in(-\infty,0)$ a $x\in(0,\infty)$.
+  \item
+    $y=(\frac{x^2}{2}+x+C)(x+1)^2$
+    pro $x=-1$ neni splnena rovnice, situace podobna jako v 1)
+  \item
+    $y=\pm x\sqrt{\ln x^2+C}$
+    konstanta $C$ a znamenko lze volit nezavisle na dvou vetvich reseni
+    $x\in (-\infty,0)$ a $x\in (0,\infty)$.
+\end{enumerate}
+
+\end{document}

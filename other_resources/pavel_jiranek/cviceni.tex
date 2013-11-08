@@ -1,0 +1,61 @@
+\documentclass[openany,a4paper,10pt]{book}
+
+%\usepackage{czech}
+\usepackage[czech]{babel}
+\usepackage[latin2]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\newtheorem{ex}{Pøíklad}
+\newenvironment{sol}{\paragraph{Øe¹ení}}{}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\renewcommand{\Re}{\mathrm{Re}\,}
+\renewcommand{\Im}{\mathrm{Im}\,}
+\newcommand{\Div}{\mathrm{div}\,}
+\newcommand{\Rot}{\mathrm{rot}\,}
+\newcommand{\Grad}{\mathrm{grad}\,}
+
+\parindent=0pt
+
+\begin{document}
+
+\include{ipfvp}
+\include{vekanal}
+\include{odr1}
+\include{slodr1}
+\include{metr}
+\include{fa}
+
+\begin{thebibliography}{10}
+   \bibitem{meznik}
+   Ivan Mezník, Jiøí Karásek, Josef Miklíèek.
+   \emph{Matematika I pro strojní fakulty.}
+   SNTL, 1992.
+   \bibitem{rektorys}
+   Karel Rektorys a spol.
+   \emph{Pøehled u¾ité matematiky I.}
+   Prometheus, 1996.
+   \bibitem{rektorys2}
+   Karel Rektorys a spol.
+   \emph{Pøehled u¾ité matematiky II.}
+   Prometheus, 1996.
+   \bibitem{kofron}
+   Josef Kofroò.
+   \emph{Obyèejné diferenciální rovnice v reálném oboru.}
+   Karolinum, 2004.
+   \bibitem{tenenbaum}
+   Morris Tennebaum, Harry Pollard.
+   \emph{Ordinary Differential Equations.}
+   Dover Publications, 1985.
+   \bibitem{kolmogorov}
+   A. N. Kolmogorov, S. V. Fomin.
+   \emph{Introductory Real Analysis.}
+   Dover Publications, 1975.
+   \bibitem{nagy1}
+   Jozef Nagy,
+   \emph{Soustavy obyèejných diferenciálních rovnic.}
+   SNTL, 1983.
+\end{thebibliography}
+
+\end{document}
