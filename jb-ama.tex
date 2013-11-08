@@ -1164,6 +1164,7 @@ platí
 \]
 jelikož v obou případech jde o řešení v čase $t - \tau$ od počáteční podmínky. Důsledkem je jednodušší struktura standardních fundamentálních matic:
 \begin{proposition}
+
 Pro standardní fundantální matici $\tn U(t,\tau)$ rovnice \eqref{eq:const_coef}
 platí
 \[
@@ -1172,65 +1173,80 @@ platí
 \end{proposition}
 
 Dále si ukážeme jak lze najít SFM pro rovnice s konstantními koeficienty. 
-\begin{theorem}
-Nechť $\vc a\ne \vc 0$ je vlastní vektor příslušící vlastnímu číslu $\alpha$ matice $\tn A$, tj. platí
+\begin{proposition}
+\label{prop:jedno_reseni}
+Nechť $\vc u\ne \vc 0$ je vlastní vektor příslušící vlastnímu číslu $\lambda$ matice $\tn A$, tj. platí
 \[
-  \tn A \vc a = \alpha \vc a.
+  \tn A \vc u = \lambda \vc u.
 \]
 Pak je vektorová funkce
 \begin{equation}
-\vc v(t)=\vc a e^{\alpha t},\qquad      t\in \Real,
+\vc v(t)=\vc u e^{\lambda t},\qquad      t\in \Real,
 \end{equation}
 řešením soustavy \eqref{eq:const_coef}.
-\end{theorem}
+\end{proposition}
 \begin{proof}
 Důkaz provedeme dosazením do rovnice:
 \[
-  \dot{\vc v}(t) = \alpha \vc a e^{\alpha t} = \tn A \vc a e^{\alpha t} = \tn A \vc v(t).
+  \dot{\vc v}(t) = \lambda \vc u e^{\lambda t} = \tn A \vc u e^{\lambda t} = \tn A \vc v(t).
 \]
 \end{proof}
 
 \subsubsection{Algebraická odbočka}
 Vlastní čísla $\lambda_i$, $i=1,\dots, m$ reálné matice $\tn A$ jsou kořeny charakteristického polynomu $p(\lambda) = \det(\tn A-\lambda I)$. 
-Tento polynom má $n$ obecně komplexních kořenů pokud každý kořen $\lambda_i$ počítáme v jeho násobnosti $r_i$, tj. platí $\sum_i r_i = n$. 
-Ke každému komplexním u kořenu existuje kořen komplexně sdružený. 
+Tento polynom s reálnými koeficienty má $n$ obecně komplexních kořenů pokud každý kořen $\lambda_i$ počítáme v jeho násobnosti $r_i$, tj. platí $\sum_i r_i = n$. 
+Ke každému komplexnímu kořeni existuje kořen komplexně sdružený. 
 
 Pro každou regulární matici $\tn A$ existuje regulární matice $\tn P$ taková, že
+\begin{equation}
+   \label{eq:Jrozklad}
+   \tn A = \tn P \tn J \tn P^{-1},
+\end{equation}
+kde $\tn J$ je tzv. \df{Jordanův kanonický tvar}. Jordanův tvar $\tn J$ 
+má na diagonále vlastní čísla matice $\tn A$ v jejich příslušné násobnosti, případně může mít na některých místech jedničky v první subdiagonále, jinde má nuly.
+Pokud má Jordanův tvar nějaké jedničky v první subdiagonále, říkáme, že matice $\tn A$ je \df{defektní}. 
+
+Pokud je $\tn J$ diagonální matice, říkáme, že $\tn A$ je diagonalizovatelná. V tom případě ke každému vlastnímu číslu $\lambda_i$ exituje prostor vlastních vektorů dimenze $r_i$.
+Ke každému vlastnímu číslu tedy lze najít $r_i$ vektorů, které tvoří bázi příslušného 
+vlastního podprostoru. Celkem tak dostaneme $n$ lineárně nezávislých vlastních vektorů
+$\vc u_j$ příslušejících vlastním číslům $\lambda_j$, $j=1,\dots, n$. Tyto vektory tedy splňují rovnice:
 \[
-   \tn A = \tn P^{-1} \tn J \tn P,
+   \tn A \vc u_j = \lambda_j \vc u, \qquad \text{ pro všechna } j=1,\dots, n.
 \]
-kde $\tn J$ je \df{Jordanův kanonický tvar}. Jordanův tvar $\tn J$ má na diagonále vlastní čísla matice $\tn A$ v jejich příslušné násobnosti.
-Pokud má Jordanův tvar nějaké jedničky v první subdiagonále, říkáme, že matice $\tn A$ ja \df{defektní}. Pokud je $\tn J$ diagonální matice, 
-říkáme, že $\tn A$ je diagonalizovatelná. V tom případě ke každému vlastnímu číslu $\lambda_i$ exituje prostor  vlastních vektorů dimenze $r_i$.
-, které jsou řešením rovnice $\tn A\vc x = \lambda_i \vc x$. 
-
-
-\todo{Případ násobných vlastních čísel a sestavení SFM.}
-\todo{Případ nediagonalizovatelných matic}
-
-Právě uvedenou větu můžeme použít pro nalezení fundamentální matice soustavy. Označme $\lambda_i$, $i=1,\dots, n$ vlastní čísla
-matice $\tn A$, kde každé vlastní číslo je uvedeno ve své násobnosti. Pro matici $\tn A$ existuje  $\tn J$
-a ortonormální podobnostní matice $\tn P$, pro které platí:
+Za matici $\tn P$ v Jordanově rozkladu \eqref{eq:Jrozklad} lze použít libovolnou matici, která má ve sloupcích $n$ lineárně nezávislých vlastních vektorů matice $\tn A$, jelikož
 \[
-   \tn A = \tn P^{-1} \tn J \tn P.
-\]
-Matice $\tn A$ se nazývá diagonalizovatelná, pokud je Jordanův kanonický tvar $\tn J$ diagonální maticí. To platí pokud 
-existuje celkem $n$ lineárně nezávislých vlastních vektorů $\vc v_i$, řešení rovnic
+    \big( \tn A \tn P \big)_{\cdot, j} = \lambda_j \tn P_{\cdot, j} = \big(\tn P \tn J\big)_{\cdot, j}
+\]    
+
+\subsubsection{SFM pro systémy s diagonalizovatelnou maticí}
+Předpokládejme nyní, že v lineární soustavě ODR \eqref{eq:const_coef} je matice $\tn A$ diagonalizovatelná.
+Pak podle Tvrzení \eqref{prop:jedno_reseni}
+existuje $n$ lineárně nezávislých řešení soustavy \eqref{eq:const_coef} ve tvaru 
 \[
-   \tn A \vc v_i = \lambda_i \vc v_i.
+    \vc v_j(t)= \vc u_j e^{\lambda_j t},\qquad \text{ pro } j=1,\dots, n.
 \]
-Vlastní vektory volíme s velikostí $\vc v_i = 1$.
-V tom případě je $\tn J$ diagonální matice s vlastními čísly na diagonále $J_{ii} =\lambda_i$, 
-matice $\tn P$ má ve sloupci $i$ vlastní vektor $\vc v_i$ a $\tn P^{-1} = \tn P^T$, jelikož matice $\tn P$ je ortonormální.
+Tato řešení dávají sloupce fundamentální matice
+\[
+    \tn V(t) = \tn P e^{\tn J t},\qquad (e^{\tn Jt})_{ii} = e^{\lambda_i t}
+\]
+kde matice $\tn P$ má ve sloupcích libovolných $n$ lineárně nezávislých vlastních vektorů
+a $e^{\tn Jt}$ je diagonální matice s prvky $(e^{\tn Jt})_{ii} = e^{J_{ii} t} = e^{\lambda_i t}$. 
+Standardní fundamentální matici pak dostaneme vynásobením inverzí matice $\tn V(\tau)$, tedy
+\[
+  \tn U(t, \tau) = \tn P e^{\tn J t} \big(\tn P e^{\tn J \tau} \big)^{-1} = \tn P e^{\tn J(t-\tau)} \tn P^{-1}.
+\]
 
+Při praktickém výpočtu nejprve určíme vlastní čísla, to lze obecně provést pro soustavy do velikosti 4, nebo pokud má soustava nějaký speciální tvar. 
+Pak pro každé vlastní číslo $\lambda$ určíme vlastní podprostor, tedy prostor řešení rovnice $(\tn A -\lambda \tn I)\vc x= 0$. 
+Z vlastních vektorů sestavíme matici $\tn P$, vypočteme $\tn P^{-1}$ a nakonec
+\[
+    \tn U(t) = \tn P e^{\tn J t} \tn P^{-1}.
+\]
 
+\todo{Příklad.}
 
-kde $\tn D$ je diagonální matice, s hodnotami na diagonále $D_{ii} = \lambda_i$ rovnými vlastním číslům matice $\tn A$ složená z vlastních čísel matice $\tn A$ v jejich příslušné násobnosti.
-Pokud taková matice $P$ existuje, pak má ve sloupci $i$ vlastní vektor příslušející vlastnímu číslu $D_{ii}$.
-
-pokud najdeme 
-$n$ vlastních vektorů s příslušnými vlstními čísly. To lze provést pro matice, které jsou diagonalizovatelné
-
+\subsubsection{Oscilující řešení pro komplexní vlastní čísla}
+\todo{Zbytek kapitoly}
 
 Vektorové funkce $\vc u$ a $\vc v$ definovaná předpisy
 \begin{equation}
