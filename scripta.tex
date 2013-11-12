@@ -651,7 +651,7 @@ Pak existuje řešení Cauchyovy úlohy \eqref{eq::Cauchy} na okolí $J \subset 
 % maximální řešení
 Peanova věta nám poskytuje existenci řešení pouze na malém okolí počátečního času, řekněme na uzavřeném intervalu $J_0=\langle \tau-\epsilon, \tau + \epsilon \rangle$ 
 (všimněte si, že řešení existuje i před počátečním časem). Pro koncový bod můžeme znovu použít Peanovu větu a tím prodloužit řešení: pokud $\tau + \epsilon \in I$
-a $x(\tau + \epsilon) \in H$, pak řešení existuje na větším intervalu $J_1 = \langle \tau - \epsilon, \tau + \epsilon + \delta$. Takto můžeme řešení prodlužovat dokud nám neopustí množinu
+a $\vc x(\tau + \epsilon) \in H$, pak řešení existuje na větším intervalu $J_1 = \langle \tau - \epsilon, \tau + \epsilon + \delta$. Takto můžeme řešení prodlužovat dokud nám neopustí množinu
 kde je funkce $\vc f$ spojitá, tj. $I \times H$. Tím získáme \df{maximální interval řešení}, tedy nejdelší interval na kterém nějaké řešení Cauchyovy úlohy existuje. Řešení na maximálním intervalu
 nazýváme \df{maximální řešení}. \todo{Jak je to v případě, že různé větve řešení mají různé maximální intervaly? Jak je to s případy exploze v konečném čase: $y'=y^2$?}
 
@@ -734,13 +734,14 @@ Nyní vysčítáme přes  $i$ a dostaneme:
 
 \begin{theorem}[Picardova věta o existenci a jednoznačnosti]
 \label{thm::Picard}
-Nechť $\vc f(t, \vc x)$, $\vc f: I\times H \to \Real^n$ je funkce lipschitzovská vzhledem k $\vc x$
+Nechť $\vc f(t, \vc x)$, $\vc f: I\times H \to \Real^n$ je funkce spojitá vzhledem k proměnné $t$ a lipschitzovská vzhledem k $\vc x$
 na oblasti $I\times H \subset \Real \times \Real ^n$. Pak pro Cauchyovu úlohu
 \begin{equation}
  \dot{\vc x}=\vc f(t,\vc x),\qquad \vc x(\tau)=\vc \xi
 \end{equation}
-existuje maximální řešení na intervalu $J$, které je na tomto intervalu jednoznačné.
+jednoznačné řešení na nějakém okolí $J\subset I$ počátečního času $\tau$.
 \end{theorem}
+\todo{Globalní řešení, maximální interval řešení a jeho jednoznačnost}
 
 %SEM POZNAMKA O zavislosti reseni Cauchyovy ulohy na pocatecnich hodnotach .............................................
 
@@ -758,16 +759,16 @@ existuje maximální řešení na intervalu $J$, které je na tomto intervalu je
 
 Pro řešení obecných diferenciálních rovnic neexistuje žádný obecný postup, podobně jako neexistuje obecný postup pro integrování. Pro většinu rovnic neexistuje
 řešení v uzavřeném tvaru a tím spíše to platí pro systémy ODR. Pro některé typy rovnic však o řešení něco říci umíme. V této kapitole se budeme věnovat řešení lineárních rovnic, kde
-funkce $\vc f$ je ve tvaru $\vc f(t,\vc x) = \tn A(t) \vc x + b(t)$. Tento typ rovnic je důležitý, protože hladké funkce $\vc f$ lze lokálně aproximovat právě lineární rovnicí.
+funkce $\vc f$ je ve tvaru $\vc f(t,\vc x) = \tn A(t) \vc x + \vc b(t)$. Tento typ rovnic je důležitý, protože hladké funkce $\vc f$ lze lokálně aproximovat právě lineární rovnicí.
 Použitím Taylorova rozvoje zvlášť pro každý parametr funkce $\vc f$ dostaneme:
 \[
    f_i(t_0 + s, \vc x_0 + \vc h) = f_i(t_0, \vc x_0) + \frac{\prtl f_i}{\prtl t}(t_0,\vc x_0)s + \sum_j \frac{\prtl f_i}{\prtl x_j}(t_0,\vc x_0) h_j + O(\delta^2).
 \]
 Pokud uvažujeme malé odchylky $s, h_j \le \delta$. Ve vektorovém zápisu pak máme:
 \[
-  \vc f(t_0 + s, \vc x_0 + \vc h) \approx \tn A \vc h + \vc b,\qquad \vc b=\vc f(t_0, \vc x_0) + \prtl_{t} \vc f(t_0, \vc x_0) \tau,\qquad \tn A = \grad_{\vc x} \vc f(t_0, \vc x_0),
+  \vc f(t_0 + s, \vc x_0 + \vc h) \approx \tn A \vc h + \vc b,\quad \vc b(s)=\vc f(t_0, \vc x_0) + \prtl_{t} \vc f(t_0, \vc x_0) s,\quad \tn A = \grad_{\vc x} \vc f(t_0, \vc x_0),
 \]
-kde $\tn A =\grad_{\vc x} \vc f$ je matice prvních derivací. Zde je dokonce $\tn A$ i $\vc b$ nezávislé na čase, což je speciální třída lineárních soustav ODR s \df{konstantními koeficienty}.
+kde $\tn A =\grad_{\vc x} \vc f$ je matice prvních derivací. Zde je dokonce $\tn A$ nezávislé na čase, což je speciální třída lineárních soustav ODR s \df{konstantními koeficienty}.
 Pro tento typ rovnic dokonce máme obecný postup pro nalezení řešení v uzavřeném tvaru.
 
 
@@ -849,8 +850,9 @@ pak i funkce $\vc z(t)=\alpha\vc x(t) + \beta\vc y(t)$ je
 \[
    \dot{\vc z} = \alpha\dot{\vc x} + \beta\dot{\vc y} = \alpha\tn A \vc x  +  \beta \tn A \vc y  = \tn A \vc z,
 \]
-kde jsme nejdříve použili linearitu derivace a pak linearitu maticového násobení.
-Z tohoto pozorování plyne následující věta.
+kde jsme nejdříve použili linearitu derivace a pak linearitu maticového násobení. Z toho plyne, že množina řešení rovnice \eqref{eq:lin_homo}
+tvoří vektorový prostor obecného prostoru funkcí na intervalu $I$. Pro každý vektor počátečních podmínek $\vc \xi \in \Real^n$ dostávám právě jedno řešení.
+Tedy prostor řešení má také dimenzi $n$. Z těchto pozorování plyne následující věta.
 
 \begin{theorem}
 Nechť maticová funkce $\tn A(t)$ a vektorová funkce $\vc b(t)$ jsou spojité na otevřeném intervalu $I$. Pak množina 
@@ -1135,6 +1137,7 @@ Zbývá ověřit splnění počáteční podmínky:
 % řešení pomocí vlastních čísel, zminka o mocninne a Putzerove metode
 % ? resit zvlast komplexni vlastni cisla ?
 
+\todo{Zmínka o Putzerově a Mocninné metodě a proč detailně děláme postup přes vlastní vektory ...}
 
 Dále se zaměříme na případ homogenních lineárních soustav s konstatními 
 koeficienty, tj. soustav, které lze zapsat ve tvaru
@@ -1217,6 +1220,9 @@ Za matici $\tn P$ v Jordanově rozkladu \eqref{eq:Jrozklad} lze použít libovol
     \big( \tn A \tn P \big)_{\cdot, j} = \lambda_j \tn P_{\cdot, j} = \big(\tn P \tn J\big)_{\cdot, j}
 \]    
 
+Pokud některému $k$-násobnému vlastnímu číslu přísluší méně než $k$ lineárně nezávislých vlastních vektorů, jedná se o defektní matici $\tn A$- V tom případě 
+je nalezní fundamentální matice již obtížnější a z praktického hlediska je lépe použít např. Putzerovu metodu (viz. dále).
+
 \subsubsection{SFM pro systémy s diagonalizovatelnou maticí}
 Předpokládejme nyní, že v lineární soustavě ODR \eqref{eq:const_coef} je matice $\tn A$ diagonalizovatelná.
 Pak podle Tvrzení \eqref{prop:jedno_reseni}
@@ -1245,70 +1251,101 @@ Z vlastních vektorů sestavíme matici $\tn P$, vypočteme $\tn P^{-1}$ a nakon
 \todo{Příklad.}
 
 \subsubsection{Oscilující řešení pro komplexní vlastní čísla}
-\todo{Zbytek kapitoly}
+Zvláštní zmínku zasluhuje případ, kdy má matice $\tn A$ komplexní vlastní čísla. Pro reálnou matici $\tn A$
+má charakteristický polynom reálné koeficienty a tudíž ke každému komplexnímu vlastnímu číslu $\lambda_1=a+ib$
+existuje komplexně sdružené vlastní číslo $\lambda_2=a-ib$. Pak jsou ovšem komplexně sdružené i příslušné vlastní vektory $\vc v_1=\vc u_a +i\vc u_b$ 
+a $\vc v_2=\vc u_a -i\vc u_b$, jelikož:
+\[
+  0=(\tn A-\lambda_1 \tn E)\vc v_1=\close{0}=\close{(\tn A-\lambda_1 \tn E)\vc v_1}
+  =(\tn A-\close{\lambda_1} \tn E)\close{\vc v_1}=(\tn A-\lambda_2 \tn E)\vc v_2.
+\]
+Podle předchozí kapitoly pak máme dvojici komplexně sdružených řešení:
+\begin{align*}
+  \vc w_1(t) = e^{\lambda_1 t} \vc v_1 = e^{at} \big(\cos(bt) + i\sin(bt) \big)\big( \vc u_a + i \vc u_b \big),\\
+  \vc w_2(t) = e^{\lambda_2 t} \vc v_2 = e^{at} \big(\cos(bt) - i\sin(bt) \big)\big( \vc u_a - i \vc u_b \big).
+\end{align*}
+Jejich kombinací dostaneme dvojici reálných řešení:
+\begin{align*}
+ \vc u_1(t) = \frac{\vc v_1(t) + \vc v_2(t)}{2} = e^{at}\big( \cos(bt) \vc u_a - \sin(bt) \vc u_b \big),\\
+ \vc u_2(t) = \frac{\vc v_2(t) - \vc v_1(t)}{2i} = e^{at}\big( \sin(bt) \vc u_a + \cos(bt) \vc u_b \big).
+\end{align*}
+Řešení $\vc u_1(t)$ odpovídá reálné části a řešení $\vc u_2$ imaginární části řešení $\vc w_1(t)$ nebo $\vc w_2(t)$.
+Pro určení obou těchto řešení nám stačí jedno z komplexně sdružených vlastních čísel a jeden vlastní vektor, např. $\lambda_1$ a $\vc v_1$.
+Takto můžeme postupovat pro libovolné (i násobné) komplexní vlastní číslo $\lambda_1$ a libovolný jemu příslušející vlastní vektor $\vc v_1$.
 
-Vektorové funkce $\vc u$ a $\vc v$ definovaná předpisy
-\begin{equation}
-\begin{array}{rcl}
-\vc u(t)&=&(\vc g\cos\omega t - \vc h\sin\omega t)\mathrm{e}^{\sigma t}\\
-\vc v(t)&=&(\vc g\sin\omega t + \vc h\cos\omega t)\mathrm{e}^{\sigma t}
-\end{array}
-~~~t\in R, \vc\zeta\neq\vc 0
-\end{equation}
-jsou řešeními soustavy (\ref{3.5.2}) právě tehdy, je-li $\lambda=\sigma + i\omega$ 
-komplexním vlastním číslem matice $\tn A$ a vektor $\vc\zeta=\vc g+i \vc h$ 
-vlastním vektorem příslušným k $\lambda$.
-%\end{theorem}
+\begin{example}
+Najděte standardní fundamentální matici pro rovnici:
+ \begin{align*}
+     &y_1'=y_2-7y_1\\
+     &y_2'=-2y_1-5y_2
+\end{align*}
+Matice soustavy 
+\[
+  \tn A = \begin{pmatrix}-7&1\\-2&-5\end{pmatrix}
+\]
+má vlastní čísla $\lambda_1=-6+i$ a $\lambda_2=-6-i$. Dále najdeme vlastní vektory $\vc v_1$, $\vc v_2$:
+\begin{description}
+  \item $\lambda_1=-6+i$:
+  \[
+    0=\begin{pmatrix}-7-(-6+i)&1\\-2&-5-(-6+i)\end{pmatrix}\vc v_1
+    =\begin{pmatrix}-1-i&1\\-2&1-i\end{pmatrix}\cdot 
+     \begin{pmatrix}1-i\\2\end{pmatrix}
+  \]
+  \item $\lambda_2=-6-i$:
+  \[
+    0=\begin{pmatrix}-7-(-6-i)&1\\-2&-5-(-6-i)\end{pmatrix}\vc v_2
+    =\begin{pmatrix}-1+i&1\\-2&1+i\end{pmatrix}\cdot 
+     \begin{pmatrix}1+i\\2\end{pmatrix}
+  \]
+\end{description}
 
-\begin{theorem}
-Nechť $\lambda$ je $k$-násobným reálným vlastním číslem matice $\tn A$, jemuž 
-přísluší $k$ lineárně nezávislých vlastních vektorů $\vc\zeta_1, \vc\zeta_2, 
-\dots,\vc\zeta_k$. Pak množina všech řešení soustavy (\ref{3.5.2}) tvaru
-\begin{equation}
-\vc u(t)=\vc\eta\mathrm{e}^{\lambda t},~~~t\in R
-\end{equation}
-tvoří $k$-rozměrný podprostor vektorového prostoru všech řešení soustavy 
-(\ref{3.5.2}). Za bázi tohoto podprostoru můžeme zvolit vektorové funkce 
-\begin{equation}
-\vc v_1(t)=\vc\zeta_1\mathrm{e}^{\lambda t},
-\vc v_2(t)=\vc\zeta_2\mathrm{e}^{\lambda t},
-\dots,
-\vc v_k(t)=\vc\zeta_k\mathrm{e}^{\lambda t},~~~t\in R.
-\end{equation}
-\end{theorem}
+Vsimnete si, ze vlastni matice $\tn A-\lambda_1 \tn E$ je komplexne sdruzena s matici
+$\tn A-\lambda_2 \tn E$, coz je pravda obecne, jelikoz $\tn A$ je realna a vlastni cisla jsou komplexne sdruzena.
+Podobne vlastni vektory jsou komplexne sdruzene. Coz opet plati obecne, jelikoz komplexni sdruzeni
+soucinu je soucin komplexnich sdruzeni :-), tedy $\close a\,\close b=\close{ab}$. A proto i 
+pro soucin s matici plati
+\[
+  0=(\tn A-\lambda_1 \tn E)\vc v_1=\close{0}=\close{(\tn A-\lambda_1 \tn E)\vc v_1}
+  =(\tn A-\close{\lambda_1} \tn E)\close{\vc v_1}=(\tn A-\lambda_2 \tn E)\vc v_2.
+\]
+Postupujeme-li stejne jako v realnem pripade, vime, ze $u_1=e^{\lambda_1 t}\vc v_1$ a $u_2=e^{\lambda_2 t}\vc v_2$
+jsou resenim a tvori bazi vektoroveho prostoru reseni ovsem nad telesem komplexnich cisel.
+Navic vime, ze jsou to komplexne sdruzene vektorove funkce. Pro libovolne komplexni cislo $c$
+lze napsat jeho realnou a imaginarni cast takto
+\[
+  {\rm Re}\ c=\frac{c+\close{c}}{2},\quad{\rm Im}\ c=\frac{c-\close{c}}{2i}.
+\]
+Tedy jako {\it linearni kombinaci} cisel $c$ a $\close{c}$!
+Jelikoz je $u_1$ komplexne sdruzena funkce s $u_2$, jsou funkce $y_1={\rm Re}\ u_1={\rm Re}\ u_2$ a 
+$y_2={\rm Im}\ u_1=-{\rm Im}\ u_2$ take dvojici nezavislych reseni a nyni uz dvojici realnou.
 
-\begin{theorem}
-Nechť $\lambda=\sigma + i\omega$ je komplexním $k$-násobným vlastním číslem 
-matice $\tn A$, jemuž přísluší $k$ lineárně nezávislých vlastních vektorů 
-$\vc\zeta_1=\vc g_1+i \vc h_1$, $\vc\zeta_2=\vc g_2+i \vc h_2$, $\dots$,
-$\vc\zeta_k=\vc g_k+i \vc h_k$. Pak množina všech řešení soustavy 
-(\ref{3.5.2}) tvaru
-\begin{equation}
-\vc u(t)=(\vc a\cos\omega t + \vc b\sin\omega t)\mathrm{e}^{\sigma t}~~~t\in R, \vc a, \vc b\in R^n
-\end{equation}
-tvoří $2k$-rozměrný podprostor vektorového prostoru všech řešení soustavy 
-(\ref{3.5.2}). Za bázi tohoto podprostoru můžeme zvolit vektorové funkce 
-\begin{equation}
-\begin{array}{rcl}
-\vc u_1(t)&=&(\vc g_1\cos\omega t - \vc h_1\sin\omega t)\mathrm{e}^{\sigma t}\\
-\vc v_1(t)&=&(\vc g_1\sin\omega t + \vc h_1\cos\omega t)\mathrm{e}^{\sigma t}\\
-\vc u_2(t)&=&(\vc g_2\cos\omega t - \vc h_2\sin\omega t)\mathrm{e}^{\sigma t}\\
-\vc v_2(t)&=&(\vc g_2\sin\omega t + \vc h_2\cos\omega t)\mathrm{e}^{\sigma t}\\
-\dots,\\
-\vc u_k(t)&=&(\vc g_k\cos\omega t - \vc h_k\sin\omega t)\mathrm{e}^{\sigma t}\\
-\vc v_k(t)&=&(\vc g_k\sin\omega t + \vc h_k\cos\omega t)\mathrm{e}^{\sigma t}
-\end{array}
-~~~t\in R.
-\end{equation}
-\end{theorem}
+Za bázi prostoru reálných řešení rovnice, vezmeme reálnou a imaginární část komplexního řešení:
+\[
+  e^{\lambda_1 t} \vc v_1
+  =e^{-6t}(\cos t+i\sin t)\begin{pmatrix}1-i\\2\end{pmatrix}
+  =e^{-6t}\begin{pmatrix}\cos t+\sin t+i(\sin t-\cos t)\\
+   2\cos t+i \sin t\end{pmatrix}
+\]
+tedy fundamentální matice je 
+\[
+  \tn V(t)=e^{-6t}\cos t \begin{pmatrix} 1 & -1\\ 2 & 0 \end{pmatrix}
+          +e^{-6t}\sin t \begin{pmatrix} 1 & 1\\ 0 & 2 \end{pmatrix}
+\]
+Pro nalezení SFM spočteme inverzi
+\[
+ \tn V^{-1}(0) = \begin{pmatrix} 1 & -1\\ 2 & 0 \end{pmatrix}^{-1} =
+ \begin{pmatrix} 0 & 1/2\\ -1 & 1/2 \end{pmatrix}.
+\]
+A vypočteme:
+\[
+  \tn U(t) = \tn V(t)\tn V^{-1}(0) = 
+    e^{-6t}\cos t \begin{pmatrix} 1 & 0\\ 0 & 1 \end{pmatrix}
+   +e^{-6t}\sin t \begin{pmatrix} -1 & 1\\ -2 & 1 \end{pmatrix}
+\]
 
-Pro případ, kdy některému $k$-násobnému vlastnímu číslu $\lambda$ matice $\tn A$ 
-přísluší méně než $k$ lineárně nezávislých vektorů, nelze předchozí věty použít 
-pro nalezení fundamentálního systému soustavy. Věty vztahující se k tomuto 
-případu lze nalézt např. v \cite{Nagy}.
+\end{example}
 
-Pro určení standardní fundamentální matice homogenních systémů s konstantními 
-koeficienty můžeme použít jednu z metod, kterým věnujeme následující odstavce.
+
 
 \subsection{Putzerova metoda}
 \begin{theorem}
