@@ -120,14 +120,14 @@
 Na jednoduché fyzikální úloze si připomeneme pojmy pro jednoduché obyčejné diferenciální rovnice
 a dvě základní metody jejich řešení.
 Auto s počáteční rychlostí $v_0=100$ km za hodinu jede s vyřazeným motorem. Při vysokých 
-rychostech převažuje aerodynamický odpor a odporová síla je úměrná druhé mocnině rychlosti.
+rychlostech převažuje aerodynamický odpor a odporová síla je úměrná druhé mocnině rychlosti.
 Máme určit průběh rychlosti jako funkci času. 
 
 Použitím druhého Newtonova zákona dostaneme pro zpomalený pohyb rovnici:
 % připomenutí ODR
 \begin{equation}
   \label{eq:brzda}
-  m\frac{dv}{dt}(t) = -k v^2(t),\qquad v(0)=v_0=100,
+  m\frac{\d v}{\d t}(t) = -k v^2(t),\qquad v(0)=v_0=100,
 \end{equation}
 kde $m$ je hmotnost vozidla, $t$ je čas a $k$ je vhodná konstanta závisející na tvaru vozidla.
 Řešením rovnice je funkce $v(t)$ přičemž $v$ se nazývá \df{závisle proměnná} a $t$ \df{nezávisle proměnná}.
@@ -135,15 +135,15 @@ V rovnici \eqref{eq:brzda} se vyskytuje nejvýše první derivace hledané funkc
 o \df{rovnici prvního řádu}. Na pravé straně je nelineární funkce $f(v)= cv^2$ závisle proměnné, proto se jedná o \df{nelineární diferenciální rovnici}.
 Jelikož pravá strana nezávisí přímo na nezávislé proměnné, jedná se o tzv. \df{autonomní rovnici}.
 
-Pro řešení nelineárních diferenciálních rovnic neexistuje řádný univerzální postup, dokonce pro většinu rovnice nelze nalézt analytické řešení.
+Pro řešení nelineárních diferenciálních rovnic neexistuje řádný univerzální postup, do\-kon\-ce pro většinu rovnic nelze nalézt analytické řešení.
 Rovnice \eqref{eq:brzda} umožňuje řešení pomocí \df{separace proměnných}. Derivaci napíšeme jako podíl diferenciálů a rovnici upravíme do tvaru, kde 
 na levé straně je pouze závisle proměnná a na pravé pouze nezávisle proměnná, tedy
 \[
-    v^{-2} dv =  \alpha dt, \quad \alpha = -k/m 
+    v^{-2} \d v =  \alpha \d t, \quad \alpha = -k/m 
 \]
 Nyní obě strany vyintegrujeme, pozor na integrační konstantu $C$,
 \[
-    -v^{-1} = \int v^{-2}\; dv = \int \alpha\; dt =\alpha t + C.
+    -v^{-1} = \int v^{-2}\; \d v = \int \alpha\; \d t =\alpha t + C.
 \]    
 A vyjádříme $v$:
 \[
@@ -169,33 +169,33 @@ Uvažujme zrychlený pohyb, kde v čase lineárně zvyšujeme výkon motoru a z�
   mv'(t) = Pt - c v(t), \qquad v(0)=0
 \]
 Jedná se o lineární rovnici, protože obsahuje pouze členy obsahující závisle proměnnou $v$ nebo její derivaci $v'$. Absolutní člen $Pt$ by mohl být i nelineární,
-např. $Pt^2$, a stále by šlo o lineární rovnici. Lineární rovnice obvykle zapisujeme tak, aby na levé straně byly členy obsahující závisl proměnnou a na pravé straně je buď nula (homogenní rovnice),
-nebo "absolutní člen", kterému se v kontextu lineárních rovnic obvykle říké \df{pravá strana}.
+např. $Pt^2$, a stále by šlo o lineární rovnici. Lineární rovnice obvykle zapisujeme tak, aby na levé straně byly členy obsahující závislou proměnnou a na pravé straně je buď nula (homogenní rovnice),
+nebo \uv{absolutní člen}, kterému se v kontextu lineárních rovnic obvykle říká \df{pravá strana}.
 
-Nejprve vyřešíme homogenní rovnici $mv'= - cv$, pomocí separace proměnných najdeme řešení $ v=Ce{-\alpha t}$, $\alpha = c/m$. Nyní hledáme řešení původní rovnice ve tvaru:
+Nejprve vyřešíme homogenní rovnici $mv'= - cv$, pomocí separace proměnných najdeme řešení $ v=Ce^{-\alpha t}$, $\alpha = c/m$. Nyní hledáme řešení původní rovnice ve tvaru:
 \[
    v(t) = C(t) e^{-\alpha t}
 \]
-kde jsme provedli "variaci" integrační konstanty $C$. Neúplné řešení v tomto tvaru dosadíme do nehomogenní rovnice:
+kde jsme provedli \uv{variaci} integrační konstanty $C$. Neúplné řešení v tomto tvaru do\-sa\-dí\-me do nehomogenní rovnice:
 \[
   m C'(t) e^{-\alpha t} - m \alpha C(t) e^{-\alpha t} = Pt - m \alpha C(t) e^{-\alpha t}
 \]
-oba poslední členy se odečtou, dále vyjádříme $C'$ a integrujeme:
+oba poslední členy se odečtou, dále vyjádříme $C'$ a integrujeme per partes:
 \[
-  C(t) = \int \frac{P}{m} t \; dt = \frac{P t^2}{2m} + C_0.
+  C(t) = \frac{P}{m} \int te^{\alpha t} \; \d t = \frac{P}{m\alpha^2}\left(\alpha t - 1\right)e^{\alpha t} + C_0.
 \]
 Celé řešení je pak
 \[
-  v(t) = C(t) e^{-\alpha t} = C_0 e^{-\alpha t} + \frac{Pt^2}{2m} e^{-\alpha t}
+  v(t) = C(t) e^{-\alpha t} = C_0 e^{-\alpha t} + \frac{P}{m\alpha^2} (\alpha t - 1)
 \]
-přičemž $C_0$ se opět určí z počáteční podmínky. Všiměme si, že počáteční podmínka ovlivňuje jen první člen řešení, který odpovídá řešení 
+přičemž $C_0$ se opět určí z počáteční podmínky. Všimněme si, že počáteční podmínka ovlivňuje jen první člen řešení, který odpovídá řešení 
 homogenní rovnice, druhý člen, kterému se říká \df{partikulární řešení} na počáteční podmínce nezávisí, ale závisí na absolutním členu. 
 
 
 \subsection{Tlumený a buzený oscilátor}
 \label{sec::oscilator}
-V mnoha aplikacích je třeba vyšetřovat různé oscilující systémy. Může jít o mechanické oscilátory jako v případě 
-vibrací různých motorů, nebo o elektrický oscilátor (RLC obvod), nebo o model visko-elastického materiálu (elastická plastelína), nebo gravitační oscilátor (kyvadlo).
+V mnoha aplikacích je třeba vyšetřovat různé oscilující systémy. Může jít o~mechanické oscilátory jako v~případě 
+vibrací různých motorů, nebo o~elektrický oscilátor (RLC obvod), nebo o~model visko-elastického materiálu (elastická plastelína), nebo o~gravitační oscilátor (kyvadlo).
 \begin{figure}[h]
 \label{fig:oscilator}
 \begin{center}
@@ -203,20 +203,20 @@ vibrací různých motorů, nebo o elektrický oscilátor (RLC obvod), nebo o mo
 \caption{Schéma tlumeného oscilátoru.}
 \end{center}
 \end{figure}
-Tlumený a buzený oscilátor (viz. schéma \ref{fig:oscilator}) se skládá z pružiny o tuhosti $k$ (závislost síly na výchylce $y$),
-sériově zapojeného tlumiče o dynamické tuhosti $\eta$ (závislost síly na rychlosti změny výchylky) a tělesa o hmotnosti $m$, které je {\emph buzeno} vnější silou $f(t)$
+Tlumený a~buzený oscilátor (viz. schéma \ref{fig:oscilator}) se skládá z~pružiny o~tuhosti $k$ (závislost síly na výchylce $y$),
+sériově zapojeného tlumiče o~dynamické tuhosti $\eta$ (závislost síly na rychlosti změny výchylky) a~tělesa o~hmotnosti $m$, které je \emph{buzeno} vnější silou $f(t)$
 (obvykle periodickou). 
-Použitím druhého Newtonova zákona a bilance sil dostaneme rovnici:
+Použitím druhého Newtonova zákona a~bilance sil dostaneme rovnici:
 \[
- m\frac{d^2y}{dt^2}+\eta \frac{dy}{dt}+ky=f(t),\quad t>0,\quad y(0)=y_0,\quad \frac{dy}{dt}(0) = y_1,
+ m\frac{\d^2y}{\d t^2}+\eta \frac{\d y}{\d t}+ky=f(t),\quad t>0,\quad y(0)=y_0,\quad \frac{\d y}{\d t}(0) = y_1,
 \]
 kterou můžeme zjednodušit na tvar:
 \[
-  y'' + \alpha y' + \beta y = F(t),\quad \alpha=\frac{\eta}{m},\quad  \beta=\frac{k}{m},\quad F=\frac{f}{m}
+  y'' + \alpha y' + \beta y = F(t),\quad \alpha=\frac{\eta}{m},\quad  \beta=\frac{k}{m},\quad F(t)=\frac{f(t)}{m}
 \]
 
-Jedná se o nehomogenní (pokud $f\ne 0$) lineární rovnici druhého řádu. Připomeňme obvyklou metodu řešení takovéto rovnice.
-Nejprve řešíma \df{charakteristickou rovnici}
+Jedná se o nehomogenní (pokud $f\ne 0$) lineární rovnici druhého řádu. Při\-po\-meň\-me obvyklou metodu řešení takovéto rovnice.
+Nejprve řešíme \df{charakteristickou rovnici}
 \[
   Y^2 + \alpha Y + \beta =0.
 \]
@@ -225,7 +225,7 @@ Tato kvadratická rovnice má buď jeden (násobný) nebo dva (obecně komplexn�
    \label{eq:charakteristicka}
    y(t) = C^{+}e^{Y^{+} t} + C^{-}e^{Y^{-} t}.
 \end{equation}
-Pro reálné kořeny (převaha tlumení) máme prostý součet dvou exponenciel. Pro násobný kořen $Y$ je řešní ve tvaru
+Pro reálné kořeny (převaha tlumení) máme prostý součet dvou exponenciel. Pro násobný kořen $Y$ je řešení ve tvaru
 \[
   y(t) = C_1 t e^{Yt} + C_2 e^{Yt}.
 \]
@@ -235,10 +235,10 @@ Pro komplexně sdružené kořeny $Y_{\pm} = a \pm i b$ musí být komplexně sd
    y(t) &= (A + i B) e^{at} e^{ibt} + (A-iB)e^{at}e^{-ibt} = A e^{at} (e^{ibt} + e^{-ibt}) + B e^{at} i(e^{ibt} - e^{-ibt}) \\
    &= e^{at}\big( 2 A cos(bt) + 2 B sin(bt) \big).
 \end{align*}
-Pro některé speciální pravé strany $F$ existují předpisy pro pratikulární řešení.
+Pro některé speciální pravé strany $F$ existují předpisy pro partikulární řešení.
 
-Nyní naznačíme jakým odkud se vzala ta metoda řešení přes charakteristickou rovnici, jak tato charakteristická rovnice souvisí s charakteristickou rovnicí pro vlastní čísla matice,
-a jak lze řešit nehomogenní lineární rovnici pro obecnou pravou stranu. Klíčovým trikem, je převod rovnice vyššího řádu na soustavu rovnic nižšího řádu. Zavedeme novou proměnnou $z(t)$ pro derivaci $y'$,
+Nyní naznačíme, odkud se vzala výše ukázaná metoda řešení pomocí charakteristické rovnice, jak tato charakteristická rovnice souvisí s~charakteristickou rovnicí pro vlastní čísla matice,
+a~jak lze řešit nehomogenní lineární rovnici pro obecnou pravou stranu. Klíčovým trikem, je převod rovnice vyššího řádu na soustavu rovnic nižšího řádu. Zavedeme novou proměnnou $z(t)$ pro derivaci $y'$,
 pak můžeme původní rovnici napsat ve tvaru soustavy:
 \begin{align}
    y'(t) - z(t) &= 0, & y(0) = y_0\\
@@ -246,7 +246,7 @@ pak můžeme původní rovnici napsat ve tvaru soustavy:
 \end{align}
 Tuto lineární soustavu můžme napsat ve vektorovém tvaru
 \[
-    \frac{d}{dt}    
+    \frac{\d}{\d t}    
     \begin{pmatrix}
        y \\ z
     \end{pmatrix}
@@ -276,46 +276,45 @@ Tento vektorový zápis budeme dále hojně využívat, vektory budou vždy psá
 
 \subsection{Systém dravec-kořist}
 Uvažujme jednoduchý ekologický systém složený z populace predátora  a jeho kořisti (klasickým příkladem jsou lišky a zajíci).
-Označme $x(t)$ počet králíků a $y(t)$ počet lišek v čase $t$ s počátečními velikostmi $x_0$ a $y_0$. 
-Králíci mají neomezený zdroj potravy, lišky se živí pouze králíky.
+Označme $x(t)$ počet zajíců a $y(t)$ počet lišek v čase $t$ s počátečními velikostmi $x_0$ a $y_0$. 
+Zajíci mají neomezený zdroj potravy, lišky se živí pouze lovem zajíců.
 Tento ekologický systém popisuje Lotkův-Voltarrův systém diferenciálních rovnic:
 \begin{align}
-  \frac{d x}{dt} &= x(a-\alpha y), \quad x(0)=x_0\\
-  \frac{d y}{dt} &= y(-c+\gamma x), \quad y(0)=y_0.
+  \frac{\d x}{\d t} &= x(a-\alpha y), \quad x(0)=x_0\\
+  \frac{\d y}{\d t} &= y(-c+\gamma x), \quad y(0)=y_0.
 \end{align}
-Význam členů na pravé straně je: $ax$ vyjadřuje přirozený přírůstek králíků za jednotku času, $-\alpha xy$ umrtí králíků v důsledku interakce,
+Význam členů na pravé straně je: $ax$ vyjadřuje přirozený přírůstek zajíců za jednotku času, $-\alpha xy$ umrtí zajíců v důsledku interakce,
 $\gamma x y$ přírůstek lišek v důsledku interakce, $-cy$ přirozený úbytek lišek.
-Vektorově ho můžeme zapsat:
+Označme $\vc x = (x,y)^T$ a zapišme vektorově:
 \[
-   \frac{d \vc x}{dt} = \begin{pmatrix} x\\ y \end{pmatrix}
+   \frac{\d \vc x}{\d t} = \begin{pmatrix} x'\\ y' \end{pmatrix}
    = \begin{pmatrix} a & -\alpha x \\ \gamma y & - c\end{pmatrix} 
      \begin{pmatrix} x \\ y\end{pmatrix} = \vc F(\vc x).
 \]
-Vidíme, že matice na pravé straně sama závisí na hledaném řešení, proto se jedná o nelineární systém obyčejných diferenciálních rovnic prvního řádu.
+Vidíme, že matice na pravé straně sama závisí na hledaném řešení, proto se jedná o~nelineární systém obyčejných diferenciálních rovnic prvního řádu.
 
 
 
 \chapter{Teorie soustav ODR}
-Systémy obyčejých diferenciálních rovnic jsou základním modelem při popisu netriviálních 
-časově proměnných jevů z fyziky, chmie, biologie, ekonomie, elektrotechniky a mnoha dalších oborů. 
-Cílem dalších kapitol bude nejprve prozkoumat základní obecné vlastnosti soustav ODR (kapitola \ref{soustavy}),
-a seznámit se s řešením lineárních soustav (kapitoly \ref{linearni_soustavy} a \ref{konst_koef}). Další kapitoly budou věnovány 
-úvodu do numerických metod pro řešení ODR.
+Systémy obyčejných diferenciálních rovnic (ODR) jsou základním modelem při popisu netriviálních 
+časově proměnných jevů z fyziky, chemie, biologie, ekonomie, elektrotechniky a mnoha dalších oborů. 
+Cílem dalších kapitol bude nejprve prozkoumání základních obecných vlastností soustav ODR (kapitola \ref{soustavy})
+a poté seznámení se s řešením lineárních soustav (kapitoly \ref{linearni_soustavy} a \ref{konst_koef}). Další kapitoly budou věnovány 
+úvodu do numerických metod pro řešení ODR a jejich soustav.
 
 \section{Soustavy obyčejných diferenciálních rovnic}
 \label{soustavy}
 
 \subsection{Cauchyova úloha pro rovnice 1. řádu}
-Uvažujme, že časový interval (otevřený, neprázdný) $I \subset \Real$, 
-na tomto časovém intervalu chceme najít vektorovou funkci $\vc x(t)$ o $n$ složkách, s hodnotami 
-v oblasti (otevřená jednoduše souvislé množina) $H \subset \Real^n$. Na intervalu $I$ chceme řešit 
+Uvažujme časový interval (otevřený, neprázdný) $I \subset \Real$, na kterém chceme najít vektorovou funkci $\vc x(t)$ o $n$ složkách, s hodnotami 
+v oblasti (otevřená jednoduše souvislá množina) $H \subset \Real^n$. Na intervalu $I$ chceme řešit 
 soustavu obyčejných diferenciálních rovnic 1. řádu:
-\begin{align}
-\dot x_1 &= f_1(t, x_1, x_2, \dots, x_n),\\
-\dot x_2 &= f_2(t, x_1, x_2, \dots, x_n),\\
-&\dots\\
-\dot x_n &= f_n(t, x_1, x_2, \dots, x_n)
-\end{align}
+\begin{eqnarray*}
+\dot x_1 &=& f_1(t, x_1, x_2, \dots, x_n),\\
+\dot x_2 &=& f_2(t, x_1, x_2, \dots, x_n),\\
+&\vdots& \\
+\dot x_n &=& f_n(t, x_1, x_2, \dots, x_n)
+\end{eqnarray*}
 nebo ve vektorovém zápisu:
 \begin{equation}
     \label{eq::soustava_ODR}
@@ -323,14 +322,14 @@ nebo ve vektorovém zápisu:
 \end{equation}
 kde $t\in I$ a $\vc f$ je daná vektorová funkce z $I\times H$ do $\Real^n$. Tečka nad písmenem je obvyklé značení časové derivace:
 \[
-    \dot{\vc x}= \frac{d \vc x}{dt}.
+    \dot{\vc x}= \frac{\d \vc x}{\d t}.
 \]
 
 Dále budeme i systémům říkat diferenciální rovnice, nebo jen rovnice a používat téměř výhradně vektorového zápisu.
 
 
 \begin{definition}
-Reálnou vektorovou funkci $\vc x: I \to H$ nazveme řešním soustavy \eqref{eq::soustava_ODR} 
+Reálnou vektorovou funkci $\vc x: I \to H$ nazveme řešením soustavy \eqref{eq::soustava_ODR} 
 obyčejných diferenciálních rovnic 1. řádu, pokud
 \begin{enumerate}
 \item Funkce $\vc x$ je definována na nějakém (nedegenerovaném) podintervalu $J\subset I$. 
@@ -344,12 +343,12 @@ platí
 \end{enumerate}
 \end{definition}
 
-Body 1 a 2 jsou valstně obsaženy v bodě 3.
+Body 1 a 2 jsou vlastně obsaženy v bodě 3.
 Někdy také říkáme, že $\vc x$ je řešením rovnice na intervalu $J$.
 
 \begin{example}
 \label{balon}
-Nad rybníkem $H$ fouká vítr, jeho směr a velikost v čase $t$ během jednoho dne $I$ a v místě $\vc x$ rybníka  $H\subset \Real^2$
+Nad rybníkem $H$ fouká vítr. Směr větru a jeho velikost v čase $t$ během jednoho dne $I$ a v místě $\vc x$ rybníka  $H\subset \Real^2$
 je dán funkcí $\vc f(t, \vc x)$. Balón s minimální hmotností a třením je větrem unášen po trajektorii dané funkcí $\vc x(t)$,
 která splňuje rovnici \eqref{eq::soustava_ODR}. 
 Rychlost balónu v čase $t$ je tedy rovna rychlosti větru v místě, kde je balón, a ve stejném čase $t$.
@@ -392,11 +391,11 @@ t^{-1}  &  3t\sqrt{1-t^2}\\
 \end{example}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Pohyb balónu v příkladu \ref{balon} není jednoznačně určen, jelikož nevíme odkud byl vypoštěn. 
-Z fyzikálního kontextu víme, že se balón z bodu vypuštění pohybovat po jednoznačné trajektorii. Pokud je 
+Pohyb balónu v příkladu \ref{balon} není jednoznačně určen, jelikož nevíme odkud byl vypuštěn. 
+Z fyzikálního kontextu víme, že se balón z bodu vypuštění bude pohybovat po jednoznačné trajektorii. Pokud je 
 náš model správně, musí mít i rovnice pro jeho pohyb jednoznačné řešení při zadání počáteční polohy. 
 Tento typ úloh nazýváme {\it Cauchyovou úlohou} nebo {\it počáteční úlohou} 
-(narozdíl tzv. okrajových úloh jako je průhyb nosníku ukotveného na obou stranách \todo{uvest v motivacnich ulohach})
+(narozdíl od tzv. okrajových úloh jako je průhyb nosníku ukotveného na obou stranách \todo{uvest v motivacnich ulohach})
 
 \begin{definition}
 \label{Cauchy}
@@ -407,7 +406,7 @@ dána funkce $\vc f: I\times H \to \Real^n$. Nechť $(\tau, \vc \xi)$ je pevně 
 \[
     \dot{\vc x} = \vc f(t,\vc x),
 \]
-které je definováno na intervalu $J$ obsahujícím $\tau$ a splňuje {\emph počáteční podmínku}
+které je definováno na intervalu $J$ obsahujícím $\tau$ a splňuje \emph {počáteční podmínku}
 \[
     \vc x(\tau)=\vc \xi.
 \]
@@ -504,7 +503,7 @@ Označme
     Q(t,\tau) = \int_\tau^t q(s)\d s,\qquad 
     H(t,\tau) = \int_\tau^t h(s)\d s.
 \]
-Ukažte, že pro libovolné $\tau\in I$ a $\vc \xi \in R^2$ je vektorová 
+Ukažte, že pro libovolné $\tau\in I$ a $\vc \xi \in \Real^2$ je vektorová 
 funkce
 \[
 \vc x(t) = \tn X(t) \vc \xi = e^{Q(t,\tau)}
@@ -525,7 +524,7 @@ pro všechna $t\in I$ řešením Cauchyovy úlohy
   -h(t) & q(t)
  \end{pmatrix}
  \vc x,
- \quad \vc x(\tau) = \xi
+ \quad \vc x(\tau) = \vc \xi
 \]
 \end{example}
 \begin{proof}
@@ -555,14 +554,14 @@ q \cos H - h \sin H   &  q \sin H + h \cos H \\
 \end{proof}
 
 \subsection{Rovnice vyššího řádu}
-V této kapitolce si zavedeme soustavy rovnic vyššího řádu a úkážeme, že je lze převést na 
-soustavy rovnic řádu prvního podobně jako jsme to udělali v případě tlumeného oscilátoru 
+V této podkapitole zavedeme soustavy rovnic vyššího řádu a ukážeme, že je lze převést na 
+soustavy rovnic řádu prvního, podobně jako jsme to udělali v případě tlumeného oscilátoru 
 v kapitole \ref{sec::oscilator}.
 
 \begin{definition}
 \label{def::rovnice_radu_n}
-Nechť je dán otevřený interval $I\subset R$ a oblast $H\subset R^{n}$.  Nechť je dána funkce
-$f:I\times H\to R$ a počáteční bod $(\tau, \vc \xi) \in I\times H$. \emph{Cauchyovou 
+Nechť je dán otevřený interval $I\subset \Real$ a oblast $H\subset \Real^{n}$.  Nechť je dána funkce
+$f:I\times H\to \Real$ a počáteční bod $(\tau, \vc \xi) \in I\times H$. \emph{Cauchyovou 
 úlohou pro obyčejnou diferenciální rovnici $n$-tého řádu}
 \begin{equation}
     \label{eq::ODR_order_n}
@@ -583,7 +582,7 @@ pro všechna $t\in J$.
 \end{enumerate}
 \end{definition}
 
-Funkci $x$ mající vlastnosti 1 až 4 z definition \ref{def::rovnice_radu_n} nazýváme 
+Funkci $x$ mající vlastnosti 1 až 4 z definice \ref{def::rovnice_radu_n} nazýváme 
 \emph{řešením Cauchyovy úlohy \eqref{eq::ODR_order_n}.} Má-li funkce $x$ pouze vlastnosti
 1 až 3, nazýváme ji \emph{řešením obyčejné diferenciální rovnice \eqref{eq::ODR_order_n}.}
 
@@ -598,16 +597,16 @@ pak platí
 \dot x_1 &= x_2,& x_1(\tau)&=\xi_1, \\
 \dot x_2 &= x_3,& x_2(\tau)&=\xi_2, \\
 \notag
-&\dots &&\dots \\
+&\vdots &&\vdots \\
 \dot x_{n-1} &= x_n,& x_{n-1}(\tau)&=\xi_{n-1}, \\
 \dot x_n &= f(t,x_1,x_2,\dots,x_n),& x_n(\tau)&=\xi_n.
 \end{align*}
 
-To je Cauchyova úloha pro soustavu obyčejných diferenciálních rovnic 1. řádu , kde
+To je Cauchyova úloha pro soustavu obyčejných diferenciálních rovnic 1. řádu, kde
 \begin{eqnarray*}
 f_1(t,x_1,x_2,\dots,x_n) &=& x_2, \\
 f_2(t,x_1,x_2,\dots,x_n) &=& x_3, \\
-&\dots&\\
+&\vdots&\\
 f_{n-1}(t,x_1,x_2,\dots,x_n) &=& x_n, \\
 f_n(t,x_1,x_2,\dots,x_n) &=& f(t,x_1,x_2,\dots,x_n).
 \end{eqnarray*}
