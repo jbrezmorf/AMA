@@ -115,11 +115,13 @@
 
 
 \chapter{Motivační praktické problémy}
+For english test see \cite[Lecture 1]{flaherty}.
+
 \section{Fyzikální motivace}
 \subsection{Aerodynamická brzda - separace proměnných}
 Na jednoduché fyzikální úloze si připomeneme pojmy pro jednoduché obyčejné diferenciální rovnice
 a dvě základní metody jejich řešení.
-Auto s počáteční rychlostí $v_0=100$ km za hodinu jede s vyřazeným motorem. Při vysokých 
+Auto s počáteční rychlostí $v_0=100$~km za hodinu jede s vyřazeným motorem. Při vysokých 
 rychlostech převažuje aerodynamický odpor a odporová síla je úměrná druhé mocnině rychlosti.
 Máme určit průběh rychlosti jako funkci času. 
 
@@ -1408,7 +1410,7 @@ používá také symbol $\mathrm{e}^{{\tn A}t}$.
 \begin{theorem}
 Matice ${\tn A}$ vyhovuje své charakteristické rovnici, tedy
 \begin{equation}
-{\tn A}^n+c_1{\tn A}^{n-1}+\dots+c_{n-1}{\tn A}+c_n{\tn E}={\tn 0},
+{\tn A}^n+c_1{\tn A}^{n-1}+\dots+c_{n-1}{\tn A}+c_n{\tn E}=0,
 \end{equation}
 kde
 \begin{equation}
@@ -1483,7 +1485,8 @@ hledanou standardní fundamentální matici.
 Jak jsme již poznamenali, analytické řešení soustavy ODR, lze najít jen pro speciální případy funkce $\vc f$. Obecný postup máme k dispozici 
 pouze pro lineární soustavy s konstantními koeficienty a i zde jsme omezeni na malé systémy, pro které jsme schopni nalézt vlastní čísla.
 Numerické metody umožňují řešit obecné soustavy obyčejných diferenciálních rovnic, ale vždy pouze přibližně, přičemž chyba se obvykle zvyšuje s časem.
-Některé přírodní procesy jsou popsány rovnicemi, kde chyba roste s časem exponenciálně. Příkladem může být předpověď počasí. Důsledkem je praktická nemožnost 
+Některé přírodní procesy jsou popsány rovnicemi, kde malá změna počáteční podmínky vede po jistém čase ke kvalitativně odlišným řešením
+Příkladem může být kulička na břitu. Do stejné katergorie patří například rovnice pro popis počasí. Důsledkem je praktická nemožnost 
 dlouhodobých předpovědí.
 
 Podle Důsledku \ref{thm:ODR_order_n}, lze každou soustavu obyčejných diferenciálních rovnic libovolného řádu převést na soustavu rovnic prvního řádu.
@@ -1494,8 +1497,8 @@ Dále se proto můžeme omezit na zkoumání numerických metod pro rovnice prvn
 \end{equation}
 Omezíme se na počáteční čas $\tau =0$ a řešení pouze pro kladné časy $t>0$ (obvykle nás zajímá nějaká forma predikce).
 
-Dále, abychom měli zajištěnu existenci jednoznačného řešení úlohy (\ref{pocul}),
-budeme požadovat následující vlastnosti funkce pravé strany $f$:
+Dále, abychom měli zajištěnu existenci jednoznačného řešení úlohy (\ref{eq::num_cauchy}),
+budeme pro jednoduchost požadovat následující vlastnosti funkce pravé strany $f$:
 \begin{enumerate}
  \item vektorová funkce $\vc f$ je spojitá funkce na pásu $(t,\vc x) \in \langle a,b\rangle\times \Real^n$
  \item $\vc f$ je na tomto pásu lipschitzovská vzhledem $\vc x$ s konstantou $L$ nezávislou na $t$, tj.
@@ -1503,19 +1506,15 @@ budeme požadovat následující vlastnosti funkce pravé strany $f$:
     \norm{\vc f(t, \vc x) - \vc f(t, \vc y)} \le L \norm{\vc x - \vc y}, \qquad \text{pro všechna} t\in\langle a,b \rangle,\ x,\,y \in \Real^n
  \]
 \end{enumerate}
-Tyto podmínky jsou pro existenci jednoznačného řešení postačující, 
-nikoliv nutné. Pro jednoduchost však budeme předpokládat jejich splnění.
 
-Pro jednoduchost budeme nasledující úvahy představovat většinou na jednoduché rovnici, 
-přičemž většinu úvah lze snadno zobecnit na soustavy. Na specifika numerického řešení soustav upozorníme
-jen tam, kde to je nutné.
+Hodnoty řešení a funkce pravé strany jsou z prostoru $\Real^n$, na kterém budeme uvažovat libovolnou danou normu $\norm{\cdot}$, např. eukleidovskou.
 
 %%% 5. prednaska 2004:
 Než přistoupíme ke studiu konkrétních metod poznamenejme, 
-že přibližné řešení úlohy (\ref{pocul}) lze hledat několika principiálně
+že přibližné řešení úlohy (\ref{eq::num_cauchy}) lze hledat několika principiálně
 odlišnými postupy. Zde zmiňme především v teorii diferenciálních rovnic 
 užitečnou, avšak pro numerické řešení neefektivní, {\em metodu postupných
-aproximací} založenou na integrální variantě rovnic (\ref{pocul})
+aproximací} založenou na integrální variantě rovnic (\ref{eq::num_cauchy})
 \begin{displaymath}
 x(t)=\xi + \int_a^t f(s,x(s))\d s
 \end{displaymath}
@@ -1523,85 +1522,138 @@ a konstrukci postupných aproximací funkce $x(t)$ podle vztahu
 \begin{displaymath}
 x_{n+1}(t)=\xi + \int_a^t f(s,x_n(s))\d s.
 \end{displaymath}
+Na tomto přístupu je založen důkaz Picardovy věty o existenci a jednoznačnosti.
 
 My se budeme zabývat jiným typem metod, tzv. {\em diskrétními 
 metodami}, založenými na hledání přibližných hodnot funkce $x(t)$ pouze
-v konečném počtu bodů $t_i$ z intervalu $\langle a,b\rangle$. Omezíme 
-se na ekvidistantní volbu bodů $t_i$, tj.
+v konečném počtu bodů $t_i$ z intervalu $[ 0,T ]$. 
+Pokud nebude řečeno jinak, budeme uvažovat ekvidistantní volbu bodů $t_i$, tj.
 \begin{displaymath}
-t_i=a+ih,~~~~ i=0,1,\dots
+t_i=a+ih,\quad i=\in I_N=\{0,1,\dots, N\},
 \end{displaymath}
-Konstantu $h$ označujeme termínem {\em integrační krok}.
+kde $N=T/h$.
+Konstantu $h$ nazýváme {\em integrační krok} metody.
 
 
-\section{Explicitní Eulerova metoda}
+\section{Explicitní metody}
+% zminka o pouziti pro dukaz existence
+\subsection{Explicitní Eulerova metoda}
 Jako úvodní příklad si představíme nejednodušší numerickou metodu pro řešení ODR prvního řádu a
 to explicitní Eulerovu metodu. Na ní si také demostrujeme základní pojmy konzistence, konvergence a stability numerické metody.
 Uvažujme počáteční úlohu
-\[
-   y' = f(t,y), t>0, y(0)=y_0.
-\]
-Z předepsané počáteční podmínky můžeme spočítat \uv{polohu} a \uv{rychlost} v počátečním čase, $y(0) = y_0$, $y'(0) = f(0, y_0)$. 
+\begin{align*}    
+   \vc y'(t) &= \vc f(t,\vc y(t)), \quad \text{for }t>0,\\
+   \vc y(0)&=\vc y_0.
+\end{align*}
+Z předepsané počáteční podmínky můžeme spočítat \uv{polohu} a \uv{rychlost} v počátečním čase, $\vc y(0) = \vc y_0$, $\vc y'(0) = \vc f(0, \vc y_0)$. 
 Pro krátkný čas $t=h$ můžeme použít Taylorův rozvoj pro výpočet řešení:
 \[
-  y(h) = y(0) + h y'(0) + O(h^2) = y_0 + h f(0, y_0) + O(h^2).
+  \vc y(h) = \vc y(0) + h \vc y'(0) + O(h^2) = \vc y_0 + h \vc f(0, \vc y_0) + O(h^2).
 \]
-Eulerovu metodu dostaneme pokud v předchozím vzorci zanedbáme člen $O(n^2)$. Tím dostaneme přibližnou hodnotu $y_1 \approx y(h)$
-v dalším kroku provedeme stejný postup pro počáteční úlohu:
-\[ 
-     y' = f(t,y), t>h, y(h)=y_1.
-\]
-a dostaneme
+Eulerovu metodu dostaneme pokud v předchozím vzorci zanedbáme člen $O(n^2)$. Tím dostaneme přibližnou hodnotu řešení $\vc y(h) \approx \vc y_1$
+v čase $t_1=h$. V dalším kroku metody provedeme stejný postup pro počáteční úlohu:
+\begin{align*}
+   \vc y'(t) &= f(t, \vc y(t)), \quad \text{for }t>h,\\
+   \vc y(h)&=\vc y_1.
+\end{align*}
+a dostaneme hodnotu přibližného řešení v čase $t_2=2h$:
 \[
-   y_2 = y_1 + h f(h, y_1) \approx y(2h).
+   \vc y(2h) \approx \vc y_2 = \vc y_1 + h \vc f(h, \vc y_1).
 \]
 Pro hodnotu přibližného řešení v čase $t_{n+1}=(n+1)h$ pak dostáváme rekurentní formuli
 \begin{equation}
    \label{eq:Euler_method}
-   y(t_{n+1}) \approx y_{n+1} = y_n + h f(t_n, y_n),\qquad t_n=nh,\qquad n>0.
+   \vc y(t_{n+1}) \approx \vc y_{n+1} = \vc y_n + h f(t_n, \vc y_n),\qquad t_n=nh,\qquad n>0.
 \end{equation}
-V každém kroku tedy zkonstruujeme tečnu k přesnému řešení začínajícímu v bodě $(t_n, y_n)$
+Takto dostaneme postupně hodnoty přibližného řešení $y_i$ v časech $t_i$, pro $i=1,2,\dots$
+V každém kroku tedy zkonstruujeme tečnu k přesnému řešení začínajícímu v bodě $(t_n, \vc y_n)$
 a až do času $t_{n+1}$ aproximujeme řešení touto tečnou, viz. Obr \ref{fig:Euler_approx}.
 Takto můžeme chápat přibližné řešení jako po částech lineární funkci:
 \[
-   \tilde y(t) = \frac{y_{n+1}(t - t_n) + y_n(t_{n+1}-t)}{h},\qquad \text{na } [t_n, t_{n+1}].
+   \vc{\tilde y}(t) = \frac{\vc y_{n+1}(t - t_n) + \vc y_n(t_{n+1}-t)}{h},\qquad \text{na } [t_n, t_{n+1}].
 \]
+\pagebreak
 
-
-\subsection{Errors of numerical solution}
+\subsection{Chyby numerických metod}
 \begin{figure}[h]
  \centering
  \includegraphics[bb=0 0 355 297]{Flaherty_2_1_1.pdf}
  % Flaherty_2.1.1.pdf: 355x297 pixel, 72dpi, 12.52x10.48 cm, bb=0 0 355 297
- \caption{Přesné řešení a approximace Eulerovou metodou. $d_i$ jsou lokální chyby $e_3$ globální chyba.}
+ \caption{Přesné řešení (nahoře) a přibližné řešení (dole) vypočtené explicitní Eulerovou metodou. Lokální chyby $d_i$ a globální chyba $e_3$.}
  \label{fig:Euler_approx}
 \end{figure}
 
-Při výpočtu hodnoty $y_{n+1}$ se dopouštíme chyby $d_n$ vzhledem k přesnému řešení začínajícímu v bodě $(t_n, y_n)$. Této chybě se říká \df{lokální chyba}
-a vstupuje nám jako chyba počáteční podmínky do dalšího kroku aproximace. Pokud je úloha citlivá na změnu počátečních podmínek může do dalšího kroku tato chyba velmi vzrůst
-a k ní se ještě přičte lokální chyba dalšího kroku. Celkem pak v každém kroku dostáváme \df{globální chybu} jako odchylku $\abs{y_n - y(t_n)}$ od přesného řešení.
+Na Obrázku \ref{fig:Euler_approx} vidíme nahoře přesné řešení (skalární lineární rovnice $y'=2y$) pro počáteční podmínku $(t_0, y_0)$ zobrazené plnou čarou.
+Lomená plná čára vespod zobrazuje přibližné řešení pro stejnou počáteční podmínku. 
 
-\begin{example}
-\label{ex:decay}
-Uvažujme počáteční úlohu:
-\[
-  y'=\lambda y,\qquad y(0) =1.
-\]
-Její přesné řešení je $y(t) = e^{\lambda t}$. Předpis pro $y_n$ podle Eulerovy metody \eqref{eq:Euler_method} je
-\[
-   y_n = (1+ h\lambda)y_{n-1},\qquad n>0,\qquad y_0=1.
-\]
-Volbou $\lambda=-100$ a $h=0.001$ dostaneme $y_n=0.9y_{n-1}$. V tabulce \ref{table:reseni} je prvních deset kroků Eulerovy metody. Vidíme, že lokální chyba $d_n$ neroste, dokonce naopak klesá, zato globální chyba $e_n$
-stále roste. Tabulka \ref{table:konvergence} ukazuje závislost globální chyby na velikosti časového kroku $h$. Vidíme, že $e_n$ klesá lineárně v závislosti na $h$.
-\end{example}
+\begin{definition}
+ \df{Globální chyba} $\vc e_i$ v čase $t_i$ je rozdíl mezi přesným a přibližným řešením po $i$ krocích metody:
+ \[
+    \vc e_i = \vc y(t_i) - \vc y_i.
+ \]
+ přičemž obě řešení splňují stejnou počáteční podmínku $\vc y(t_0)=\vc y_0$.
+\end{definition}
+V obecnějším smyslu můžeme globální chybu chápat jako funkci $\vc e(t) = \vc y(t) - \vc{\tilde y}(t)$.
 
+Globální chyba tedy zahrnuje ochylky ze všech časových kroků.
+Naproti tomu lokální chyba $\vc d_i$ je rozdíl přesného a přibližného řešení po jednom kroku. Pro první krok splývá s globální chybou 
+$\vc d_1=\vc e_1=\vc y(t_1; t_0, \vc y_0) - \vc y_1$ pro obecný krok $i$ musíme uvažovat přesné řešení $\vc y(t; t_{i-1}, \vc y_{i-1})$,
+které startuje 
+z hodnoty přibližného řešení $\vc y_{i-1}$ v předchozím čase $t_{i-1}$, na Obrázku \ref{fig:Euler_approx} jsou tato řešení vyznačena čárkovaně.
+
+\begin{definition}
+ \df{Lokální chyba} $\vc d_i$ v čase $t_i$ je rozdíl mezi přesným a přibližným řešením po jednom kroku metody,
+ \[
+   \vc d_i = \vc y(t_i; t_{i-1}, \vc y_{i-1}) - \vc y_i,
+ \]
+kde přesné řešení splňuje počáteční podmínku $\vc y(t_{i-1}) = \vc y_{i-1}$. 
+\end{definition}
+
+Lokální chyba je úzce spjata s \df{lokální diskretizační chybou}. K její definici si nejprve zavedeme diferenční operátor Eulerovy metody:
+\[
+ \mathcal{L}_h \vc u(t_i) = \frac{\vc u(t_i) - \vc u(t_{i-1})}{h} - \vc f(t_{i-1}, \vc u(t_{i-1})), \quad \text{for }n>0.
+\]
+\begin{definition}
+ \df{Lokální diskretizační chyba} $\vc{\tau}_i$ v čase $t_i$ je přesnost s jakou přesné řešení 
+ $y(t_i; t_{i-1}, y_{i-1})$ splňuje diferenční rovnici metody:
+ \[
+   \vc{\tau}_i = \mathcal{L}_h \vc y(t_i)
+ \]
+\end{definition}
+
+V případě explicitní Eulerovy metody máme
+\[
+  \vc d_i = \vc y(t_i; t_{i-1}, \vc y_{i-1}) - \vc y_i = \vc y(t_i) - \vc y(t_{i-1}) - h \vc f(t_{i-1}, \vc y(t_{i-1}))
+\]
+a tedy $\vc \tau_i = \vc d_i/h$. Pro jiné metody může být vztah lokální chyby a lokální diskretizační chyby složitější.
+
+\begin{definition}
+ Říkáme, že metoda je konzistentní, pokud platí
+ \[
+   \lim_{h\to 0} \max_{i\in I_N} \norm{\vc \tau_i} = 0.
+ \]
+ Metoda je konzistentní řádu $p$, pokud pro všechna $i=1,\dots, N$ platí  $\norm{\vc\tau_i} = O (h^p)$, tj.
+ \[
+        \norm{\vc \tau_i} \le C h^p
+ \]
+pro nějakou konstantu $C$ a všechna dostatečně malá $h$.
+\end{definition}
+
+\begin{definition}
+ Říkáme, že metoda je konvergentní řádu $p$, pokud při výpočtu numerického řešení na pevném intervalu $t \in [0,T]$ konverguje globální chyba
+ s klesajícím $h$ k nule:
+ \[
+    \lim_{h\to 0} \max_{i\in I_N} \norm{\vc e_i} = 0,
+ \]
+ Pokud $\max_{i<N} \norm{\vc e_i} = O(h^p)$, říkáme, že metoda konverguje s řádem $p$.
+\end{definition}
 
 
 \begin{table}
 \centering
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-$n$ & $t_n$ & $y_n$ & $d_n$ & $e_n$\\ 
+$i$ & $t_i$ & $y_i$ & $d_i$ & $e_i$\\ 
 \hline
 0 & 0.0000 & 1.0000 & 0.0000 & 0.0000\\ 
 \hline
@@ -1634,7 +1686,7 @@ $n$ & $t_n$ & $y_n$ & $d_n$ & $e_n$\\
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
-$h$ & $n=T/h$ & $y_n$ & $e_n$\\ 
+$h$ & $i=T/h$ & $y_i$ & $e_i$\\ 
 \hline
 1.00e-3 & 1.00e+2 & 2.66e-5 & 1.88e-5\\ 
 \hline
@@ -1649,54 +1701,103 @@ $h$ & $n=T/h$ & $y_n$ & $e_n$\\
 \caption{Závislost chyby řešení na časovém kroku, $T=0.1$, $\lambda=-100$.} 
 \end{table}
 
-\begin{definition}
- \df{Globální chyba} $e_n$ je absolutní rozdíl mezi přesným a numerickým řešením po $n$ krocích metody v čase $t_n$:
- \[
-    e_n = \abs{ y(t_n) - y_n}.
- \]
-\end{definition}
-Globální chybu můžeme také chápat jako funkci $e(t) = y(t) - \tilde y(t)$.
 
-
-\begin{definition}
- \df{Lokální chyba} $d_n$ je absolutní rozdíl mezi přesným a numerickým řešením po jednom kroku metody, pokud obě tato řešení startují ze
- stejného bodu $(t_{n-1}, y_{n-1})$.
- \[
-   d_n = \abs{ y(h; t_{n-1}, y_{n-1}) - y_n}
- \]
-\end{definition}
-
-V případě soustav diferenciálních rovnic je v předchozích dvou definicích potřeba použít normu na $\Real^n$ místo absolutní hodnoty.
-
-Lokální chyba je uzce spjata s \df{lokální diskretizační chybou}. K její definici si nejprve zavedeme diferenční operátor Eulerovy metody:
+\begin{example}
+\label{ex:decay}
+Uvažujme počáteční úlohu:
 \[
- \mathcal{L}_h u(t_n) = \frac{u(t_n) - u(t_{n-1})}{h} - f(t_{n-1}, u(t_n)).
+  y'=\lambda y,\qquad y(0) =1.
 \]
-\begin{definition}
- \df{Lokální diskretizační chyba} $\tau_n$ je přesnost s jakou přesné řešení splňuje diferenční rovnici metody:
- \[
-   \tau_n = \mathcal{L}_h y(t_n)
- \]
-\end{definition}
-
-V případě Eulerovy metody máme
+Její přesné řešení je $y(t) = e^{\lambda t}$. Předpis pro $y_n$ podle Eulerovy metody \eqref{eq:Euler_method} je
 \[
-  d_n = y(t_n; t_{n-1}, y_{n-1} - y_n =y(t_n) - y(t_{n-1}) - hf(t_{n-1}, y(t_{n-1}))
+   y_i = (1+ h\lambda)y_{i-1},\qquad i>0,\qquad y_0=1.
 \]
-a tedy $\tau_n = d_n/h$. Pro jiné metody může být vztah lokální a lokální diskretizační chyby složitější.
+Volbou $\lambda=-100$ a $h=0.001$ dostaneme 
+\[
+    y_i=0.9y_{i-1}, \qquad i>0,\qquad y_0=1
+\]
+V tabulce \ref{table:reseni} je prvních deset kroků 
+Eulerovy metody. Vidíme, že lokální chyba $d_i$ neroste, dokonce naopak klesá, zato globální chyba $e_i$
+stále roste. Tabulka \ref{table:konvergence} ukazuje závislost globální chyby na velikosti časového kroku $h$. 
+Vidíme, že $e_i$ klesá lineárně v závislosti na $h$, jde tedy o kovergentní metodu prvního řádu. 
 
+
+Zkusme toto pozorování dokázat obecně pro explicitní Eulerovu metodu. Podle definice lokální chyby máme:
+\begin{equation}
+  \label{eq:local_err}
+  \vc d_i = \vc y(t_i;t_{i-1}, y_{i-1}) - \vc y_i = \vc y(t_i) - \vc y_{i-1} - h \vc f(t_{i-1}, \vc y_{i-1}) 
+\end{equation}
+Pro přesné řešení použijeme Taylorův rozvoj:
+\[
+    \vc y(t_i)=\vc y(t_{i-1})+ h \vc y'(t_{i-1})+\frac{h^2}{2}\vc y''(\xi_i),\quad \text{for some }\xi_i \in (t_{i-1}, t_i).
+\]
+Nyní dosadíme do \eqref{eq:local_err} a dále použijeme rovnici pro  $y'(t_{i-1})$, jelikož pro lokální chyby předpokládáme  
+$y(t_{i-1})=y_{i-1}$, dostaneme:
+\[
+    \vc d_i = \frac{h^2}{2}\vc y''(\xi_i).
+\]
+Odtud také určíme lokální diskretizační chybu: $\vc \tau_i = \vc d_i/h = \frac{h}{2}\vc y''(\xi_i)$ a proto je explicitní 
+Eulerova metoda konzistentní řádu $1$.
+
+TODO: global error and convergency
+\end{example}
+
+\begin{theorem}\label{Veta2.2}
+Nechť $\vc y$ je řešení počáteční úlohy s pravou stranou  $\vc f$ splňující předpoklady Picardovy věty \ref{thm::Picard} s Lischitzovskou konstantou $L$.
+Dále nechť má řešení $\vc y$ na intervalu $[ 0, T]$ dvě spojité derivace. Pak pro přibližné řešení  $\vc y_i$ vypočtené explicitní Eulerovou metodou platí
+\begin{equation}\label{odhadEul}
+\norm{\vc y_i - \vc y(t_i)} \leq h M(t_i) E_L(t_i), i=0,\dots,n,
+\end{equation}
+kde 
+\begin{displaymath}
+M(t_i) = \frac 12 \max_{s\in [0,t_i]} \norm{\ddot{\vc{y}}(s)},\qquad
+E_L(t)=\left\{\begin{array}{ll}
+                \frac{e^{Lt}-1}{L}&\mbox{pro } L>0\\
+                t&\mbox{pro } L=0
+              \end{array}\right. ,
+\end{displaymath}
+\end{theorem}
+Vzorec (\ref{odhadEul}) vyjadřuje {\em apriorní odhad} chyby Eulerovy metody, 
+pokud známe funkci $M(t)$. Bez znalosti řešení tuto funkci ovšem neznáme. 
+Dostáváme ale z Věty \ref{Veta2.2} informaci, že rychlost konvergence Eulerovy 
+metody je $h$. 
+
+
+\subsection{Zaokrouhlovací chyba}
+Doposud jsme analyzovali pouze chyby způsobeneé diskretizací diferenciální rovnice. Pro Eulerovu metodu dostáváme lineární pokles globální chyby z závislosti na 
+kroku $h$ metody. Při praktickém řešení na počítači však nepočítáme v přesné aritmetice a na řešení se projevuje též zaokrouhlovací chyba.
 
 \begin{definition}
- Říkáme, že metoda je konzistentní do řádu $p$, pokud $\tau_n = O (h^p)$. Pokud je $p\ge 1$, říkáme že metoda je konzistentní.
+  Nechť $\vc y_i$ je numerické řešení počáteční úlohu v přesné aritmetice a $\vc{\tilde y}_i$ řešení stejné úlohy v aritmetice s konečnou přesností. Pak 
+  veličinu 
+  \[
+     \vc \eta_i = \vc y_i - \vc{\tilde y}_i
+  \]
+  nazýváme \df{celkovou zaokrouhlovací chybou}.
 \end{definition}
 
-\begin{definition}
- Říkáme, že metoda je konvergentní řádu $p$, pokud při výpočtu numerického řešení na pevném intervalu $t \in [0,T]$ konverguje globální chyba s klesajícím $h$ k nule:
- \[
-    \lim_{h\to 0} \abs{e(t)} \to 0,\qquad \text{ pro všechna $t\in [0,T]$}
- \]
- Pokud $\abs{e(t)} = O(h^p)$, říkáme, že metoda konverguje s řádem $p$.
-\end{definition}
+Pro velikost celkové zaokrouhlovací chyby lze dokázat následující větu:
+\begin{theorem}\label{Veta2.5}
+Nechť je pravá strana $\vc f$ Lischitzovská s konstantou $L$ a
+a nechť je lokální zaokrouhlovací chyba $\varepsilon_i$ při výpočtu jednoho kroku metody omezená konstantou $\varepsilon$.
+Pak platí
+\begin{equation}\label{zaokrchEuler}
+\norm{\vc \eta_i}\leq \frac\varepsilon h E_L(t_i), i=1,\dots,n.
+\end{equation}
+\end{theorem}
+Tedy chyba roste přímo úměrně počtu vypočtených kroků a nepřímo úměrně s $h$. Tato zaokrouhlovací chyba se sčítá s globální diskretizační chybou a pro 
+jejich normu dostáváme graf na obrázku \ref{fig:limit_precision}. S klesajícím krokem $h$, nejprve celková chyba klesá jako globální diskretizační chyba
+až do okamžiku, kdy se globální diskretizační chyba vyrovná s celkovou zaokrouhlovací chybou která naopak roste. Tomuto minimu celkové chyby se říká 
+\df{mezní přesnost metody}. Pro menší $h$ pak dominuje zaokrouhlovací chyba a celková chyba už jen roste.
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.98\textwidth]{chyby}\\
+\caption[]{Vztah diskretizační, zaokrouhlovací a celkové chyby.}
+\label{fig:limit_precision}
+\end{figure}
+
 
 \subsection{Stabilita a absolutní stabilita}
 \begin{example}
@@ -1727,31 +1828,31 @@ $n$ & $t_n$ & $y_n$\\
 \hline
 \hline\end{tabular}
 \label{table:instability}
-\caption{\small{}} 
+\caption{Řešení rovnice $y'=-100y$ s explicitní Eulerovou metodou s krokem $h=0.05$. Přesné řešení rychle konverguje k nule, numerické vykazuje exponenciálně rostoucí oscilace.} 
 \end{table}
 
 Jev demonstrovaný v posledním příkladu nazýváme \uv{numerická nestabilita} metody.
 \begin{definition}
- Jednokroková numerická metoda je \df{stabilní} pokud existují kladné konstatny $\hat h$, $k$  takové, že pro numerické řešení $y(t)$, $y(0) = y_0$ 
- a numerické řešení $z(t)$, $z(0) = y_0 + \delta_0$ platí 
+ Jednokroková numerická metoda je \df{stabilní} pokud existují kladné konstatny $\hat h$, $k$ takové, že pro numerické řešení $\vc y_i$ úlohy s počáteční podmínkou $\vc y_0$ 
+ a numerické řešení $\vc z_i$ úlohy s počáteční podmínkou $\vc z_0 = \vc y_0 + \vc \delta_0$ platí 
  \[
-   \abs{y(t) - z(t)} \le k \delta,\qquad \text{pro všechna }h\in(0,\hat h)
+   \max_{i} \norm{\vc y_i - \vc z_i} \le k \delta,\qquad \text{pro všechna }h\in(0,\hat h).
  \]
- kdykoliv $\delta_0 \le \delta$.
+ kdykoliv $\norm{\vc \delta_0} \le \delta$.
 \end{definition}
 Pro Eulerovu metodu můžeme odhadnout rozdíl řešení následovně
 \[
-  \delta_n = y_n - z_n = \delta_{n-1} + h\big[ f(t_{n-1}, y_{n-1}) - f(t_{n-1}, z_{n-1}) \big].
+  \norm{\vc\delta_n} = \vc y_n - \vc z_n = \norm{\delta_{n-1}} + h\norm{f(t_{n-1}, y_{n-1}) - f(t_{n-1}, z_{n-1}) }.
 \]
 a díky lipschicovské podmínce:
 \[
-  \abs{\delta_n} \le (1 + hL)\abs{\delta_{n-1}}.
+  \norm{\vc\delta_n} \le (1 + hL)\norm{\vc\delta_{n-1}}.
 \]
 Iterováním dostaneme:
 \[
-  \abs{\delta_n} \le (1+hL)^n\abs{\delta_0} \le e^{hLn}\abs{\delta_0} \le e^{LT}\abs{\delta_0} \le k \delta
+  \norm{\vc\delta_n} \le (1+hL)^n\norm{\vc\delta_0} \le e^{hLn}\norm{\vc\delta_0} \le e^{LT}\norm{\vc\delta_0} \le k \delta
 \]
-kde $k = e^{LT}$ a $\abs{delta_0} \le \delta$.
+kde $k = e^{LT}$ a $\norm{\vc\delta_0} \le \delta$.
 
 Eulerova metoda je tedy stabilní. Proč tedy nefunguje v posledním příkladu? Definice stability je problematická ze dvou důvodů:
 \begin{enumerate}
@@ -1760,17 +1861,19 @@ Eulerova metoda je tedy stabilní. Proč tedy nefunguje v posledním příkladu?
 \end{enumerate}
 
 \begin{definition}
- Metoda se nazývá \uv{absolutně stabilní} pro časový krok $h$ a danou ODR, pokud změna počáteční podmínky $y_0$ o $\delta$ vyvolá změnu numerického řešení v dalších 
+ Metoda se nazývá \df{absolutně stabilní} pro časový krok $h$ a danou ODR, pokud změna počáteční podmínky $y_0$ o $\delta$ vyvolá změnu numerického řešení v dalších 
  časech opět nejvýše o $\delta$.
 \end{definition}
 
-Absolutní stabilita se obvykle vyšetřuje na obecné lineární rovnici (abychom se zbavili závislosti na rovnici):
-\[
-  y' = \lambda y,\qquad y(0) =y_0.
-\]
+Absolutní stabilita se obvykle vyšetřuje na obecné skalární lineární rovnici:
+\begin{equation}
+  \label{eq:lin_abs_stab}
+  y' = \lambda y,\qquad y(0) =y_0,
+\end{equation}
+kde $\lambda \in \bf{C}$.
 
 \begin{definition}
- Monžinu komplexních hodnot $\lambda$, pro které  je metoda absolutně stabilní pro rovnici \eqref{eq:lin_abs_stab}a libovolný časový krok $h$
+ Monžinu kroků $h$ a komplexních hodnot $\lambda$, pro které je metoda absolutně stabilní pro rovnici \eqref{eq:lin_abs_stab}
  nazýváme \df{regionem absolutní stability} dané metody.
 \end{definition}
 
@@ -1780,6 +1883,45 @@ Pro Eulerovu metodu máme
 \]
 Má-li být tato diference omezená pro libovolné $nh\le T$, musí být $\abs{1+h\lambda}\le 1$. Součin $h\lambda$ je komplexní číslo, které musí být v jednotkovém kruhu se středem v $-1+0i$. 
 V posledním příkladu jsme měli $h\lambda = -4$, tedy mimo region absolutní stability.
+
+
+\section{Implicitní Eulerova metoda}
+
+
+
+
+
+
+
+\begin{thebibliography}{9}
+
+\bibitem{flaherty}
+  Joseph E. Flaherty,\emph{ODE lecture notes}.
+\end{thebibliography}
+\end{document}
+
+
+
+\section{Vícekrokové metody}
+
+\section{Adaptivní metody}
+% metoda polovicniho kroku
+% porovnani metod ruznych radu
+
+\section{Přehled metod}
+
+\section{Okrajové úlohy a metoda sítí}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3232,38 +3374,3 @@ a odkazem do publikací věnovaných metodě sítí.
 
 % stabilita bodu
 
-
-
-
-\chapter{Numerické metody pro soustavy ODR}
-
-\section{Explicitní Eulerova metoda}
-% zminka o pouziti pro dukaz existence
-\subsection{Chyba diskretizace}
-\subsection{Lokální chyba metody}
-\subsection{Globální chyba metody}
-\subsection{Vliv zaokrouhlovacích chyb}
-% optimalni krok pro konecnou presnost
-\subsection{Oblast absolutní stability}
-% theorem stabilita & konzistence => konvergence
-
-\section{Implicitní Eulerova metoda}
-\subsection{Stiff problémy}
-\subsection{Oblast absolutní stability}
-\subsection{Řešení nelineárních soustav}
-
-\section{Rungeovy-Kuttovy metody}
-\subsection{Metody druhého řádu}
-\subsection{Obecná RK metoda}
-
-
-\section{Vícekrokové metody}
-
-\section{Adaptivní metody}
-% metoda polovicniho kroku
-% porovnani metod ruznych radu
-
-\section{Přehled metod}
-
-\section{Okrajové úlohy a metoda sítí}
-\end{document}
