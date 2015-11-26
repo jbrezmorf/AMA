@@ -11,6 +11,7 @@
 
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage[vlined]{algorithm2e}
 \hypersetup{backref,colorlinks=true, raiselinks=true}
 %
 \theoremstyle{definition}
@@ -143,7 +144,7 @@ na levé straně je pouze závisle proměnná a na pravé pouze nezávisle prom�
 \[
     v^{-2} \d v =  \alpha \d t, \quad \alpha = -k/m 
 \]
-Nyní obě strany vyintegrujeme, pozor na integrační konstantu $C$,
+Nyní obě strany integrujeme, pozor na integrační konstantu $C$,
 \[
     -v^{-1} = \int v^{-2}\; \d v = \int \alpha\; \d t =\alpha t + C.
 \]    
@@ -164,7 +165,7 @@ a celkový výsledek je tedy:
 
 \subsection{Rozjezd auta - variace konstant}
 V případě lineárních rovnic se autonomním rovnicím říká \df{homogenní} a lze je vždy řešit separací. Pokud se na pravé straně navíc objeví člen
-zavislý pouze na čase, \df{absolutní člen}, jedná se o \df{nehomogenní rovnici}, kterou řešíma \df{variací konstant}.
+závislý pouze na čase, \df{absolutní člen}, jedná se o \df{nehomogenní rovnici}, kterou řešíme \df{variací konstant}.
 
 Uvažujme zrychlený pohyb, kde v čase lineárně zvyšujeme výkon motoru a zároveň uvažujeme odporovou sílu přímo úměrnou rychlosti:
 \[
@@ -246,7 +247,7 @@ pak můžeme původní rovnici napsat ve tvaru soustavy:
    y'(t) - z(t) &= 0, & y(0) = y_0\\
    z'(t) + \alpha z(t) + \beta y(t) &= F(t), & z(0)= y_1
 \end{align}
-Tuto lineární soustavu můžme napsat ve vektorovém tvaru
+Tuto lineární soustavu můžeme napsat ve vektorovém tvaru
 \[
     \frac{\d}{\d t}    
     \begin{pmatrix}
@@ -358,7 +359,7 @@ Rychlost balónu v čase $t$ je tedy rovna rychlosti větru v místě, kde je ba
 
 
 \begin{example}
-Ukažte, že vektorová funkce
+Ukážeme, že vektorová funkce
 \[
 \vc x(t) = \begin{pmatrix}
 c_1 e^{2t} + c_2 e^{-2t} - c_3 e^{-t}\\
@@ -372,7 +373,57 @@ je pro každou volbu reálných konstant $c_1, c_2, c_3$ řešením soustavy
 \dot x_2 &= \phantom{-}x_1 - x_2 + x_3,\\
 \dot x_3 &= \phantom{-}x_1 + x_2 + x_3. 
 \end{align*}
+
+Nejprve spočteme 
+\[
+  \dot{\vc x}=
+\begin{pmatrix}
+2 c_1 e^{2t} - 2 c_2 e^{-2t} + c_3 e^{-t}\\
+2c_1 e^{2t} +2 c_2 e^{-2t} + c_3 e^{-t}\\
+4c_1 e^{2t}              - c_3 e^{-t}
+\end{pmatrix}=
+\begin{pmatrix}
+2e^{2t} & -2 e^{-2t} & e^{-t}\\
+2e^{2t} &  2 e^{-2t} & e^{-t}\\
+4e^{2t} & 0          & -e^{-t}
+\end{pmatrix}
+\begin{pmatrix}
+c_1\\
+c_2\\
+c_3\\
+\end{pmatrix}
+\]
 \end{example}
+Dále spočteme pravou stranu:
+\[
+ \tn A\vc x =
+ \begin{pmatrix}
+  -1 & 1 &1\\
+  1 &-1 &1\\
+  1 &1 &1
+ \end{pmatrix}
+\begin{pmatrix}
+e^{2t} &  e^{-2t}  & -  e^{-t}\\
+e^{2t} &  -e^{-2t} & -  e^{-t}\\
+2e^{2t} &  0        &    e^{-t}
+\end{pmatrix}
+\begin{pmatrix}
+c_1\\
+c_2\\
+c_3\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+2e^{2t} & -2 e^{-2t} & e^{-t}\\
+2e^{2t} &  2 e^{-2t} & e^{-t}\\
+4e^{2t} & 0          & -e^{-t}
+\end{pmatrix}
+\begin{pmatrix}
+c_1\\
+c_2\\
+c_3\\
+\end{pmatrix}
+\]
 
 \begin{example}
 Ukažte, že vektorová funkce
@@ -397,7 +448,7 @@ Pohyb balónu v příkladu \ref{balon} není jednoznačně určen, jelikož nev�
 Z fyzikálního kontextu víme, že se balón z bodu vypuštění bude pohybovat po jednoznačné trajektorii. Pokud je 
 náš model správně, musí mít i rovnice pro jeho pohyb jednoznačné řešení při zadání počáteční polohy. 
 Tento typ úloh nazýváme {\it Cauchyovou úlohou} nebo {\it počáteční úlohou} 
-(narozdíl od tzv. okrajových úloh jako je průhyb nosníku ukotveného na obou stranách \todo{uvest v motivacnich ulohach})
+(na rozdíl od tzv. okrajových úloh jako je průhyb nosníku ukotveného na obou stranách \todo{uvest v motivacnich ulohach})
 
 \begin{definition}
 \label{Cauchy}
@@ -696,12 +747,12 @@ pro každý čas  $t\in I$ a dvojici bodů $\vc x$, $\vc y$ v $H$ platí
 \end{definition}
 Pokud chceme zdůraznit hodnotu konstanty $L$, říkáme, že je funkce Lipschitzovská s konstantou $L$. 
 Za normu $\norm{\cdot}$ v podmínce \eqref{eq::Lipschitz} můžeme použít kteroukoliv normu na prostoru $\Real^n$, protože
-všechny normy na konečněrozměrných prostorech jsou ekvivalentní. Nicméně hodnota konstanty $L$ na volbě normy závisí.
+všechny normy na konečně rozměrných prostorech jsou ekvivalentní. Nicméně hodnota konstanty $L$ na volbě normy závisí.
 
 Důležitou třídu funkcí lipschitzovských vzhledem k proměnné $\vc x$ 
 tvoří funkce mající omezené všechny své první parciální derivace vzhledem k proměnným 
 $x_1, x_2, \dots, x_n$. Zkusme to dokázat, použijeme normu $\norm{\vc x} = \sum \abs{x_i}$. Mějme funkci $\vc f: I \times H \to \Real^n$
-s omezenými parciálními deriavacemi:
+s omezenými parciálními derivacemi:
 \[
     \Big\| \frac{\prtl f}{\prtl x_i}(t, \vc x) \Big\| \le M, \quad \text{pro všechna } t\in I,\ \vc x \in H,\ i=1,\dots, n
 \]
@@ -744,7 +795,7 @@ na oblasti $I\times H \subset \Real \times \Real ^n$. Pak pro Cauchyovu úlohu
 \end{equation}
 jednoznačné řešení na nějakém okolí $J\subset I$ počátečního času $\tau$.
 \end{theorem}
-\todo{Globalní řešení, maximální interval řešení a jeho jednoznačnost}
+\todo{Globální řešení, maximální interval řešení a jeho jednoznačnost}
 
 %SEM POZNAMKA O zavislosti reseni Cauchyovy ulohy na pocatecnich hodnotach .............................................
 
@@ -959,7 +1010,7 @@ $\vc e_i$ má jedničku ve složce $i$, jinde má nuly:
         \end{array}
         \right.
 \]
-Vlastně zobrazujeme pomocí zobrazení $\Phi$ standardní bázi $\{\vc e_i\}$ prostoru počátečních podmínek $\Real^n$ na \df{standarní bázi prostoru řešení} 
+Vlastně zobrazujeme pomocí zobrazení $\Phi$ standardní bázi $\{\vc e_i\}$ prostoru počátečních podmínek $\Real^n$ na \df{standardní bázi prostoru řešení} 
 $\mathcal{U}(I)$. Z toho ostatně plyne, že \eqref{eq:StdFS} je skutečně báze. Tuto bázi též nazýváme \df{standardním fundamentálním 
 systémem} Cauchyovy úlohy \eqref{eq:linODR}. Mezi všemi bázemi prostoru $\mathcal U(I)$ má standardní fundamentální systém tu vlastnost, že koeficienty 
 řešení $\vc x(t; \tau,\vc  \xi)$ jsou přímo složky počáteční podmínky, tj. v obecném tvaru řešení \eqref{eq:obecny_tvar} je $\vc c = \vc\xi$.
@@ -1001,7 +1052,7 @@ Uveďme nyní důležité vlastnosti fundamentálních matic a standardních fun
 
 
 \begin{theorem}[Liouvillova věta]
-     Nechť $\tn V(t)$ je fundamentální matice homegenní soustavy ODR \eqref{eq:lin_homo} definovaná na intervalu $I$.
+     Nechť $\tn V(t)$ je fundamentální matice homogenní soustavy ODR \eqref{eq:lin_homo} definovaná na intervalu $I$.
      Pak platí
      \[
         \det{\tn V}(t) = (\det{\tn V}(\tau)) \exp \Big( \int\limits_\tau^t {\mathrm tr} \tn A(s) \d s \Big), \qquad {\mathrm tr} \tn A = \sum\limits_{i=1}^n a_{ii}
@@ -1061,7 +1112,7 @@ Výsledná matice bude opět FM a je jednotková v čase $\tau$ navíc platí $\
 
 
 \subsection{Nehomogenní rovnice}
-Řešení nehomogenních sytémů lineárních ODR prvního řádu lze provést podobně jako pro jednoduché 
+Řešení nehomogenních systémů lineárních ODR prvního řádu lze provést podobně jako pro jednoduché 
 lineární ODR, tedy pomocí variace konstant. Připomeňme krátce postup pro jednoduchou rovnici
 \[
   \dot{x} = a(t)x + b(t), \qquad x(\tau) = \xi.
@@ -1142,7 +1193,7 @@ Zbývá ověřit splnění počáteční podmínky:
 
 \todo{Zmínka o Putzerově a Mocninné metodě a proč detailně děláme postup přes vlastní vektory ...}
 
-Dále se zaměříme na případ homogenních lineárních soustav s konstatními 
+Dále se zaměříme na případ homogenních lineárních soustav s konstantními 
 koeficienty, tj. soustav, které lze zapsat ve tvaru
 \begin{equation}
     \label{eq:const_coef}
@@ -1150,7 +1201,7 @@ koeficienty, tj. soustav, které lze zapsat ve tvaru
 \end{equation}
 kde $\tn A$ je konstantní reálná čtvercová matice.
 
-Protože konstatní maticová funkce $\tn A(t)=\tn A$ je spojitá pro všechna $t\in \Real$, má Cauchyova úloha
+Protože konstantní maticová funkce $\tn A(t)=\tn A$ je spojitá pro všechna $t\in \Real$, má Cauchyova úloha
 \begin{equation}
     \label{eq:cauchy_const_coef}
     \dot{\vc x} = {\tn A}\vc x,\qquad \vc x(\tau)=\vc\xi
@@ -1170,7 +1221,7 @@ platí
 jelikož v obou případech jde o řešení v čase $t - \tau$ od počáteční podmínky. Důsledkem je jednodušší struktura standardních fundamentálních matic:
 \begin{proposition}
 
-Pro standardní fundantální matici $\tn U(t,\tau)$ rovnice \eqref{eq:const_coef}
+Pro standardní fundamentální matici $\tn U(t,\tau)$ rovnice \eqref{eq:const_coef}
 platí
 \[
     {\tn U}(t,\tau)={\tn U}(t-\tau,0),\qquad \text{pro všechna }t,\tau\in \Real.
@@ -1211,7 +1262,7 @@ kde $\tn J$ je tzv. \df{Jordanův kanonický tvar}. Jordanův tvar $\tn J$
 má na diagonále vlastní čísla matice $\tn A$ v jejich příslušné násobnosti, případně může mít na některých místech jedničky v první subdiagonále, jinde má nuly.
 Pokud má Jordanův tvar nějaké jedničky v první subdiagonále, říkáme, že matice $\tn A$ je \df{defektní}. 
 
-Pokud je $\tn J$ diagonální matice, říkáme, že $\tn A$ je diagonalizovatelná. V tom případě ke každému vlastnímu číslu $\lambda_i$ exituje prostor vlastních vektorů dimenze $r_i$.
+Pokud je $\tn J$ diagonální matice, říkáme, že $\tn A$ je diagonalizovatelná. V tom případě ke každému vlastnímu číslu $\lambda_i$ existuje prostor vlastních vektorů dimenze $r_i$.
 Ke každému vlastnímu číslu tedy lze najít $r_i$ vektorů, které tvoří bázi příslušného 
 vlastního podprostoru. Celkem tak dostaneme $n$ lineárně nezávislých vlastních vektorů
 $\vc u_j$ příslušejících vlastním číslům $\lambda_j$, $j=1,\dots, n$. Tyto vektory tedy splňují rovnice:
@@ -1302,25 +1353,26 @@ má vlastní čísla $\lambda_1=-6+i$ a $\lambda_2=-6-i$. Dále najdeme vlastní
   \]
 \end{description}
 
-Vsimnete si, ze vlastni matice $\tn A-\lambda_1 \tn E$ je komplexne sdruzena s matici
-$\tn A-\lambda_2 \tn E$, coz je pravda obecne, jelikoz $\tn A$ je realna a vlastni cisla jsou komplexne sdruzena.
-Podobne vlastni vektory jsou komplexne sdruzene. Coz opet plati obecne, jelikoz komplexni sdruzeni
-soucinu je soucin komplexnich sdruzeni :-), tedy $\close a\,\close b=\close{ab}$. A proto i 
-pro soucin s matici plati
+Všimněte si, že vlastní matice $\tn A-\lambda_1 \tn E$ je komplexně sdružená s maticí
+$\tn A-\lambda_2 \tn E$, což je pravda obecně, jelikož $\tn A$ je reálná a vlastní čísla jsou komplexně sdružená.
+Podobně vlastní vektory jsou komplexně sdružené. Což opět platí obecně, jelikož komplexní sdružení
+součinu je součin komplexních sdružení, tedy $\close a\,\close b=\close{ab}$. A proto i
+pro součin s maticí platí
 \[
-  0=(\tn A-\lambda_1 \tn E)\vc v_1=\close{0}=\close{(\tn A-\lambda_1 \tn E)\vc v_1}
-  =(\tn A-\close{\lambda_1} \tn E)\close{\vc v_1}=(\tn A-\lambda_2 \tn E)\vc v_2.
+0=(\tn A-\lambda_1 \tn E)\vc v_1=\close{0}=\close{(\tn A-\lambda_1 \tn E)\vc v_1}
+=(\tn A-\close{\lambda_1} \tn E)\close{\vc v_1}=(\tn A-\lambda_2 \tn E)\vc v_2.
 \]
-Postupujeme-li stejne jako v realnem pripade, vime, ze $u_1=e^{\lambda_1 t}\vc v_1$ a $u_2=e^{\lambda_2 t}\vc v_2$
-jsou resenim a tvori bazi vektoroveho prostoru reseni ovsem nad telesem komplexnich cisel.
-Navic vime, ze jsou to komplexne sdruzene vektorove funkce. Pro libovolne komplexni cislo $c$
-lze napsat jeho realnou a imaginarni cast takto
+Postupujeme-li stejně jako v reálném případě, víme, že $u_1=e^{\lambda_1 t}\vc v_1$ a $u_2=e^{\lambda_2 t}\vc v_2$
+jsou řešením a tvoří bázi vektorového prostoru řešení ovšem nad tělesem komplexních čísel.
+Navíc víme, že jsou to komplexně sdružené vektorové funkce. Pro libovolné komplexní číslo $c$
+lze napsat jeho reálnou a imaginární část takto
 \[
-  {\rm Re}\ c=\frac{c+\close{c}}{2},\quad{\rm Im}\ c=\frac{c-\close{c}}{2i}.
+   {\rm Re}\ c=\frac{c+\close{c}}{2},\quad{\rm Im}\ c=\frac{c-\close{c}}{2i}.
 \]
-Tedy jako {\it linearni kombinaci} cisel $c$ a $\close{c}$!
-Jelikoz je $u_1$ komplexne sdruzena funkce s $u_2$, jsou funkce $y_1={\rm Re}\ u_1={\rm Re}\ u_2$ a 
-$y_2={\rm Im}\ u_1=-{\rm Im}\ u_2$ take dvojici nezavislych reseni a nyni uz dvojici realnou.
+Tedy jako {\it lineární kombinaci} čísel $c$ a $\close{c}$.
+Jelikož je $u_1$ komplexně sdružená funkce s $u_2$, jsou funkce $y_1={\rm Re}\ u_1={\rm Re}\ u_2$ a
+$y_2={\rm Im}\ u_1=-{\rm Im}\ u_2$ také dvojicí nezávislých řešení a nyní už dvojici reálnou.
+
 
 Za bázi prostoru reálných řešení rovnice, vezmeme reálnou a imaginární část komplexního řešení:
 \[
@@ -1404,7 +1456,7 @@ její derivaci platí
 ${\tn U}(t)$ je tedy standardní fundamentální matice uvedené soustavy.\\
 {\bf Q.E.D.}
 
-Z tvrzení minulé věty je patrné, proč se pro standarní fundamentální matici 
+Z tvrzení minulé věty je patrné, proč se pro standardní fundamentální matici 
 používá také symbol $\mathrm{e}^{{\tn A}t}$.
 
 \begin{theorem}
@@ -1486,7 +1538,7 @@ Jak jsme již poznamenali, analytické řešení soustavy ODR, lze najít jen pr
 pouze pro lineární soustavy s konstantními koeficienty a i zde jsme omezeni na malé systémy, pro které jsme schopni nalézt vlastní čísla.
 Numerické metody umožňují řešit obecné soustavy obyčejných diferenciálních rovnic, ale vždy pouze přibližně, přičemž chyba se obvykle zvyšuje s časem.
 Některé přírodní procesy jsou popsány rovnicemi, kde malá změna počáteční podmínky vede po jistém čase ke kvalitativně odlišným řešením
-Příkladem může být kulička na břitu. Do stejné katergorie patří například rovnice pro popis počasí. Důsledkem je praktická nemožnost 
+Příkladem může být kulička na břitu. Do stejné kategorie patří například rovnice pro popis počasí. Důsledkem je praktická nemožnost 
 dlouhodobých předpovědí.
 
 Podle Důsledku \ref{thm:ODR_order_n}, lze každou soustavu obyčejných diferenciálních rovnic libovolného řádu převést na soustavu rovnic prvního řádu.
@@ -1535,18 +1587,18 @@ kde $N=T/h$.
 Konstantu $h$ nazýváme {\em integrační krok} metody.
 
 
-\section{Explicitní metody}
+\section{Eulerovy metody a základní pojmy}
 % zminka o pouziti pro dukaz existence
 \subsection{Explicitní Eulerova metoda}
 Jako úvodní příklad si představíme nejednodušší numerickou metodu pro řešení ODR prvního řádu a
-to explicitní Eulerovu metodu. Na ní si také demostrujeme základní pojmy konzistence, konvergence a stability numerické metody.
+to explicitní Eulerovu metodu. Na ní si také demonstrujeme základní pojmy konzistence, konvergence a stability numerické metody.
 Uvažujme počáteční úlohu
 \begin{align*}    
    \vc y'(t) &= \vc f(t,\vc y(t)), \quad \text{for }t>0,\\
    \vc y(0)&=\vc y_0.
 \end{align*}
 Z předepsané počáteční podmínky můžeme spočítat \uv{polohu} a \uv{rychlost} v počátečním čase, $\vc y(0) = \vc y_0$, $\vc y'(0) = \vc f(0, \vc y_0)$. 
-Pro krátkný čas $t=h$ můžeme použít Taylorův rozvoj pro výpočet řešení:
+Pro krátký čas $t=h$ můžeme použít Taylorův rozvoj pro výpočet řešení:
 \[
   \vc y(h) = \vc y(0) + h \vc y'(0) + O(h^2) = \vc y_0 + h \vc f(0, \vc y_0) + O(h^2).
 \]
@@ -1595,7 +1647,7 @@ Lomená plná čára vespod zobrazuje přibližné řešení pro stejnou počát
 \end{definition}
 V obecnějším smyslu můžeme globální chybu chápat jako funkci $\vc e(t) = \vc y(t) - \vc{\tilde y}(t)$.
 
-Globální chyba tedy zahrnuje ochylky ze všech časových kroků.
+Globální chyba tedy zahrnuje odchylky ze všech časových kroků.
 Naproti tomu lokální chyba $\vc d_i$ je rozdíl přesného a přibližného řešení po jednom kroku. Pro první krok splývá s globální chybou 
 $\vc d_1=\vc e_1=\vc y(t_1; t_0, \vc y_0) - \vc y_1$ pro obecný krok $i$ musíme uvažovat přesné řešení $\vc y(t; t_{i-1}, \vc y_{i-1})$,
 které startuje 
@@ -1719,7 +1771,7 @@ Volbou $\lambda=-100$ a $h=0.001$ dostaneme
 V tabulce \ref{table:reseni} je prvních deset kroků 
 Eulerovy metody. Vidíme, že lokální chyba $d_i$ neroste, dokonce naopak klesá, zato globální chyba $e_i$
 stále roste. Tabulka \ref{table:konvergence} ukazuje závislost globální chyby na velikosti časového kroku $h$. 
-Vidíme, že $e_i$ klesá lineárně v závislosti na $h$, jde tedy o kovergentní metodu prvního řádu. 
+Vidíme, že $e_i$ klesá lineárně v závislosti na $h$, jde tedy o konvergentní metodu prvního řádu. 
 
 
 Zkusme toto pozorování dokázat obecně pro explicitní Eulerovu metodu. Podle definice lokální chyby máme:
@@ -1743,7 +1795,7 @@ TODO: global error and convergency
 \end{example}
 
 \begin{theorem}\label{Veta2.2}
-Nechť $\vc y$ je řešení počáteční úlohy s pravou stranou  $\vc f$ splňující předpoklady Picardovy věty \ref{thm::Picard} s Lischitzovskou konstantou $L$.
+Nechť $\vc y$ je řešení počáteční úlohy s pravou stranou  $\vc f$ splňující předpoklady Picardovy věty \ref{thm::Picard} s Lipschitzovskou konstantou $L$.
 Dále nechť má řešení $\vc y$ na intervalu $[ 0, T]$ dvě spojité derivace. Pak pro přibližné řešení  $\vc y_i$ vypočtené explicitní Eulerovou metodou platí
 \begin{equation}\label{odhadEul}
 \norm{\vc y_i - \vc y(t_i)} \leq h M(t_i) E_L(t_i), i=0,\dots,n,
@@ -1764,7 +1816,7 @@ metody je $h$.
 
 
 \subsection{Zaokrouhlovací chyba}
-Doposud jsme analyzovali pouze chyby způsobeneé diskretizací diferenciální rovnice. Pro Eulerovu metodu dostáváme lineární pokles globální chyby z závislosti na 
+Doposud jsme analyzovali pouze chyby způsobené diskretizací diferenciální rovnice. Pro Eulerovu metodu dostáváme lineární pokles globální chyby z závislosti na 
 kroku $h$ metody. Při praktickém řešení na počítači však nepočítáme v přesné aritmetice a na řešení se projevuje též zaokrouhlovací chyba.
 
 \begin{definition}
@@ -1778,7 +1830,7 @@ kroku $h$ metody. Při praktickém řešení na počítači však nepočítáme 
 
 Pro velikost celkové zaokrouhlovací chyby lze dokázat následující větu:
 \begin{theorem}\label{Veta2.5}
-Nechť je pravá strana $\vc f$ Lischitzovská s konstantou $L$ a
+Nechť je pravá strana $\vc f$ Lipschitzovská s konstantou $L$ a
 a nechť je lokální zaokrouhlovací chyba $\varepsilon_i$ při výpočtu jednoho kroku metody omezená konstantou $\varepsilon$.
 Pak platí
 \begin{equation}\label{zaokrchEuler}
@@ -1833,7 +1885,7 @@ $n$ & $t_n$ & $y_n$\\
 
 Jev demonstrovaný v posledním příkladu nazýváme \uv{numerická nestabilita} metody.
 \begin{definition}
- Jednokroková numerická metoda je \df{stabilní} pokud existují kladné konstatny $\hat h$, $k$ takové, že pro numerické řešení $\vc y_i$ úlohy s počáteční podmínkou $\vc y_0$ 
+ Jednokroková numerická metoda je \df{stabilní} pokud existují kladné konstanty $\hat h$, $k$ takové, že pro numerické řešení $\vc y_i$ úlohy s počáteční podmínkou $\vc y_0$ 
  a numerické řešení $\vc z_i$ úlohy s počáteční podmínkou $\vc z_0 = \vc y_0 + \vc \delta_0$ platí 
  \[
    \max_{i} \norm{\vc y_i - \vc z_i} \le k \delta,\qquad \text{pro všechna }h\in(0,\hat h).
@@ -1865,7 +1917,7 @@ Eulerova metoda je tedy stabilní. Proč tedy nefunguje v posledním příkladu?
  časech opět nejvýše o $\delta$.
 \end{definition}
 
-Absolutní stabilita se obvykle vyšetřuje na obecné skalární lineární rovnici:
+Absolutní stabilita se vyšetřuje na obecné skalární lineární rovnici:
 \begin{equation}
   \label{eq:lin_abs_stab}
   y' = \lambda y,\qquad y(0) =y_0,
@@ -1881,11 +1933,395 @@ Pro Eulerovu metodu máme
 \[
     \delta_n = y_n - z_n = (1+h\lambda)^n \abs{\delta_0}.
 \]
-Má-li být tato diference omezená pro libovolné $nh\le T$, musí být $\abs{1+h\lambda}\le 1$. Součin $h\lambda$ je komplexní číslo, které musí být v jednotkovém kruhu se středem v $-1+0i$. 
+Má-li být tato diference omezená pro libovolné $nh\le T$, musí být $\abs{1+h\lambda}\le 1$. 
+Součin $h\lambda$ je komplexní číslo, které musí být v jednotkovém kruhu se středem v $-1+0i$,
+viz. Obrázek \ref{fig:as_explicit_euler}.
 V posledním příkladu jsme měli $h\lambda = -4$, tedy mimo region absolutní stability.
 
+\begin{figure}[h]
+    \label{fig:as_explicit_euler}
+    \centering
+    \includegraphics[scale=0.5]{as_explicit_euler.pdf}
+    \caption{Oblast absolutní stability pro explicitní Eulerovu metodu.}
+\end{figure}
 
-\section{Implicitní Eulerova metoda}
+
+\subsection{Implicitní Eulerova metoda}
+V předchozí části jsme viděli, že pro některé typy rovnic (s velkými vlastními čísly) vyžaduje explicitní Eulerova metoda 
+velmi krátké časové kroky, což ovšem může vést na velkou zaokrouhlovací chybu. Uvažujme počáteční úlohu:
+\begin{equation}
+  \label{eq:stiff_scalar}
+  y' = -\alpha (y-t^2) +2t,\quad t>0, y(0)=y_0
+\end{equation}
+s přesným řešením
+\[
+    y(t)=y_0e^{-\alpha t} + t^2.
+\]
+Nyní uvažujme velmi velké $\alpha$, např. $\alpha=100$. Pro $t$ blízko $O$ převažuje na pravé straně první člen a řešení 
+velmi rychle klesá k nule jako $e^{-\alpha t}$, jak se řešení přiblíží k $t^2$, převáží druhý člen a řešení roste jako $t^2$.
+Použití explicitní Eulerovy metody pro tuto úlohu vyžaduje časový krok $h<\le 2/\alpha$. Navíc tato podmínka musí být splněna
+i na časovém intervalu, kde se řešení mění pomalu. Pro srovnání uvažujme počáteční úlohu:
+\begin{equation}
+    \label{eq:nonstiff_scalar}
+    x' = 2t, \quad t>0, x(0)=x_0
+\end{equation}
+Pro $y_0=1$ je řešení rovnice \eqref{eq:stiff_scalar} $y(t) = e^{-100t} +t^2$ a $y(0.5) = 0.25$. Pro $x_0=0$ je řešení $\eqref{eq:nonstiff_scalar}$
+$x(t)=t^2$ a $x(0.5)=0.25$. Tabulka \ref{tab:stiff_osc} obsahuje tři kroky explicitní Eulerovy metody s krokem $0.1$ pro obě rovnice startující z času $t_0=0.5$.
+Je vidět, že pro rovnici \eqref{eq:stiff_scalar} dojde (kvůli porušení podmínky stability) k oscilacím i když startujeme prakticky z přesného řešení.
+
+\begin{table}[h]
+\label{tab:stiff_osc}
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$n$ & $t_n$ & $y(t_n)$ & $ey_n$ & $x(t_n)$ & $ex_n$\\ 
+\hline
+0 & 0.5 & 0.25 & 0 & 0.25 & 0\\ 
+\hline
+1 & 0.6 & 0.36 & -0.01 & 0.36 & -0.01\\ 
+\hline
+2 & 0.7 & 0.49 & 0.08 & 0.49  & -0.02 \\
+\hline
+3 & 0.8 & 0.64 & -0.73  & 0.64  & -0.03\\
+\hline\end{tabular}
+\label{table:instability}
+\caption{Porovnání chyb explicitní Eulerovy metody pro tuhou ($y(t)$) a netuhou rovnici $x(t)$. 
+Pro tuhou rovnici není splněna podmínka stability a dojde k oscilacím.} 
+\end{table}
+
+
+\begin{definition}
+ Úloha se nazývá \emph{tuhá} na intervalu $I$ pokud časový krok vyžadovaný pro absolutní stabilitu je menší než časový krok vyžadovaný pro splnění požadované přesnosti.
+\end{definition}
+Soustavy ODE jsou tuhé pokud jejich Jakobián (matice prvních derivací) má řádově odlišná vlastní čísla. Například rovnice
+\[
+    \dot{\vc x}(t) = \tn A\vc x(t),\quad 
+    \tn A= \begin{pmatrix}
+                0 & 1\\
+                -100 & -101
+           \end{pmatrix}
+\]
+má jakobián $\prtl_{\vc x}  \vc f(t,\vc x) = \tn A$ a jeho vlastní čísla jsou $-1$ a $-100$. Příslušná počáteční úloha je tuhá. 
+
+Pro efektivní řešení tuhých úloh potřebujeme metodu, jejíž podmínky stability neomezují časový krok. Jak uvidíme později tuto podmínku nesplňuje 
+žádná explicitní metoda a je třeba použít metodu implicitní. Uvažujme opět obecnou počáteční úlohu:
+\begin{align*}    
+   \vc y'(t) &= \vc f(t,\vc y(t)), \quad \text{for }t>0,\\
+   \vc y(0)&=\vc y_0.
+\end{align*}
+Na rozdíl od explicitní metody použijeme nyní Taylorův rozvoj v čase $t_{n}$ vyhodnocený v čase $t_{n-1}= t_n -h$:
+\[
+  \vc y(t_n - h) = \vc y(t_n) - h \vc y'(t_n) + O(h^2) =  \vc y_n - h \vc f(t_n, \vc y_n) + O(h^2).
+\]
+Odtud dostaneme předpis implicitní Eulerovy metody:
+\[
+    \vc y_n = \vc y_{n-1} + h\vc f(t_n, \vc y_n).
+\]
+Metoda se nazývá \emph{implicitní} protože k získání řešení $y_n$ v čase $t_n$ z řešení $y_{n-1}$ v předchozím časovém kroku je třeba řeši obecně 
+nelineární algebraickou rovnici, respektive soustavu takových rovnic. 
+
+Jaká je podmínka lineární stability implicitní Eulerovy metody? Pro rovnici testovací rovnici \eqref{eq:lin_abs_stab} máme:
+\[
+    y_n  = y_{n-1} + h\lambda y_n,
+\]
+kde algebraická rovnice pro přechod k dalšímu časovému kroku má analytické řešení:
+\[
+    y_n = y_{n-1}\frac{1}{1-h\lambda}.
+\]
+Podmínka stability je tedy 
+\[
+    \frac{1}{\abs{1-h\lambda}}\le 1,
+\]
+nebo-li
+\[
+    \abs{1-h\lambda}\ge 1.
+\]
+Tedy, oblast absolutní stability pro implicitní Eulerovu metodu je množina mimo jednotkový kruh se středem $1+0i$ v komplexní rovině.
+Je tedy stabilní s libovolným časovým krokem pro stabilní rovnice jako $\dot{x} = -x$ a navíc pro velké časové kroky je stabilní i pro 
+nestabilní rovnice jako $\dot{x} = x$.
+
+\begin{figure}[h]
+    \label{fig:as_implicit_euler}
+    \centering
+    \includegraphics[scale=0.5]{as_implicit_euler.pdf}
+    \caption{Oblast absolutní stability pro explicitní Eulerovu metodu.}
+\end{figure}
+
+
+
+
+
+
+
+\subsection{Systémy nelineárních algebraických rovnic}
+Implicitní metody tedy v principu umožňují použití libovolného časového kroku pro stabilní rovnice, nicméně potřebujeme v každém kroku řešit (systém)
+nelineárních rovnic. Nejjednodušším přístupem je metoda prostých iterací:
+
+%\begin{figure}
+ 
+
+\begin{algorithm}[H]
+%\DontPrintSemicolon
+ $\vc y_n^0 := \vc y_{n-1}$\;
+ $\nu := 0$\;
+ $e := \infty$\;
+ \BlankLine
+ \While{$ e \ge \epsilon$}{    
+    $\vc y_n^{\nu+1} := \vc y_{n-1} + h \vc f(t_n, \vc y_n^{\nu})$\;
+    $e:=\norm{\vc y_n^{\nu+1} - \vc y_n^{\nu}}$\;
+    $\nu := \nu +1$
+ }
+\end{algorithm}
+%\end{figure}
+
+Ukážeme, že metoda konverguje pokud $\abs{hL}\le 1$, kde $L$ je Lipschitzovská konstanta funkce $\vc f$ vzhledem k $\vc y$. Zobrazení $F$ realizující 
+jednu iteraci:
+\[
+    \vc y_n^{\nu+1} = \vc F(\vc y_n^\nu) = \vc y_{n-1} + h \vc f(t_n, \vc y_n^{\nu})
+\]
+se nazývá kontraktivní, pokud 
+\[
+    \norm{\vc F(\vc x) - \vc F(\vc y)} \le \alpha\norm{\vc x - \vc y},
+\]
+pro nějaké $\alpha<1$. Podle Banachovy věty o pevném bodě bude metoda prostých iterací konvergovat pokud $F$ bude kontraktivní zobrazení.
+V našem případě:
+\[
+    \norm{\vc F(\vc x) - \vc F(\vc y)} = \norm{\vc y_{n-1} + h \vc f(t_n, \vc x) - \vc y_{n-1} - h \vc f(t_n, \vc y)}
+    \le h\norm{\vc f(t_n, \vc x) - \vc f(t_n, \vc y)} \le hL\norm{\vc x - \vc y}
+\]
+tedy zobrazení je kontraktivní pokud $\alpha = hL < 1$.
+Dostali jsme tady výsledek, že implicitní Eulerova metoda používající metodu prostých iterací jako nelineární řešič, má stejné omezující podmínky na časový krok
+jako explicitní Eulerova metoda. Je tedy třeba použít lepší metodu pro řešení nelineárních rovnic.
+
+Jednou z možností je použití Newtonovy metody. Uvažujme skalární nelineární rovnici $F(x)=0$, kde
+$F:\Real \to \Real$ je funkce se spojitou první derivací. Počáteční přiblížení označíme $x^0\in \Real$.
+Další iterace metody se spočítají podle vzorce:
+\[
+    x^{\nu+1} = x^{\nu} - \frac{F(x^\nu)}{F'(x^\nu)}.
+\]
+Pokud je počáteční přiblížení dostatečně blízko řešení $x$, pak metoda konverguje.
+
+Pro řešení soustav ODR však potřebujeme řešit soustavu nelineárních rovnic ve tvaru:
+\[
+    \vc F(\vc y_n) = \vc y_n - \vc y_{n-1} -h\vc f(t_n, \vc y_n) = 0
+\]
+Pro systémy rovnic lze Newtonovu metodu upravit následovně:
+
+\begin{algorithm}[H]
+%\DontPrintSemicolon
+ $\vc Y^0 := \vc y_{n-1}$\;
+ $\nu := 0$\;
+ $\vc F^{0} := \vc F(\vc Y^0) = \vc Y^0 - \vc y_{n-1} -h\vc f(t_n, \vc Y^0)$\;
+ \BlankLine
+ \While{$ \abs{\vc F^\nu} \ge \epsilon$}{
+    $\tn A^\nu := \prtl_{\vc y} \vc F(\vc Y^\nu) = \tn I - h \prtl_{\vc y}\vc f(t_n, \vc Y^\nu)$\;
+    řešení soustavy: $\tn A^\nu \vc d^{\nu} = \vc F^\nu$\;
+    $\vc Y^{\nu+1} := \vc Y^{\nu} - \lambda \vc d^{\nu}$\;
+    $\vc F^{\nu+1} := \vc F(\vc Y^{\nu+1}) = \vc Y^{\nu+1} - \vc y_{n-1} -h\vc f(t_n, \vc Y^{\nu+1})$\;
+    $\nu := \nu +1$
+ }
+\end{algorithm}
+Doplňující poznámky:
+\begin{itemize}
+ \item Parametr $\lambda$ je v základní verzi algoritmu roven $1$, pokročilejší verze algoritmu provádějí pro nalezený vektor kroku $\vc d^\nu$ 
+vhodné zkrácení délky kroku, aby byla zajištěna konvergence metody i dále od řešení. 
+ \item Soustavu lineárních rovnic lze řešit iteračně s omezenou přesností.
+ \item V rámci numerického řešení systému ODE není výhodné nechat Newtonovu metodu používat velké množství iterací, proto se při překročení vhodného limitu do 
+ 10 iterací provede zkrácení časového kroku $h$. Tím se zlepší jako konvergence Newtonovy metody, tak konvergence případného vnitřního lineárního řešiče.
+\end{itemize}
+
+
+
+
+
+
+
+\section{Jednokrokové metody}
+Jak explicitní tak implicitní Eulerova metoda jsou metody prvního řádu. Z praktického hlediska jsou více náchylné 
+na akumulaci chyby vzniklé v jednotlivých krocích. V této kapitole ukážeme jak odvodit explicitní jednokrokovou metodu 
+druhého řádu a představíme si i další jednokrokové, tak zvané Runge-Kuttovy metody. 
+
+\subsection{Metoda Taylorova rozvoje}
+Opět řešíme počáteční úlohu:
+\begin{equation}
+    \label{eq:rk_ivp}
+    \dot{\vc y} = \vc f(t, \vc y),\quad \vc y(0)=\vc y_0
+\end{equation}
+
+Podobně jako v případě explicitní Eulerovy metody začneme 
+Taylorovým rozvojem:
+\begin{equation}
+    \label{eq:taylor_second}
+    \vc y(t_n + h) = \vc y(t_n) + h\dot{\vc y}(t_n)+ \frac{h^2}{2} \ddot{\vc y}(t_n) + O(h^3)
+\end{equation}
+Dále potřebujeme spočítat obě derivace $\vc y$ z rovnice \eqref{eq:rk_ivp}. První derivaci získáme přímo z rovnice,
+druhou derivaci spočteme derivováním obou stran rovnice podle času:
+\begin{equation}
+    \label{eq:ddot_y}
+    \ddot{\vc y}(t) = \prtl_t \vc f(t, \vc y(t)) + \prtl_{\vc y} \vc f(t, \vc y(t)) \dot{\vc y}(t) =
+                     \left[ \prtl_t \vc f + (\prtl_{\vc y} \vc f) \vc f \right] (t, \vc y(t)).
+\end{equation}
+Zde upozorníme, že $\prtl_{\vc y} \vc f$ je Jacobiho matice $n\times n$ derivací vektorové funkce $\vc f$ podle vektoru $\vc y$, 
+výraz $(\prtl_{\vc y} \vc f) \vc f$ je tedy násobení této matice vektorovou hodnotou funkce $\vc f$.  Dále jsme použili notaci 
+pro počítání s funkcemi, například $[f + g](t) = f(t) + g(t)$, tedy všechny funkce na pravé straně jsou vyhodnoceny v bodě $(t, \vc y(t))$. 
+Nyní dosadíme \eqref{eq:ddot_y} do \eqref{eq:taylor_second} a dostaneme metodu druhého řádu:
+\[
+    \vc y_{n+1} = \vc y_n + h \vc f(t_n, \vc y_n) + \frac{h^2}{2}\left[\prtl_t \vc f + \prtl_{\vc y} \vc f \vc f \right] (t_n, \vc y_n).
+\]
+Podobně bychom mohli spočítat i vyšší derivace $\vc y$, použít delší část Taylorova rozvoje a obdržet metody vyšších řádů. 
+Nicméně takto získaná metoda není použitelná v praxi, protože vyžaduje znalost nejen funkce $\vc f$, ale i jejích derivací 
+a to případně i vysokého řádu. 
+
+\subsection{Metoda druhého řádu}
+Jednou možností by bylo aproximovat derivace $\vc f$, ale my se vydáme jinou cestou. Začneme tím, že zintegrujeme počáteční problém \eqref{eq:rk_ivp}
+podle času:
+\begin{equation}
+   \label{eq:int_ivp}
+   \vc y(0 + h) = \vc y_0 + \int_{0}^h \vc f(t, \vc y(t)) \d t.
+\end{equation}
+Dále si připomeneme, že určité integrály lze aproximovat pomocí numerické kvadratury. Nejjednodušší kvadraturní vzorec je obdélníkové pravidlo
+(midpoint rule):
+\[
+    \int_a^b f(t) \d t = (b-a)f\Big(\frac{a+b}{2}\Big) + O(\abs{b-a}^3).
+\]
+pokud funkce $f$ má omezenou druhou derivaci. Aplikací na integrovaný počáteční problém \eqref{eq:int_ivp} dostaneme:
+\[
+    y_{n+1} = y_n + h\vc f(t_n + \frac12, \vc y(t_n + \frac12)) + O(h^3)
+\]
+za předpokladu, že $\vc f$ má omezené všechny druhé derivace. Nyní je otázka jak získat $\vc y_{n+\frac12} = \vc y(t_n + \frac{h}{2})$.
+K tomu použijeme jeden krok explicitní Eulerovy metody s krokem $h/2$, dohromady pak dostaneme následující předpis pro výpočet jednoho kroku metody:
+\begin{align}
+    \label{eq:midpoint_rule}
+    \vc k_1 &= \vc f(t_n, \vc y_n)\\
+    \vc k_2 &= \vc f(t_n + \frac{h}{2}, \vc y_n + \frac{h}{2} \vc k_1)\\
+    \vc y_{n+1} &= y_n + h \vc k_2 
+\end{align}
+Tato metoda by měla mít lokální diskretizační chybu $O(h^3)$, globální chybu $O(h^2)$ a byla by to tedy metoda druhého řádu. To nyní dokážeme
+pro obecnější metodu ve tvaru:
+\begin{align}
+    \label{eq:rk2}
+    \vc k_1 &= \vc f(t_n, \vc y_n)\\
+    \vc k_2 &= \vc f(t_n + ch, \vc y_n + ah\vc k_1)\\
+    \vc y_{n+1} &= y_n + h(b_1 \vc k_1 + b_2 \vc k_2),
+\end{align}
+kde $a$, $b_1$, $b_2$, $c$ jsou zatím obecné reálné parametry. Toto schéma se nazývá dvou stupňová (two stage) Runge-Kuttova metoda.
+Pro určení parametrů schématu a zároveň pro důkaz řádu lokální diskretizační chyby dosadíme přesné řešení do schématu, provedeme Taylorův rozvoj 
+a výsledek porovnáme s rozvojem \eqref{eq:taylor_second} pro $\vc y(t_n + h)$. Taylorův rozvoj funkce $\vc f$ v bodě $(t, \vc y)$ má tvar:
+\[
+    \vc f(t + \tau, \vc y + \vc \xi) = \vc f(t,\vc y) + \tau \prtl_t \vc f(t,\vc y) + \prtl_{\vc y} \vc f(t, \vc y) \vc xi  
+     + O(\tau \norm{\xi}) + O(\tau^2) + O(\norm{\xi}^2)
+\]
+Nyní tento rozvoj použijeme pro $\vc k_2$, dosazením $t= t_n$, $\vc y = \vc y_n$, $\tau = hc$, $\vc \xi = ha \vc f(t_n, \vc y_n)$
+\[
+    \vc k_2 = [f + hc\prtl_t f + \prtl_{\vc y} \vc f (ha\vc f)](t_n, \vc y(t_n)) + O(h^2).
+\]
+Jelikož jak $\tau$ tak $\xi$ obsahuje $h$ zjednodušili jsme všechny tři chybové Taylorova rozvoje jen na $O(h^2)$.
+Nyní použijeme poslední řádek schématu \eqref{eq:rk2} a dosadíme do něj přesné řešení:
+\[
+  \vc y(t_n + h) = \vc y(t_n) + h\left[ b_1 \vc f + b_2 \vc f + hb_2c\prtl_t f + \prtl_{\vc y} \vc f (hb_2a\vc f) \right](t_n, \vc y(t_n)) + O(h^3)
+\]
+Tento rozvoj porovnáme s rozvojem \eqref{eq:taylor_second}, do kterého jsme dosadili za $\dot{\vc y}$ a $\ddot{ \vc y}$ podle 
+\eqref{eq:rk_ivp} a \eqref{eq:ddot_y}:
+\[
+  \vc y(t_n + h) = \vc y(t_n) + \left[h\vc f + \frac{h^2}{2}(\prtl_t f + \prtl_{\vc y} \vc f \vc f)\right](t_n, \vc y(t_n)) + O(h^3) 
+\]
+Odtud dostáváme následující rovnice pro parametry schématu:
+\[
+   b_1 + b_2 = 1,\quad a = c = \frac12
+\]
+Tři rovnice pro čtyři parametry dávají volnost jednoho parametru a dostáváme tak celou třídu metod druhého řádu. V praxi se používají zejména dvě
+z nich:
+\begin{enumerate}
+ \item Pro volbu $b_1 =0$, $b_2 =1$, $a=c=\frac12$ dostáváme metodu \eqref{eq:midpoint_rule}, 
+ která se v angličtině nazývá: 'explicit midpoint method' nebe 'modified Euler method'.
+ \item Pro volbu $b_1 = b_2 = \frac12$, $a=c=1$ dostáváme metodu:
+ \begin{align}
+    \label{eq:trapezoid_rule}
+    \vc k_1 &= \vc f(t_n, \vc y_n)\\
+    \vc k_2 &= \vc f(t_n + h, \vc y_n + h \vc k_1)\\
+    {\vc y}_{n+1} &= y_n + \frac{h}{2}(\vc k_1 + \vc k_2).
+ \end{align}
+ V angličtině ji najdete po názvy: 'Huen's method', 'modified Euler method' !!, 'improved Euler method'. 
+\end{enumerate}
+
+\subsection{Runge-Kuttovy metody}
+Obecná $s$-stupňová Runge-Kuttova metoda používá $s$ vyhodnocení funkce $\vc f$ a má tvar
+\[
+  \vc y_{n+1} = \vc y_n + h\sum_{i=1}^s b_i \vc k_i,
+\]
+kde 
+\[
+  \vc k_i = \vc f(t_n+ hc_i, y_n + h\alpha_i),\quad \alpha_i = \sum_{j=1}^s a_{ij} k_j
+\]
+Parametry Runge-Kuttových metod se obvykle zapisují ve formě takzvaných Butcherových tabulek:
+\begin{equation}
+    \begin{array}{c|cccc}
+        c_1 & a_{11} & a_{12} & \dots & a_{1s} \\
+        c_2 & a_{21} & a_{22} & \dots & a_{2s} \\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        c_s & a_{s1} & a_{s2} & \dots & a_{ss} \\
+        \hline
+             & b_{1} & b_{2} & \dots & b_{s} \\
+    \end{array}
+\end{equation}
+nebo též:
+\begin{equation}
+    \begin{array}{c|c}
+        \vc c & \tn A\\
+              & \vc b 
+    \end{array}
+\end{equation}
+Pro explicitní metody má matice $\tn A$ nenulové hodnoty pouze pod diagonálou, ostatní metody jsou implicitní.
+
+Příklad explicitní tří stupňové metody třetího řádu (též pod jménem Heunova metoda):
+\begin{equation}
+    \begin{array}{l|lll}
+        0 &  &  &  \\
+        1/3 & 1/3 &  &  \\
+        2/3 & 0 & 2/3 &  \\
+        \hline
+             & 1/4 & 0 & 3/4 \\
+    \end{array}
+\end{equation}
+
+Příklad explicitní čtyřstupňové metody čtvrtého řádu (standardní RK metoda):
+\begin{equation}
+    \begin{array}{c|cccc}
+        0 &  &  &  & \\
+        1/2 & 1/2 &  &  & \\
+        1/2 & 0 & 1/2 &  & \\
+        1 & 0 & 0 & 1 & \\
+        \hline
+             & 1/6 & 2/6 & 2/6 & 1/6 \\
+    \end{array}    
+\end{equation}
+Výhodou této metody jsou další nulové hodnoty v tabulce a tím menší počet operací, to však má význam jen pro jednoduché funkce $\vc f$.
+Dále je populární explicitní metodou čtvrtého řádu, takzvané tří-osminové pravidlo:
+\begin{equation}
+    \begin{array}{c|cccc}
+        0 &  &  &  & \\
+        1/3 & 1/3 &  &  & \\
+        2/3 & -1/3 & 1 &  & \\
+        1 & 1 & -1 & 1 & \\
+        \hline
+             & 1/8 & 3/8 & 3/8 & 1/8 \\
+    \end{array}    
+\end{equation}
+Výhodou této metody je menší konstanta u chybového členu v porovnání se standardní RK metodou.
+
+Z uvedených příkladů by se dalo soudit, že každá $s$-stupňová metoda má řád $s$. To je bohužel pravda pouze pro $s\le 4$.
+Každá metoda pátého řádu je minimálně $6$-ti stupňová. Z tohoto důvodu jsou nejčastěji používány metody čtvrtého řádu.
+Další důležitou otázkou je stabilita metod. Lze dokázat, že pro pevné $s\le  4$ mají všechny $s$-stupňové RK metody řádu $s$
+stejnou oblast absolutní stability, viz. Obrázek \ref{fig:as_rk}. Žádná explicitní metoda není nepodmíněně absolutně stabilní.
+
+\begin{figure}[h]
+    \label{as_rk}
+    \centering
+    \includegraphics[scale=0.7]{as_rk.pdf} 
+    \caption{Oblast absolutní stability pro $p$-stupňové RK metody řádu $p$.}
+\end{figure}
+
+
 
 
 
@@ -1900,7 +2336,8 @@ V posledním příkladu jsme měli $h\lambda = -4$, tedy mimo region absolutní 
 \end{thebibliography}
 \end{document}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%ř
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%ř
 
 \section{Vícekrokové metody}
 
